@@ -10,7 +10,7 @@ export default async function EditPageAdmin({ params }) {
   if (!page) notFound();
   return (
     <AppShell active="/admin/sayfalar">
-      <PageHeader title="Sayfayı düzenle" note={page.title} />
+      <PageHeader title="Edit page" note={page.title} />
       <PageForm page={page} />
     </AppShell>
   );

@@ -5,7 +5,7 @@ import { PageForm } from "../../components/page-form";
 export default function NewPageAdmin() {
   return (
     <AppShell active="/admin/sayfalar">
-      <PageHeader title="Yeni sayfa" note="Sayfa içeriği yerel veritabanında tutulur." />
+      <PageHeader title="New page" note="Page content is stored in the local database." />
       <PageForm />
     </AppShell>
   );

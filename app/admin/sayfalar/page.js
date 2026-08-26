@@ -9,7 +9,7 @@ export default function PagesAdminPage() {
   const pages = getPages();
   return (
     <AppShell active="/admin/sayfalar">
-      <PageHeader title="Sayfalar" note={`${pages.length} özel sayfa`} actions={<Link href="/admin/sayfalar/yeni" className={buttonVariants()}>Yeni sayfa</Link>} />
+      <PageHeader title="Pages" note={`${pages.length} custom pages`} actions={<Link href="/admin/sayfalar/yeni" className={buttonVariants()}>New page</Link>} />
       <PagesTable pages={pages} />
     </AppShell>
   );

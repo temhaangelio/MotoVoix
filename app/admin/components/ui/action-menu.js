@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "../../../../lib/cn";
 
-export function ActionMenu({ label = "İşlemler", items, trigger, triggerClassName, placement = "anchor" }) {
+export function ActionMenu({ label = "Actions", items, trigger, triggerClassName, placement = "anchor" }) {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, right: 0 });
   const triggerRef = useRef(null);

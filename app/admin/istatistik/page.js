@@ -10,7 +10,7 @@ export default async function AnalyticsPage({ searchParams }) {
   const analytics = getAnalytics(range);
   return (
     <AppShell active="/admin/istatistik">
-      <PageHeader title="İstatistik" note="Yerel demo analitikleri · Supabase yok" />
+      <PageHeader title="Analytics" note="Local demo analyticsleri · Supabase yok" />
       <AnalyticsDashboard analytics={analytics} range={range} />
     </AppShell>
   );

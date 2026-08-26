@@ -11,7 +11,7 @@ export function ConfirmDialog({
   title,
   description,
   confirmLabel = "Onayla",
-  cancelLabel = "Vazgeç",
+  cancelLabel = "Cancel",
   error,
   variant = "primary",
   onConfirm,
@@ -76,7 +76,7 @@ export function ConfirmDialog({
         {error ? <p role="alert" className="mt-4 rounded-2xl bg-[#fff1f0] p-3 text-sm font-medium text-[#b42318]">{error}</p> : null}
         <div className="mt-7 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button variant="secondary" disabled={pending} onClick={() => onOpenChange(false)}>{cancelLabel}</Button>
-          <Button disabled={pending} onClick={confirm} className={variant === "destructive" ? "bg-[#b42318] text-white hover:bg-[#912018]" : undefined}>{pending ? "İşleniyor…" : confirmLabel}</Button>
+          <Button disabled={pending} onClick={confirm} className={variant === "destructive" ? "bg-[#b42318] text-white hover:bg-[#912018]" : undefined}>{pending ? "Processing…" : confirmLabel}</Button>
         </div>
       </div>
     </div>,

@@ -26,7 +26,7 @@ export function PagesTable({ pages }) {
     return true;
   }
 
-  if (!pages.length) return <EmptyState title="Henüz sayfa yok" description="Yeni bir sayfa ekleyebilirsiniz." />;
+  if (!pages.length) return <EmptyState title="No pages yet" description="Create a new page to get started." />;
 
   return (
     <>
@@ -35,11 +35,11 @@ export function PagesTable({ pages }) {
           <Table>
             <thead>
               <tr>
-                <Th>Sayfa</Th>
+                <Th>Page</Th>
                 <Th>Slug</Th>
-                <Th>Durum</Th>
-                <Th className="text-right">Sıra</Th>
-                <Th><span className="sr-only">İşlemler</span></Th>
+                <Th>Status</Th>
+                <Th className="text-right">Order</Th>
+                <Th><span className="sr-only">Actions</span></Th>
               </tr>
             </thead>
             <tbody>
@@ -47,15 +47,15 @@ export function PagesTable({ pages }) {
                 <tr key={page.id}>
                   <Td className="font-bold">{page.title}</Td>
                   <Td className="text-[#777]">/{page.slug}</Td>
-                  <Td><Badge className={page.published ? "bg-black text-white" : ""}>{page.published ? "Yayında" : "Taslak"}</Badge></Td>
+                  <Td><Badge className={page.published ? "bg-black text-white" : ""}>{page.published ? "Published" : "Draft"}</Badge></Td>
                   <Td className="text-right">{page.menu_order}</Td>
                   <Td>
                     <div className="flex justify-end">
                       <ActionMenu
-                        label={`${page.title} işlemleri`}
+                        label={`${page.title} actions`}
                         items={[
-                          { label: "Düzenle", href: `/admin/sayfalar/${page.id}/duzenle`, icon: <Pencil size={15} /> },
-                          { label: "Sil", destructive: true, icon: <Trash2 size={15} />, onSelect: () => setPageToDelete(page) },
+                          { label: "Edit", href: `/admin/sayfalar/${page.id}/duzenle`, icon: <Pencil size={15} /> },
+                          { label: "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => setPageToDelete(page) },
                         ]}
                       />
                     </div>
@@ -68,9 +68,9 @@ export function PagesTable({ pages }) {
       </div>
       <ConfirmDialog
         open={Boolean(pageToDelete)}
-        title="Sayfa silinsin mi?"
-        description={pageToDelete ? `“${pageToDelete.title}” silinecek.` : ""}
-        confirmLabel="Sayfayı sil"
+        title="Delete page?"
+        description={pageToDelete ? `“${pageToDelete.title}” will be deleted.` : ""}
+        confirmLabel="Delete page"
         variant="destructive"
         error={error}
         onOpenChange={(open) => { if (!open) setPageToDelete(null); setError(null); }}

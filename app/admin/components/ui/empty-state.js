@@ -1,6 +1,6 @@
 import { Inbox } from "lucide-react";
 
-export function EmptyState({ title = "Henüz kayıt yok", description = "Yeni bir kayıt eklediğinizde burada görünecek." }) {
+export function EmptyState({ title = "No records yet", description = "New records will appear here." }) {
   return (
     <div className="grid min-h-48 place-items-center text-center">
       <div>

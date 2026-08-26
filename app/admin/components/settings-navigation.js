@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Blocks, ChevronRight, Eye, Mail, Settings2, UserRound } from "lucide-react";
 
 const items = [
-  { title: "Genel", description: "Site adı, açıklamalar, alan adı ve akış biçimi", href: "/admin/ayarlar/genel", icon: Settings2 },
-  { title: "E-bülten", description: "Ziyaretçi abonelik alanının metinleri ve görünürlüğü", href: "/admin/ayarlar/e-bulten", icon: Mail },
-  { title: "Görünürlük", description: "Abone sayısı ve bakım modu seçenekleri", href: "/admin/ayarlar/gorunurluk", icon: Eye },
-  { title: "Modüller", description: "Panelde kullanılacak özellikleri açın veya kapatın", href: "/admin/ayarlar/moduller", icon: Blocks },
-  { title: "Profil", description: "Admin hesabı bilgileri", href: "/admin/profil", icon: UserRound },
+  { title: "General", description: "Site name, descriptions, domain and feed layout", href: "/admin/ayarlar/genel", icon: Settings2 },
+  { title: "Newsletter", description: "Visitor subscription copy and visibility", href: "/admin/ayarlar/e-bulten", icon: Mail },
+  { title: "Visibility", description: "Subscriber count and maintenance mode options", href: "/admin/ayarlar/gorunurluk", icon: Eye },
+  { title: "Modules", description: "Enable or disable panel features", href: "/admin/ayarlar/moduller", icon: Blocks },
+  { title: "Profile", description: "Admin account details", href: "/admin/profil", icon: UserRound },
 ];
 
 export function SettingsNavigation() {

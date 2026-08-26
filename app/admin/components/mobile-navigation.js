@@ -4,15 +4,17 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BrandMark } from "../../components/brand-mark";
+import LanguageSwitcher from "../../components/language-switcher";
+import { useLanguage } from "../../components/language-provider";
 
 const items = [
-  ["Dashboard", "/admin", null],
-  ["Yazılar", "/admin/yazilar", "posts"],
-  ["E-bülten", "/admin/e-bulten", "newsletter"],
-  ["Reklamlar", "/admin/reklamlar", "ads"],
-  ["Sayfalar", "/admin/sayfalar", null],
-  ["İstatistik", "/admin/istatistik", "analytics"],
-  ["Ayarlar", "/admin/ayarlar", null],
+  [{ en: "Dashboard", fr: "Tableau de bord" }, "/admin", null],
+  [{ en: "Posts", fr: "Articles" }, "/admin/yazilar", "posts"],
+  [{ en: "Newsletter", fr: "Infolettre" }, "/admin/e-bulten", "newsletter"],
+  [{ en: "Ads", fr: "Publicités" }, "/admin/reklamlar", "ads"],
+  [{ en: "Pages", fr: "Pages" }, "/admin/sayfalar", null],
+  [{ en: "Analytics", fr: "Statistiques" }, "/admin/istatistik", "analytics"],
+  [{ en: "Settings", fr: "Paramètres" }, "/admin/ayarlar", null],
 ];
 
 function isSelected(active, href) {
@@ -21,6 +23,7 @@ function isSelected(active, href) {
 }
 
 export function MobileNavigation({ active, siteName, modules }) {
+  const { language } = useLanguage();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -40,16 +43,16 @@ export function MobileNavigation({ active, siteName, modules }) {
           <BrandMark className="!size-10 text-black" />
           <strong>{siteName}</strong>
         </Link>
-        <button aria-label="Menüyü aç" aria-expanded={open} onClick={() => setOpen(true)} className="grid size-11 place-items-center rounded-full bg-white">
+        <button aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)} className="grid size-11 place-items-center rounded-full bg-white">
           <Menu size={20} />
         </button>
       </div>
       {open ? (
         <div className="fixed inset-0 z-50 bg-black/25" role="presentation" onMouseDown={() => setOpen(false)}>
-          <aside role="dialog" aria-modal="true" aria-label="Ana menü" className="ml-auto flex h-full w-[min(88vw,360px)] flex-col bg-[#efefef] p-5 shadow-2xl" onMouseDown={(event) => event.stopPropagation()}>
+          <aside role="dialog" aria-modal="true" aria-label="Main menu" className="ml-auto flex h-full w-[min(88vw,360px)] flex-col bg-[#efefef] p-5 shadow-2xl" onMouseDown={(event) => event.stopPropagation()}>
             <div className="mb-8 flex items-center justify-between">
               <strong className="text-lg">{siteName}</strong>
-              <button autoFocus aria-label="Menüyü kapat" onClick={() => setOpen(false)} className="grid size-11 place-items-center rounded-full bg-white">
+              <button autoFocus aria-label="Close menu" onClick={() => setOpen(false)} className="grid size-11 place-items-center rounded-full bg-white">
                 <X size={20} />
               </button>
             </div>
@@ -60,13 +63,14 @@ export function MobileNavigation({ active, siteName, modules }) {
                   const selected = isSelected(active, href);
                   return (
                     <Link key={href} href={href} onClick={() => setOpen(false)} className={`flex min-h-12 items-center rounded-2xl px-4 font-semibold ${selected ? "bg-black text-white" : "hover:bg-white"}`}>
-                      {label}
+                      {label[language]}
                     </Link>
                   );
                 })}
             </nav>
+            <div className="mt-3"><LanguageSwitcher light /></div>
             <Link href="/news" className="mt-auto rounded-2xl bg-white p-4 font-semibold">
-              Siteyi gör ↗
+              {language === "fr" ? "Voir le site" : "View site"} ↗
             </Link>
           </aside>
         </div>

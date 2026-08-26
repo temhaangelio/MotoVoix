@@ -11,7 +11,7 @@ export default function PostsPage() {
   return (
     <AppShell active="/admin/yazilar">
       <div className="mx-auto w-full max-w-[1600px]">
-        <PageHeader title="Yazılar" note={`${posts.length.toLocaleString("tr-TR")} yazı · yerel veritabanı`} actions={<Link href="/admin/yazilar/yeni" className={buttonVariants()}>Yeni yazı <ArrowRight className="ml-3 size-4" /></Link>} />
+        <PageHeader title="Posts" note={`${posts.length.toLocaleString("en-US")} posts · local database`} actions={<Link href="/admin/yazilar/yeni" className={buttonVariants()}>New post <ArrowRight className="ml-3 size-4" /></Link>} />
         <PostsTable posts={posts} />
       </div>
     </AppShell>

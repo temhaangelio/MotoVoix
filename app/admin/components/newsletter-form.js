@@ -21,13 +21,13 @@ export function NewsletterForm() {
     try {
       const result = await saveNewsletterAction(new FormData(event.currentTarget));
       if (!result?.success) {
-        setMessage(result?.message || "Kayıt başarısız.");
+        setMessage(result?.message || "Tueve failed.");
         return;
       }
       router.push("/admin/e-bulten");
       router.refresh();
     } catch {
-      setMessage("Sunucudan beklenmeyen bir yanıt geldi.");
+      setMessage("The server returned an unexpected response.");
     } finally {
       setPending(false);
     }
@@ -36,24 +36,24 @@ export function NewsletterForm() {
   return (
     <form onSubmit={onSubmit} className="mx-auto max-w-[920px] space-y-5">
       <div className="card space-y-5">
-        <h2 className="section-title">Yeni bülten</h2>
-        <FormField label="Konu" htmlFor="subject"><Input id="subject" name="subject" required /></FormField>
-        <FormField label="Ön izleme" htmlFor="previewText"><Input id="previewText" name="previewText" /></FormField>
-        <FormField label="İçerik" htmlFor="content"><Textarea id="content" name="content" className="min-h-[220px]" /></FormField>
+        <h2 className="section-title">New newsletter</h2>
+        <FormField label="Subject" htmlFor="subject"><Input id="subject" name="subject" required /></FormField>
+        <FormField label="Preview text" htmlFor="previewText"><Input id="previewText" name="previewText" /></FormField>
+        <FormField label="Content" htmlFor="content"><Textarea id="content" name="content" className="min-h-[220px]" /></FormField>
         <div className="grid gap-5 sm:grid-cols-2">
-          <FormField label="Durum" htmlFor="status">
+          <FormField label="Status" htmlFor="status">
             <Select id="status" name="status" defaultValue="draft">
-              <option value="draft">Taslak</option>
-              <option value="scheduled">Planlı</option>
-              <option value="sent">Gönderildi (demo)</option>
+              <option value="draft">Draft</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="sent">Sent (demo)</option>
             </Select>
           </FormField>
-          <FormField label="Planlanan gönderim" htmlFor="scheduledAt"><Input id="scheduledAt" name="scheduledAt" type="datetime-local" /></FormField>
+          <FormField label="Scheduled send" htmlFor="scheduledAt"><Input id="scheduledAt" name="scheduledAt" type="datetime-local" /></FormField>
         </div>
         {message ? <p className="text-sm text-[#b42318]">{message}</p> : null}
         <div className="flex justify-end gap-2">
-          <Link href="/admin/e-bulten" className={buttonVariants({ variant: "secondary" })}>Vazgeç</Link>
-          <Button type="submit" disabled={pending}>{pending ? "Kaydediliyor…" : "Kaydet"}</Button>
+          <Link href="/admin/e-bulten" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
+          <Button type="submit" disabled={pending}>{pending ? "Tueving…" : "Tueve"}</Button>
         </div>
       </div>
     </form>

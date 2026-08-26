@@ -25,14 +25,14 @@ export function AdminLoginForm() {
       const result = await response.json().catch(() => null);
 
       if (!response.ok || !result?.success) {
-        setMessage(result?.message || "Giriş yapılamadı.");
+        setMessage(result?.message || "Sign-in failed.");
         return;
       }
 
       router.push("/admin");
       router.refresh();
     } catch {
-      setMessage("Sunucuya bağlanılamadı. Sayfayı yenileyip tekrar deneyin.");
+      setMessage("Could not connect to the server. Refresh and try again.");
     } finally {
       setPending(false);
     }
@@ -40,9 +40,9 @@ export function AdminLoginForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      <Input name="password" type="password" placeholder="Şifre" autoComplete="current-password" required />
+      <Input name="password" type="password" placeholder="Password" autoComplete="current-password" required />
       {message ? <p className="text-sm font-medium text-[#b42318]">{message}</p> : null}
-      <Button type="submit" disabled={pending} className="w-full">{pending ? "Giriş yapılıyor…" : "Panele gir"}</Button>
+      <Button type="submit" disabled={pending} className="w-full">{pending ? "Signing in…" : "Sign in"}</Button>
     </form>
   );
 }

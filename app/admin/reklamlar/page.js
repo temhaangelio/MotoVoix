@@ -8,7 +8,7 @@ export default function AdsPage() {
   const active = ads.filter((ad) => ad.active).length;
   return (
     <AppShell active="/admin/reklamlar">
-      <PageHeader title="Reklamlar" note={`${ads.length} reklam · ${active} yayında`} />
+      <PageHeader title="Ads" note={`${ads.length} ads · ${active} published`} />
       <AdsManager ads={ads} />
     </AppShell>
   );

@@ -7,7 +7,7 @@ export async function POST(request) {
   const password = String(body.password || "");
 
   if (password !== ADMIN_PASSWORD) {
-    return NextResponse.json({ success: false, message: "Şifre hatalı" }, { status: 401 });
+    return NextResponse.json({ success: false, message: "Incorrect password" }, { status: 401 });
   }
 
   const response = NextResponse.json({ success: true });

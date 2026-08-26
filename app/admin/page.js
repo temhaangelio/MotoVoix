@@ -11,8 +11,8 @@ const timeZone = "Europe/Istanbul";
 function relativeTime(value) {
   const elapsed = Date.now() - new Date(value).getTime();
   const hours = Math.max(1, Math.floor(elapsed / 3_600_000));
-  if (hours < 24) return `${hours} saat önce`;
-  return `${Math.floor(hours / 24)} gün önce`;
+  if (hours < 24) return `${hours} hours ago`;
+  return `${Math.floor(hours / 24)} days ago`;
 }
 
 export default function AdminDashboardPage() {
@@ -40,11 +40,11 @@ export default function AdminDashboardPage() {
     <AppShell active="/admin">
       <PageHeader
         title="Dashboard"
-        note={`${part("weekday")}, ${part("day")} ${part("month")} · bu hafta ${postStats.publishedThisWeek} yazı yayında`}
+        note={`${part("weekday")}, ${part("month")} ${part("day")} · ${postStats.publishedThisWeek} posts published this week`}
         actions={
           <div className="flex gap-2">
-            <div className="hidden h-11 items-center rounded-full bg-white px-5 text-sm font-medium text-[#a1a1a1] md:flex">Yerel demo veritabanı</div>
-            <Link href="/admin/yazilar/yeni" className={buttonVariants()}>Yeni yazı <ArrowRight className="ml-3 size-4" /></Link>
+            <div className="hidden h-11 items-center rounded-full bg-white px-5 text-sm font-medium text-[#a1a1a1] md:flex">Local demo database</div>
+            <Link href="/admin/yazilar/yeni" className={buttonVariants()}>New post <ArrowRight className="ml-3 size-4" /></Link>
           </div>
         }
       />
@@ -60,12 +60,12 @@ export default function AdminDashboardPage() {
               <span key={index} title={`${index + 1} ${monthName}`} className={`size-[13px] rounded-full ${publishedDays.has(index + 1) ? "bg-black" : "bg-[#dcdcdc]"}`} />
             ))}
           </div>
-          <p className="mt-8 text-sm font-medium text-[#a1a1a1]">Bu ay {postStats.publishedThisMonth} yazı, {publishedDays.size} yayın günü</p>
+          <p className="mt-8 text-sm font-medium text-[#a1a1a1]">{postStats.publishedThisMonth} posts across {publishedDays.size} publishing days this month</p>
         </Card>
         <Card className="min-h-[300px] xl:col-span-5">
           <div className="flex justify-between">
-            <h2 className="section-title">Son yazılar</h2>
-            <span className="text-[15px] font-medium text-[#a1a1a1]">{postStats.total.toLocaleString("tr-TR")} yazı</span>
+            <h2 className="section-title">Recent posts</h2>
+            <span className="text-[15px] font-medium text-[#a1a1a1]">{postStats.total.toLocaleString("en-US")} posts</span>
           </div>
           <div className="mt-6 space-y-4">
             {postStats.recent.map((post) => (
@@ -73,7 +73,7 @@ export default function AdminDashboardPage() {
                 <span className={`w-[3px] rounded-full ${post.status === "published" ? "bg-black" : "bg-[#dcdcdc]"}`} />
                 <div>
                   <strong className="block text-base tracking-[-.022em]">{post.title}</strong>
-                  <small className="text-sm font-medium text-[#a1a1a1]">{post.status === "published" ? "Yayında" : post.status === "scheduled" ? "Planlı" : "Taslak"} · {relativeTime(post.created_at)}</small>
+                  <small className="text-sm font-medium text-[#a1a1a1]">{post.status === "published" ? "Published" : post.status === "scheduled" ? "Scheduled" : "Draft"} · {relativeTime(post.created_at)}</small>
                 </div>
               </Link>
             ))}
@@ -81,10 +81,10 @@ export default function AdminDashboardPage() {
         </Card>
         <div className="grid gap-5 sm:grid-cols-2 xl:col-span-2 xl:grid-cols-1">
           <Card className="flex min-h-[140px] flex-col justify-between">
-            <strong>Abone <span className="text-[#a1a1a1]">{newsletterData.stats.pending} bekliyor</span></strong>
+            <strong>Subscribers <span className="text-[#a1a1a1]">{newsletterData.stats.pending} pending</span></strong>
             <div>
               <div className="text-[40px] font-bold leading-none tracking-[-.05em]">{newsletterData.stats.active.toLocaleString("tr-TR")}</div>
-              <small className="text-[#a1a1a1]">aktif abone</small>
+              <small className="text-[#a1a1a1]">active subscribers</small>
             </div>
           </Card>
           <Card className="flex min-h-[140px] flex-col justify-between">
@@ -95,19 +95,19 @@ export default function AdminDashboardPage() {
               </>
             ) : (
               <>
-                <small className="text-[#a1a1a1]">E-bülten</small>
-                <div className="text-[22px] font-bold leading-tight tracking-[-.04em]">Planlı <span className="text-[#a1a1a1]">gönderim yok</span></div>
+                <small className="text-[#a1a1a1]">Newsletter</small>
+                <div className="text-[22px] font-bold leading-tight tracking-[-.04em]">Scheduled <span className="text-[#a1a1a1]">no sends</span></div>
               </>
             )}
           </Card>
         </div>
         <Card className="xl:col-span-5">
           <div className="flex justify-between">
-            <h2 className="section-title">Yayın takvimi</h2>
-            <span className="text-[#a1a1a1]">{postStats.scheduled.length} planlı yazı</span>
+            <h2 className="section-title">Publishing calendar</h2>
+            <span className="text-[#a1a1a1]">{postStats.scheduled.length} scheduled posts</span>
           </div>
           <div className="mt-6 grid grid-cols-7 gap-y-4 text-center">
-            {["Pt", "Sa", "Ça", "Pe", "Cu", "Ct", "Pz"].map((label) => <span key={label} className="text-sm font-semibold text-[#a1a1a1]">{label}</span>)}
+            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((label) => <span key={label} className="text-sm font-semibold text-[#a1a1a1]">{label}</span>)}
             {Array.from({ length: firstWeekday - 1 }, (_, index) => <span key={`empty-${index}`} />)}
             {Array.from({ length: daysInMonth }, (_, index) => {
               const day = index + 1;
@@ -121,8 +121,8 @@ export default function AdminDashboardPage() {
         </Card>
         <Card className="xl:col-span-7">
           <div className="flex justify-between">
-            <h2 className="section-title">Görüntüleme</h2>
-            <span className="text-[#a1a1a1]">Son 7 gün</span>
+            <h2 className="section-title">Views</h2>
+            <span className="text-[#a1a1a1]">Last 7 days</span>
           </div>
           <div className="mt-4 text-[40px] font-bold tracking-[-.05em]">{analytics.pageviews.toLocaleString("tr-TR")}</div>
           <div className="mt-8 flex h-24 items-end gap-2">

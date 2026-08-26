@@ -5,20 +5,20 @@ import { ChevronLeft, ChevronRight, Download, RotateCcw } from "lucide-react";
 import { Button } from "./ui/button";
 
 const formats = [
-  { id: "square", label: "Kare gönderi", width: 1080, height: 1080, ratio: "1:1" },
-  { id: "portrait", label: "Dikey gönderi", width: 1080, height: 1350, ratio: "4:5" },
-  { id: "landscape", label: "Yatay gönderi", width: 1080, height: 566, ratio: "1.91:1" },
+  { id: "square", label: "Square post", width: 1080, height: 1080, ratio: "1:1" },
+  { id: "portrait", label: "Portrait post", width: 1080, height: 1350, ratio: "4:5" },
+  { id: "landscape", label: "Landscape post", width: 1080, height: 566, ratio: "1.91:1" },
   { id: "story", label: "Hikâye", width: 1080, height: 1920, ratio: "9:16" },
   { id: "reels", label: "Reels", width: 1080, height: 1920, ratio: "9:16" },
-  { id: "reels-cover", label: "Reels kapak görseli", width: 1080, height: 1920, ratio: "9:16" },
-  { id: "profile", label: "Profil fotoğrafı", width: 320, height: 320, ratio: "1:1" },
-  { id: "carousel", label: "Karusel gönderisi", width: 1080, height: 1350, ratio: "4:5" },
+  { id: "reels-cover", label: "Reels cover", width: 1080, height: 1920, ratio: "9:16" },
+  { id: "profile", label: "Profilee photo", width: 320, height: 320, ratio: "1:1" },
+  { id: "carousel", label: "Carousel post", width: 1080, height: 1350, ratio: "4:5" },
 ];
 
 const themes = {
-  light: { label: "Açık", background: "#f2f2f0", foreground: "#101010", muted: "#6f6f6b" },
+  light: { label: "Light", background: "#f2f2f0", foreground: "#101010", muted: "#6f6f6b" },
   dark: { label: "Koyu", background: "#111111", foreground: "#ffffff", muted: "#a8a8a8" },
-  warm: { label: "Sıcak", background: "#e7dfd1", foreground: "#201d18", muted: "#766e62" },
+  warm: { label: "Warm", background: "#e7dfd1", foreground: "#201d18", muted: "#766e62" },
 };
 
 const DEFAULT_TITLE_SIZE = 76;
@@ -106,7 +106,7 @@ function loadCanvasImage(source) {
 }
 
 function fileBase(title, formatId) {
-  return `${title.toLocaleLowerCase("tr-TR").replace(/[^a-z0-9ğüşöçıİĞÜŞÖÇ]+/gi, "-").replace(/^-|-$/g, "").slice(0, 70) || "haber"}-${formatId}`;
+  return `${title.toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").slice(0, 70) || "post"}-${formatId}`;
 }
 
 function downloadDataUrl(href, name) {
@@ -332,28 +332,28 @@ export function PostImageGenerator({ title, body, imageUrl: savedImageUrl }) {
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(300px,.72fr)_minmax(0,1.28fr)]">
       <section className="card h-fit">
-        <h2 className="text-xl font-bold tracking-[-.035em]">Kart ayarları</h2>
-        <p className="mt-2 text-sm leading-6 text-[#777]">Uzun yazılar otomatik olarak birden fazla karta bölünür.</p>
-        <label htmlFor="card-text" className="mt-6 block text-sm font-semibold">Kart metni</label>
+        <h2 className="text-xl font-bold tracking-[-.035em]">Card settings</h2>
+        <p className="mt-2 text-sm leading-6 text-[#777]">Long posts are automatically split across multiple cards.</p>
+        <label htmlFor="card-text" className="mt-6 block text-sm font-semibold">Card text</label>
         <textarea id="card-text" value={text} onChange={(event) => setText(event.target.value)} rows={8} className="mt-2 w-full resize-y rounded-[20px] border border-[#dedede] bg-white p-4 text-[15px] leading-6 outline-none transition focus:border-black" />
-        <div className="mt-2 text-right text-xs text-[#999]">{text.length} karakter · {pageCount} görsel</div>
-        <label htmlFor="card-format" className="mt-5 block text-sm font-semibold">Boyut</label>
+        <div className="mt-2 text-right text-xs text-[#999]">{text.length} characters · {pageCount} images</div>
+        <label htmlFor="card-format" className="mt-5 block text-sm font-semibold">Format</label>
         <select id="card-format" value={formatId} onChange={(event) => setFormatId(event.target.value)} className="mt-2 h-12 w-full rounded-full border border-[#dedede] bg-white px-4 text-[15px] font-semibold outline-none focus:border-black">
           {formats.map((item) => (
             <option key={item.id} value={item.id}>{item.label} · {item.width} × {item.height} · {item.ratio}</option>
           ))}
         </select>
-        <label htmlFor="card-font" className="mt-5 block text-sm font-semibold">Yazı tipi</label>
+        <label htmlFor="card-font" className="mt-5 block text-sm font-semibold">Font</label>
         <select id="card-font" value={fontId} onChange={(event) => setFontId(event.target.value)} className="mt-2 h-12 w-full rounded-full border border-[#dedede] bg-white px-4 text-[15px] font-semibold outline-none focus:border-black">
           {Object.keys(fonts).map((value) => (
             <option key={value} value={value} style={{ fontFamily: fonts[value].family }}>{fonts[value].label}</option>
           ))}
         </select>
-        <span className="mt-5 block text-sm font-semibold">Yazı boyutu</span>
+        <span className="mt-5 block text-sm font-semibold">Font size</span>
         <div className="mt-2 grid grid-cols-2 gap-3">
           <label className="block">
             <span className="mb-1.5 flex items-center justify-between text-xs font-semibold text-[#777]">
-              Başlık
+              Title
               <span className="tabular-nums text-[#111]">{titleSize}</span>
             </span>
             <input type="range" min="28" max="96" value={titleSize} onChange={(event) => setTitleSize(Number(event.target.value))} className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#e8e8e8] accent-black" />
@@ -366,11 +366,11 @@ export function PostImageGenerator({ title, body, imageUrl: savedImageUrl }) {
             <input type="range" min="18" max="56" value={bodySize} onChange={(event) => setBodySize(Number(event.target.value))} className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#e8e8e8] accent-black" />
           </label>
         </div>
-        <span className="mt-5 block text-sm font-semibold">İç boşluk</span>
+        <span className="mt-5 block text-sm font-semibold">Padding</span>
         <div className="mt-2 grid grid-cols-2 gap-3">
           <label className="block">
             <span className="mb-1.5 flex items-center justify-between text-xs font-semibold text-[#777]">
-              Üst ve yanlar
+              Top and sides
               <span className="tabular-nums text-[#111]">{padding.top}</span>
             </span>
             <input type="range" min="0" max="220" value={padding.top} onChange={(event) => setEdgePadding(event.target.value)} className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#e8e8e8] accent-black" />
@@ -383,7 +383,7 @@ export function PostImageGenerator({ title, body, imageUrl: savedImageUrl }) {
             <input type="range" min="0" max="220" value={padding.bottom} onChange={(event) => setBottomPadding(event.target.value)} className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[#e8e8e8] accent-black" />
           </label>
         </div>
-        <span className="mt-5 block text-sm font-semibold">Tema</span>
+        <span className="mt-5 block text-sm font-semibold">Theme</span>
         <div className="mt-2 grid grid-cols-3 gap-2">
           {Object.keys(themes).map((value) => (
             <button key={value} type="button" onClick={() => setTheme(value)} className={`h-11 rounded-full text-sm font-semibold transition ${theme === value ? "bg-black text-white" : "bg-[#f1f1f1] text-black hover:bg-[#e7e7e7]"}`}>
@@ -392,40 +392,40 @@ export function PostImageGenerator({ title, body, imageUrl: savedImageUrl }) {
           ))}
         </div>
         <Button type="button" variant="ghost" onClick={reset} className="mt-6 w-full">
-          <RotateCcw className="mr-2 size-4" />Başlangıca dön
+          <RotateCcw className="mr-2 size-4" />Reset
         </Button>
       </section>
       <section className="card">
         <div className="flex flex-col gap-4 border-b border-[#ececec] pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-xl font-bold tracking-[-.035em]">Önizleme</h2>
-            <p className="mt-1 text-sm text-[#999]">{format.width} × {format.height} px · {pageCount} görsel</p>
+            <h2 className="text-xl font-bold tracking-[-.035em]">Preview</h2>
+            <p className="mt-1 text-sm text-[#999]">{format.width} × {format.height} px · {pageCount} images</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {pageCount > 1 ? (
               <Button type="button" variant="outline" onClick={downloadAll}>
-                <Download className="mr-2 size-4" />Tümünü indir
+                <Download className="mr-2 size-4" />Download all
               </Button>
             ) : null}
             <Button type="button" variant="outline" onClick={downloadCurrent}>
-              <Download className="mr-2 size-4" />PNG indir
+              <Download className="mr-2 size-4" />Download PNG
             </Button>
           </div>
         </div>
         <div className="pt-5">
           {pageCount > 1 ? (
             <div className="mb-4 flex items-center justify-center gap-3">
-              <Button type="button" variant="ghost" size="sm" disabled={pageIndex === 0} onClick={() => setPageIndex((value) => Math.max(0, value - 1))} aria-label="Önceki görsel">
+              <Button type="button" variant="ghost" size="sm" disabled={pageIndex === 0} onClick={() => setPageIndex((value) => Math.max(0, value - 1))} aria-label="Previous image">
                 <ChevronLeft className="size-4" />
               </Button>
               <span className="min-w-16 text-center text-sm font-semibold tabular-nums">{pageIndex + 1} / {pageCount}</span>
-              <Button type="button" variant="ghost" size="sm" disabled={pageIndex >= pageCount - 1} onClick={() => setPageIndex((value) => Math.min(pageCount - 1, value + 1))} aria-label="Sonraki görsel">
+              <Button type="button" variant="ghost" size="sm" disabled={pageIndex >= pageCount - 1} onClick={() => setPageIndex((value) => Math.min(pageCount - 1, value + 1))} aria-label="Next image">
                 <ChevronRight className="size-4" />
               </Button>
             </div>
           ) : null}
           <div className="mx-auto max-h-[75vh] max-w-full overflow-hidden bg-[#e8e8e8]" style={{ aspectRatio: `${format.width} / ${format.height}` }}>
-            <canvas ref={canvasRef} width={format.width} height={format.height} aria-label={`${format.label} önizlemesi ${pageIndex + 1}`} className="block size-full" />
+            <canvas ref={canvasRef} width={format.width} height={format.height} aria-label={`${format.label} preview ${pageIndex + 1}`} className="block size-full" />
           </div>
         </div>
       </section>

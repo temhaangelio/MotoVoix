@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AdminLoginForm } from "../components/admin-login-form";
 import { BrandMark } from "../../components/brand-mark";
 
-export const metadata = { title: "Yönetici girişi | MotoVoix" };
+export const metadata = { title: "Admin sign in | MotoVoix" };
 
 export default function AdminLoginPage() {
   return (
@@ -12,11 +12,11 @@ export default function AdminLoginPage() {
           <BrandMark className="text-black" />
           <span>
             <strong className="block">MotoVoix</strong>
-            <small className="text-[#a1a1a1]">Yönetim paneli</small>
+            <small className="text-[#a1a1a1]">Admin panel</small>
           </span>
         </Link>
-        <h1 className="page-title !text-[32px]">Yönetici girişi</h1>
-        <p className="mb-8 mt-3 text-[15px] leading-relaxed text-[#a1a1a1]">Demo panel için yerel veritabanı kullanılır. Şifre site girişi ile aynıdır.</p>
+        <h1 className="page-title !text-[32px]">Admin sign in</h1>
+        <p className="mb-8 mt-3 text-[15px] leading-relaxed text-[#a1a1a1]">The demo panel uses a local database. The password is the same as the site login.</p>
         <AdminLoginForm />
       </section>
     </main>

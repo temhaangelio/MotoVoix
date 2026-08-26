@@ -6,13 +6,13 @@ import { cn } from "../../../lib/cn";
 const number = new Intl.NumberFormat("tr-TR");
 
 function changeLabel(value) {
-  if (value === null || value === undefined) return "önceki dönemde veri yok";
+  if (value === null || value === undefined) return "no data for previous period";
   const sign = value > 0 ? "+" : "";
-  return `${sign}%${Math.abs(value) < 0.05 ? "0" : value.toFixed(1).replace(".", ",")} önceki döneme göre`;
+  return `${sign}${Math.abs(value) < 0.05 ? "0" : value.toFixed(1)}% vs previous period`;
 }
 
 function dayLabel(value, days) {
-  return new Intl.DateTimeFormat("tr-TR", days === 7 ? { weekday: "short" } : { day: "numeric", month: "short" }).format(new Date(`${value}T12:00:00Z`));
+  return new Intl.DateTimeFormat("en-US", days === 7 ? { weekday: "short" } : { day: "numeric", month: "short" }).format(new Date(`${value}T12:00:00Z`));
 }
 
 export function AnalyticsDashboard({ analytics, range }) {
@@ -26,21 +26,21 @@ export function AnalyticsDashboard({ analytics, range }) {
   return (
     <>
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <p className="text-[15px] font-medium text-[#a1a1a1]">Son {range} gün · yerel demo veri</p>
+        <p className="text-[15px] font-medium text-[#a1a1a1]">Last {range} days · local demo data</p>
         <div className="flex gap-2">
           {ranges.map((days) => (
             <Link key={days} href={days === 30 ? "/admin/istatistik" : `/admin/istatistik?aralik=${days}`} className={buttonVariants({ variant: days === range ? "primary" : "outline", size: "sm" })}>
-              {days} gün
+              {days} days
             </Link>
           ))}
         </div>
       </div>
       <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {[
-          ["Görüntüleme", number.format(analytics.pageviews), changeLabel(analytics.pageviewsChange)],
+          ["Views", number.format(analytics.pageviews), changeLabel(analytics.pageviewsChange)],
           ["Tekil okur", number.format(analytics.visitors), changeLabel(analytics.visitorsChange)],
-          ["Ziyaretçi başına", pagePerVisitor.toFixed(1).replace(".", ","), "sayfa görüntüleme"],
-          ["Günlük ortalama", number.format(Math.round(dailyAverage)), "görüntüleme"],
+          ["Per visitor", pagePerVisitor.toFixed(1), "page views"],
+          ["Daily average", number.format(Math.round(dailyAverage)), "views"],
         ].map(([label, value, note]) => (
           <Card key={label} className="flex h-[132px] flex-col justify-between">
             <strong>{label}</strong>
@@ -54,8 +54,8 @@ export function AnalyticsDashboard({ analytics, range }) {
       <div className="mt-5 grid gap-5 xl:grid-cols-12">
         <Card className="xl:col-span-8">
           <div className="flex justify-between">
-            <h2 className="section-title">Günlük görüntüleme</h2>
-            <span className="text-[#a1a1a1]">Son {range} gün</span>
+            <h2 className="section-title">Daily views</h2>
+            <span className="text-[#a1a1a1]">Last {range} days</span>
           </div>
           <div className="mt-8 flex h-[270px] gap-3">
             <div className="flex w-10 shrink-0 flex-col justify-between pb-7 text-right text-xs font-medium tabular-nums text-[#a1a1a1]">
@@ -80,7 +80,7 @@ export function AnalyticsDashboard({ analytics, range }) {
           </div>
         </Card>
         <Card className="xl:col-span-4">
-          <h2 className="section-title">Trafik kaynakları</h2>
+          <h2 className="section-title">Traffic sources</h2>
           <div className="mt-7 space-y-5">
             {analytics.sources.map((source) => (
               <div key={source.label}>
@@ -96,7 +96,7 @@ export function AnalyticsDashboard({ analytics, range }) {
           </div>
         </Card>
         <Card className="xl:col-span-8">
-          <h2 className="section-title">En çok ziyaret edilenler</h2>
+          <h2 className="section-title">Most visited</h2>
           <div className="mt-5 divide-y divide-[#f1f1f1]">
             {analytics.topPages.map((page, index) => (
               <div key={page.path} className="grid grid-cols-[36px_minmax(0,1fr)_80px_90px] gap-3 py-3">
@@ -109,7 +109,7 @@ export function AnalyticsDashboard({ analytics, range }) {
           </div>
         </Card>
         <Card className="xl:col-span-4">
-          <h2 className="section-title">Okur dağılımı</h2>
+          <h2 className="section-title">Audience breakdown</h2>
           <div className="mt-7 space-y-5">
             {analytics.countries.map((country) => (
               <div key={country.code} className="flex items-center justify-between">

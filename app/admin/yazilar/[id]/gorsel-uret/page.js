@@ -16,11 +16,11 @@ export default async function GeneratePostImagePage({ params }) {
     <AppShell active="/admin/yazilar">
       <div className="mx-auto w-full max-w-[1180px]">
         <PageHeader
-          title="Görsel üret"
-          note="Yazıyı Instagram’da paylaşılabilir bir karta dönüştürün"
+          title="Generate image"
+          note="Turn the post into a shareable Instagram card"
           actions={(
             <Link href="/admin/yazilar" className={buttonVariants({ variant: "outline" })}>
-              <ArrowLeft className="mr-2 size-4" />Yazılara dön
+              <ArrowLeft className="mr-2 size-4" />Back to posts
             </Link>
           )}
         />

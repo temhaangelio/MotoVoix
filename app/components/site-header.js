@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./theme-toggle";
+import LanguageSwitcher from "./language-switcher";
+import { useLanguage } from "./language-provider";
+import { Wordmark } from "./wordmark";
 
 const NAV_ITEMS = [
-  { href: "/news", label: "News", match: (pathname) => pathname === "/news" || pathname.startsWith("/haber/") },
-  { href: "/newsletter", label: "Newsletter", match: (pathname) => pathname === "/newsletter" },
-  { href: "/about", label: "About", match: (pathname) => pathname === "/about" },
-  { href: "/contact", label: "Contact", match: (pathname) => pathname === "/contact" },
+  { href: "/news", en: "News", fr: "Actualités", match: (pathname) => pathname === "/news" || pathname.startsWith("/haber/") },
+  { href: "/newsletter", en: "Newsletter", fr: "Infolettre", match: (pathname) => pathname === "/newsletter" },
+  { href: "/about", en: "About", fr: "À propos", match: (pathname) => pathname === "/about" },
+  { href: "/contact", en: "Contact", fr: "Contact", match: (pathname) => pathname === "/contact" },
 ];
 
 function getLinkClass(isActive) {
@@ -21,6 +24,7 @@ function getLinkClass(isActive) {
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const { language } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -31,19 +35,20 @@ export default function SiteHeader() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/60 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 md:px-8 md:py-5">
         <div className="flex items-center justify-between gap-4">
-          <Link href="/news" className="brand-logo text-xl font-semibold tracking-tight text-[#E5E2E1] sm:text-2xl">
-            MOTOVOIX
+          <Link href="/news" className="text-xl tracking-tight text-[#E5E2E1] sm:text-2xl">
+            <Wordmark />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
             {NAV_ITEMS.map((item) => (
               <Link className={getLinkClass(item.match(pathname))} href={item.href} key={item.href}>
-                {item.label}
+                {item[language]}
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher />
             <ThemeToggle />
             <button
               aria-controls="mobile-navigation"
@@ -69,7 +74,7 @@ export default function SiteHeader() {
                 href={item.href}
                 key={item.href}
               >
-                {item.label}
+                {item[language]}
               </Link>
             ))}
           </nav>

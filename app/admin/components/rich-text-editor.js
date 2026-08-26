@@ -131,7 +131,7 @@ export function RichTextEditor({ id, name, value, onChange, onBlur }) {
   }
 
   function addLink() {
-    const url = window.prompt("Bağlantı adresi", "https://");
+    const url = window.prompt("Link address", "https://");
     if (url?.startsWith("http://") || url?.startsWith("https://")) command("createLink", url);
   }
 
@@ -166,35 +166,35 @@ export function RichTextEditor({ id, name, value, onChange, onBlur }) {
           : "relative overflow-hidden rounded-2xl border border-transparent bg-[#f5f5f5] transition focus-within:border-black focus-within:bg-white",
       )}
     >
-      <div role="toolbar" aria-label="Metin biçimlendirme" className="absolute right-3 top-3 z-10 flex max-w-[calc(100%-24px)] items-center gap-0.5 overflow-x-auto rounded-full bg-[#171717] px-2 py-1.5 shadow-[0_10px_30px_rgba(0,0,0,.18)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <ToolButton label="Kalın" shortcut="⌘B" onPress={() => command("bold")}>
+      <div role="toolbar" aria-label="Text formatting" className="absolute right-3 top-3 z-10 flex max-w-[calc(100%-24px)] items-center gap-0.5 overflow-x-auto rounded-full bg-[#171717] px-2 py-1.5 shadow-[0_10px_30px_rgba(0,0,0,.18)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <ToolButton label="Bold" shortcut="⌘B" onPress={() => command("bold")}>
           <Bold className="size-[17px]" />
         </ToolButton>
-        <ToolButton label="İtalik" shortcut="⌘I" onPress={() => command("italic")}>
+        <ToolButton label="Italic" shortcut="⌘I" onPress={() => command("italic")}>
           <Italic className="size-[17px]" />
         </ToolButton>
         <ToolButton label="Vurgula" onPress={() => command("hiliteColor", "#eaeaea")}>
           <Highlighter className="size-[17px]" />
         </ToolButton>
-        <ToolButton label="Biçimi temizle" onPress={() => command("removeFormat")}>
+        <ToolButton label="Clear formatting" onPress={() => command("removeFormat")}>
           <Eraser className="size-[17px]" />
         </ToolButton>
         <span aria-hidden="true" className="mx-1 h-5 w-px bg-white/20" />
-        <ToolButton label="Bağlantı ekle" shortcut="⌘K" onPress={addLink}>
+        <ToolButton label="Add link" shortcut="⌘K" onPress={addLink}>
           <Link2 className="size-[17px]" />
         </ToolButton>
         <span aria-hidden="true" className="mx-1 h-5 w-px bg-white/20" />
-        <ToolButton label="Başlık 1" onPress={() => command("formatBlock", "h1")}>
+        <ToolButton label="Heading 1" onPress={() => command("formatBlock", "h1")}>
           <Heading1 className="size-[18px]" />
         </ToolButton>
-        <ToolButton label="Başlık 2" onPress={() => command("formatBlock", "h2")}>
+        <ToolButton label="Heading 2" onPress={() => command("formatBlock", "h2")}>
           <Heading2 className="size-[18px]" />
         </ToolButton>
-        <ToolButton label="Alıntı" onPress={() => command("formatBlock", "blockquote")}>
+        <ToolButton label="Quote" onPress={() => command("formatBlock", "blockquote")}>
           <Quote className="size-[17px]" />
         </ToolButton>
         <span aria-hidden="true" className="mx-1 h-5 w-px bg-white/20" />
-        <ToolButton label={fullscreen ? "Tam ekrandan çık" : "Tam ekran"} shortcut={fullscreen ? "Esc" : undefined} onPress={() => setFullscreen((current) => !current)}>
+        <ToolButton label={fullscreen ? "Exit fullscreen" : "Fullscreen"} shortcut={fullscreen ? "Esc" : undefined} onPress={() => setFullscreen((current) => !current)}>
           {fullscreen ? <Minimize2 className="size-[17px]" /> : <Maximize2 className="size-[17px]" />}
         </ToolButton>
       </div>

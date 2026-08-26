@@ -9,8 +9,8 @@ import { Card } from "../components/ui/card";
 import { EmptyState } from "../components/ui/empty-state";
 import { Table, TableWrap, Td, Th } from "../components/ui/table";
 
-const statusLabels = { draft: "Taslak", scheduled: "Planlı", sent: "Gönderildi", cancelled: "İptal" };
-const subscriberStatusLabels = { active: "Aktif", pending: "Bekliyor", unsubscribed: "Ayrıldı" };
+const statusLabels = { draft: "Draft", scheduled: "Scheduled", sent: "Sent", cancelled: "Cancelled" };
+const subscriberStatusLabels = { active: "Active", pending: "Pending", unsubscribed: "Unsubscribed" };
 
 function rate(value, total) {
   return total ? `%${((value / total) * 100).toFixed(1).replace(".", ",")}` : "—";
@@ -27,16 +27,16 @@ export default function NewsletterAdminPage() {
   const sentCampaigns = newsletters.filter((item) => item.status === "sent");
   const chartCampaigns = sentCampaigns.slice(0, 6).reverse();
   const cards = [
-    ["Abone", stats.active.toLocaleString("tr-TR"), `${stats.pending} bekliyor`],
-    ["Açılma", `%${stats.openRate.toFixed(1).replace(".", ",")}`, `${stats.sent} gönderim`],
-    ["Tıklama", `%${stats.clickRate.toFixed(1).replace(".", ",")}`, "demo oran"],
-    ["Çıkış", stats.unsubscribed.toLocaleString("tr-TR"), "kişi"],
+    ["Subscribers", stats.active.toLocaleString("en-US"), `${stats.pending} pending`],
+    ["Opens", `${stats.openRate.toFixed(1)}%`, `${stats.sent} sends`],
+    ["Clicks", `%${stats.clickRate.toFixed(1).replace(".", ",")}`, "demo rate"],
+    ["Unsubscribes", stats.unsubscribed.toLocaleString("tr-TR"), "people"],
   ];
 
   return (
     <AppShell active="/admin/e-bulten">
       <div className="mx-auto w-full max-w-[1600px]">
-        <PageHeader title="E-bülten" note={`${stats.active.toLocaleString("tr-TR")} aktif abone · ${stats.sent} sayı gönderildi`} actions={<Link href="/admin/e-bulten/yeni" className={buttonVariants()}>Yeni bülten <ArrowRight className="ml-3 size-4" /></Link>} />
+        <PageHeader title="Newsletter" note={`${stats.active.toLocaleString("en-US")} active subscribers · ${stats.sent} issues sent`} actions={<Link href="/admin/e-bulten/yeni" className={buttonVariants()}>New newsletter <ArrowRight className="ml-3 size-4" /></Link>} />
         <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {cards.map(([label, value, note]) => (
             <Card key={label} className="flex h-[132px] flex-col justify-between">
@@ -52,23 +52,23 @@ export default function NewsletterAdminPage() {
           <Card className="xl:col-span-7">
             {scheduled ? (
               <>
-                <div className="text-sm font-medium text-[#a1a1a1]">Sıradaki gönderim · {campaignDate(scheduled)}</div>
+                <div className="text-sm font-medium text-[#a1a1a1]">Next send · {campaignDate(scheduled)}</div>
                 <div className="mt-4 flex items-start justify-between gap-4">
                   <div>
                     <h2 className="section-title">#{scheduled.issue_number} · {scheduled.subject}</h2>
-                    <p className="mt-1 text-[#a1a1a1]">{scheduled.preview_text || "Ön izleme metni eklenmedi"}</p>
+                    <p className="mt-1 text-[#a1a1a1]">{scheduled.preview_text || "No preview text added"}</p>
                   </div>
-                  <Badge className="bg-black text-white">Planlı</Badge>
+                  <Badge className="bg-black text-white">Scheduled</Badge>
                 </div>
               </>
             ) : (
-              <EmptyState title="Planlanmış bülten yok" description="Yeni bir bülten oluşturup gönderim tarihini planlayabilirsiniz." />
+              <EmptyState title="No scheduled newsletters" description="Create a newsletter and schedule its send date." />
             )}
           </Card>
           <Card className="xl:col-span-5">
             <div className="flex justify-between">
-              <h2 className="section-title">Açılma oranı</h2>
-              <span className="text-[#a1a1a1]">Son {chartCampaigns.length} sayı</span>
+              <h2 className="section-title">Open rate</h2>
+              <span className="text-[#a1a1a1]">Last {chartCampaigns.length} issues</span>
             </div>
             <div className="mt-5 text-[42px] font-bold tracking-[-.05em]">%{stats.openRate.toFixed(1).replace(".", ",")}</div>
             {chartCampaigns.length ? (
@@ -84,23 +84,23 @@ export default function NewsletterAdminPage() {
                 })}
               </div>
             ) : (
-              <p className="mt-8 text-sm text-[#a1a1a1]">Gönderilmiş bülten verisi oluştuğunda grafik burada görünecek.</p>
+              <p className="mt-8 text-sm text-[#a1a1a1]">The chart will appear here once sent-newsletter data is available.</p>
             )}
           </Card>
           <Card className="xl:col-span-12">
             <div className="mb-5 flex justify-between">
-              <h2 className="section-title">Aboneler</h2>
-              <span className="text-[#a1a1a1]">{subscribers.length} kişi</span>
+              <h2 className="section-title">Subscribers</h2>
+              <span className="text-[#a1a1a1]">{subscribers.length} people</span>
             </div>
             <TableWrap>
               <Table>
                 <thead>
                   <tr>
-                    <Th>Ad</Th>
-                    <Th>E-posta</Th>
-                    <Th>Durum</Th>
-                    <Th>Kaynak</Th>
-                    <Th className="text-right">Kayıt tarihi</Th>
+                    <Th>Name</Th>
+                    <Th>Email</Th>
+                    <Th>Status</Th>
+                    <Th>Source</Th>
+                    <Th className="text-right">Signup date</Th>
                   </tr>
                 </thead>
                 <tbody>
@@ -119,19 +119,19 @@ export default function NewsletterAdminPage() {
           </Card>
           <Card className="xl:col-span-12">
             <div className="mb-5 flex justify-between">
-              <h2 className="section-title">Bültenler</h2>
-              <span className="text-[#a1a1a1]">{newsletters.length} sayı</span>
+              <h2 className="section-title">Newsletters</h2>
+              <span className="text-[#a1a1a1]">{newsletters.length} issues</span>
             </div>
             <TableWrap>
               <Table>
                 <thead>
                   <tr>
-                    <Th>Sayı</Th>
-                    <Th>Konu</Th>
-                    <Th>Durum</Th>
-                    <Th className="text-right">Alıcı</Th>
-                    <Th className="text-right">Açılma</Th>
-                    <Th className="text-right">Tarih</Th>
+                    <Th>Issue</Th>
+                    <Th>Subject</Th>
+                    <Th>Status</Th>
+                    <Th className="text-right">Recipients</Th>
+                    <Th className="text-right">Opens</Th>
+                    <Th className="text-right">Date</Th>
                   </tr>
                 </thead>
                 <tbody>

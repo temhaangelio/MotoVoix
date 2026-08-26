@@ -62,31 +62,31 @@ export function AdsManager({ ads }) {
   return (
     <div className="grid gap-5 xl:grid-cols-12">
       <Card className="h-fit xl:col-span-5">
-        <h2 className="section-title">Yeni reklam</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[#a1a1a1]">Reklam demo veritabanına yazılır; Supabase kullanılmaz.</p>
+        <h2 className="section-title">New ad</h2>
+        <p className="mt-2 text-sm leading-relaxed text-[#a1a1a1]">The ad is saved to the demo database; Supabase is not used.</p>
         <form onSubmit={submit} className="mt-6 space-y-5">
-          <FormField label="Başlık" htmlFor="ad-title"><Input id="ad-title" name="title" required /></FormField>
-          <FormField label="Açıklama" htmlFor="ad-description"><Textarea id="ad-description" name="description" required /></FormField>
+          <FormField label="Title" htmlFor="ad-title"><Input id="ad-title" name="title" required /></FormField>
+          <FormField label="Description" htmlFor="ad-description"><Textarea id="ad-description" name="description" required /></FormField>
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField label="Buton metni" htmlFor="ad-cta"><Input id="ad-cta" name="ctaLabel" defaultValue="Keşfet" required /></FormField>
+            <FormField label="Button label" htmlFor="ad-cta"><Input id="ad-cta" name="ctaLabel" defaultValue="Discover" required /></FormField>
             <FormField label="Hedef adres" htmlFor="ad-url"><Input id="ad-url" name="targetUrl" type="url" placeholder="https://" required /></FormField>
           </div>
-          <FormField label="Görsel URL" htmlFor="ad-image"><Input id="ad-image" name="imageUrl" placeholder="/images/news/news1.png" /></FormField>
-          <FormField label="Dil" htmlFor="ad-language">
+          <FormField label="Image URL" htmlFor="ad-image"><Input id="ad-image" name="imageUrl" placeholder="/images/news/news1.png" /></FormField>
+          <FormField label="Language" htmlFor="ad-language">
             <Select id="ad-language" name="language" defaultValue="en">
               <option value="en">English</option>
-              <option value="tr">Türkçe</option>
+              <option value="fr">Français</option>
             </Select>
           </FormField>
           <div className="flex items-center justify-between rounded-2xl bg-[#f7f7f7] p-4">
             <div>
-              <strong className="block text-sm">Hemen yayınla</strong>
-              <small className="mt-1 block text-[#a1a1a1]">Kapatırsanız reklam taslak olarak saklanır.</small>
+              <strong className="block text-sm">Publish now</strong>
+              <small className="mt-1 block text-[#a1a1a1]">If disabled, the ad is saved as a draft.</small>
             </div>
-            <Switch checked={active} onCheckedChange={setActive} label="Reklamı hemen yayınla" />
+            <Switch checked={active} onCheckedChange={setActive} label="Publish ad now" />
           </div>
           {message ? <p aria-live="polite" className="rounded-2xl bg-[#f5f5f5] p-3 text-sm">{message}</p> : null}
-          <Button type="submit" disabled={pending} className="w-full">{pending ? "Kaydediliyor…" : "Reklamı ekle"}</Button>
+          <Button type="submit" disabled={pending} className="w-full">{pending ? "Tueving…" : "Add ad"}</Button>
         </form>
       </Card>
 
@@ -96,7 +96,7 @@ export function AdsManager({ ads }) {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-lg font-bold tracking-[-.03em]">{ad.title}</h3>
-                <Badge className={ad.active ? "bg-black text-white" : ""}>{ad.active ? "Yayında" : "Taslak"}</Badge>
+                <Badge className={ad.active ? "bg-black text-white" : ""}>{ad.active ? "Published" : "Draft"}</Badge>
               </div>
               <p className="mt-2 text-sm text-[#666]">{ad.description}</p>
               <a href={ad.targetUrl} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold" target="_blank" rel="noreferrer">
@@ -104,7 +104,7 @@ export function AdsManager({ ads }) {
               </a>
             </div>
             <div className="flex items-center gap-3">
-              <Switch checked={ad.active} onCheckedChange={(checked) => toggle(ad, checked)} label={`${ad.title} yayını`} />
+              <Switch checked={ad.active} onCheckedChange={(checked) => toggle(ad, checked)} label={`${ad.title} publishing`} />
               <button type="button" onClick={() => setAdToDelete(ad)} className="grid size-10 place-items-center rounded-full text-[#b42318] hover:bg-[#fff1f0]">
                 <Trash2 size={16} />
               </button>
@@ -115,9 +115,9 @@ export function AdsManager({ ads }) {
 
       <ConfirmDialog
         open={Boolean(adToDelete)}
-        title="Reklam silinsin mi?"
-        description={adToDelete ? `“${adToDelete.title}” silinecek.` : ""}
-        confirmLabel="Reklamı sil"
+        title="Delete ad?"
+        description={adToDelete ? `“${adToDelete.title}” will be deleted.` : ""}
+        confirmLabel="Delete ad"
         variant="destructive"
         onOpenChange={(open) => { if (!open) setAdToDelete(null); }}
         onConfirm={removeSelected}

@@ -11,13 +11,16 @@ import { ConfirmDialog } from "./ui/confirm-dialog";
 import { EmptyState } from "./ui/empty-state";
 import { Input } from "./ui/input";
 import { Table, TableWrap, Td, Th } from "./ui/table";
+import { useLanguage } from "../../components/language-provider";
+import { getCategoryLabel } from "../../../lib/categories";
 
-const labels = { published: "Yayında", draft: "Taslak", scheduled: "Planlı", archived: "Arşiv" };
-const tabs = [["Tümü", "all"], ["Yayında", "published"], ["Taslak", "draft"], ["Planlı", "scheduled"]];
-const sortLabels = { newest: "En yeni", oldest: "En eski", "title-asc": "Başlık A–Z" };
+const labels = { published: "Published", draft: "Draft", scheduled: "Scheduled", archived: "Archived" };
+const tabs = [["All", "all"], ["Published", "published"], ["Draft", "draft"], ["Scheduled", "scheduled"]];
+const sortLabels = { newest: "Newest", oldest: "Oldest", "title-asc": "Title A–Z" };
 
 export function PostsTable({ posts }) {
   const router = useRouter();
+  const { language } = useLanguage();
   const [status, setStatus] = useState("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("newest");
@@ -61,11 +64,11 @@ export function PostsTable({ posts }) {
         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative max-w-md flex-1">
             <Search className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-[#a1a1a1]" />
-            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Başlık veya içerikte ara" className="pl-11" />
+            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search title or content" className="pl-11" />
           </div>
           <ActionMenu
-            label="Yazıları sırala"
-            trigger={<><ArrowDownUp size={15} /><span>Sırala · {sortLabels[sort]}</span></>}
+            label="Sort posts"
+            trigger={<><ArrowDownUp size={15} /><span>Sort · {sortLabels[sort]}</span></>}
             triggerClassName="bg-[#f1f1f1] text-sm font-semibold text-black hover:bg-[#e8e8e8] hover:text-black"
             items={Object.entries(sortLabels).map(([value, label]) => ({ label, checked: sort === value, onSelect: () => setSort(value) }))}
           />
@@ -75,12 +78,12 @@ export function PostsTable({ posts }) {
             <Table>
               <thead>
                 <tr>
-                  <Th className="w-[48%]">Yazı</Th>
-                  <Th>Kategori</Th>
-                  <Th>Durum</Th>
-                  <Th className="text-right">Okuma</Th>
-                  <Th className="text-right">Tarih</Th>
-                  <Th><span className="sr-only">İşlemler</span></Th>
+                  <Th className="w-[48%]">Post</Th>
+                  <Th>Category</Th>
+                  <Th>Status</Th>
+                  <Th className="text-right">Reads</Th>
+                  <Th className="text-right">Date</Th>
+                  <Th><span className="sr-only">Actions</span></Th>
                 </tr>
               </thead>
               <tbody>
@@ -90,20 +93,20 @@ export function PostsTable({ posts }) {
                       <Link href={`/admin/yazilar/${post.id}/duzenle`} className="block text-base font-bold tracking-[-.022em] hover:underline">{post.title}</Link>
                       <p className="mt-2 line-clamp-2 text-sm text-[#777]">{post.excerpt || post.description}</p>
                     </Td>
-                    <Td>{post.category}</Td>
+                    <Td>{getCategoryLabel(post.category, language)}</Td>
                     <Td><Badge className={post.status === "published" ? "bg-black text-white" : post.status === "scheduled" ? "border border-[#dedede] bg-white text-black" : ""}>{labels[post.status] || post.status}</Badge></Td>
-                    <Td className="text-right font-semibold">{post.reads ? post.reads.toLocaleString("tr-TR") : "—"}</Td>
+                    <Td className="text-right font-semibold">{post.reads ? post.reads.toLocaleString(language === "fr" ? "fr-FR" : "en-US") : "—"}</Td>
                     <Td className="text-right text-[#a1a1a1]" suppressHydrationWarning>
-                      {new Intl.DateTimeFormat("tr-TR", { timeZone: "Europe/Istanbul", day: "numeric", month: "short" }).format(new Date(post.published_at || post.scheduled_at || post.created_at))}
+                      {new Intl.DateTimeFormat(language === "fr" ? "fr-FR" : "en-US", { timeZone: "Europe/Istanbul", day: "numeric", month: "short" }).format(new Date(post.published_at || post.scheduled_at || post.created_at))}
                     </Td>
                     <Td>
                       <div className="flex justify-end">
                         <ActionMenu
-                          label={`${post.title} işlemleri`}
+                          label={`${post.title} actions`}
                           items={[
-                            { label: "Düzenle", href: `/admin/yazilar/${post.id}/duzenle`, icon: <Pencil size={15} /> },
-                            { label: "Görsel üret", href: `/admin/yazilar/${post.id}/gorsel-uret`, icon: <ImagePlus size={15} /> },
-                            { label: "Sil", destructive: true, icon: <Trash2 size={15} />, onSelect: () => { setDeleteError(null); setPostToDelete(post); } },
+                            { label: "Edit", href: `/admin/yazilar/${post.id}/duzenle`, icon: <Pencil size={15} /> },
+                            { label: "Generate image", href: `/admin/yazilar/${post.id}/gorsel-uret`, icon: <ImagePlus size={15} /> },
+                            { label: language === "fr" ? "Supprimer" : "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => { setDeleteError(null); setPostToDelete(post); } },
                           ]}
                         />
                       </div>
@@ -114,14 +117,14 @@ export function PostsTable({ posts }) {
             </Table>
           </TableWrap>
         ) : (
-          <EmptyState title="Eşleşen yazı bulunamadı" description="Arama veya filtreyi değiştirip tekrar deneyin." />
+          <EmptyState title="No matching posts found" description="Change the search or filter and try again." />
         )}
       </div>
       <ConfirmDialog
         open={Boolean(postToDelete)}
-        title="Yazı silinsin mi?"
-        description={postToDelete ? `“${postToDelete.title}” yerel veritabanından silinecek.` : "Bu işlem geri alınamaz."}
-        confirmLabel="Yazıyı sil"
+        title="Delete post?"
+        description={postToDelete ? `“${postToDelete.title}” will be deleted from the local database.` : "This action cannot be undone."}
+        confirmLabel="Delete post"
         variant="destructive"
         error={deleteError}
         onOpenChange={(open) => { if (!open) setPostToDelete(null); setDeleteError(null); }}

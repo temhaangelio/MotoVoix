@@ -1,6 +1,7 @@
 import "./globals.css";
 import AnimatedBackground from "./components/animated-background";
 import RouteLoading from "./components/route-loading";
+import { LanguageProvider } from "./components/language-provider";
 
 export const metadata = {
   title: "MotoVoix",
@@ -31,7 +32,7 @@ export default function RootLayout({ children }) {
       >
         <AnimatedBackground />
         <RouteLoading />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

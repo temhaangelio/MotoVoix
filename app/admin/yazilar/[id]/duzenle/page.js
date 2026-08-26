@@ -10,7 +10,7 @@ export default async function EditPostPage({ params }) {
   if (!post) notFound();
   return (
     <AppShell active="/admin/yazilar">
-      <PageHeader title="Yazıyı düzenle" note={post.title} />
+      <PageHeader title="Edit post" note={post.title} />
       <PostForm post={post} />
     </AppShell>
   );

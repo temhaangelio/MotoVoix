@@ -5,7 +5,7 @@ import { PostForm } from "../../components/post-form";
 export default function NewPostPage() {
   return (
     <AppShell active="/admin/yazilar">
-      <PageHeader title="Yeni yazı" note="Kayıt data/local-db.json dosyasına yazılır." />
+      <PageHeader title="New post" note="The record is saved to data/local-db.json." />
       <PostForm />
     </AppShell>
   );
