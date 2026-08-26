@@ -127,6 +127,8 @@ const TURKISH_COPY = {
   "Active subscribers": ["Active subscribers", "Abonnés actifs"], "New ad": ["New ad", "Nouvelle publicité"],
   "Delete ad?": ["Delete ad?", "Supprimer la publicité ?"], "Delete page?": ["Delete page?", "Supprimer la page ?"],
   "Back to posts": ["Back to posts", "Retour aux articles"], "Page": ["Page", "Page"],
+  "Unique readers": ["Unique readers", "Lecteurs uniques"], "Discover": ["Discover", "Découvrir"],
+  "Demo ad. It can be displayed in the visitor feed.": ["Demo ad. It can be displayed in the visitor feed.", "Publicité de démonstration. Elle peut être affichée dans le fil public."],
 };
 
 const COPY = {
@@ -177,6 +179,7 @@ function translate(value, language) {
     .replace(/(\d+) days ago/g, language === "fr" ? "il y a $1 jours" : "$1 days ago")
     .replace(/(\d+) characters/g, language === "fr" ? "$1 caractères" : "$1 characters")
     .replace(/(\d+) images/g, language === "fr" ? "$1 images" : "$1 images")
+    .replace(/(\d+) readers/g, language === "fr" ? "$1 lecteurs" : "$1 readers")
     .replace(/Last (\d+) days/g, language === "fr" ? "$1 derniers jours" : "Last $1 days")
     .replace(/Last (\d+) issues/g, language === "fr" ? "$1 derniers numéros" : "Last $1 issues")
     .replace(/published this week/g, language === "fr" ? "publiés cette semaine" : "published this week")

@@ -38,7 +38,7 @@ export function AnalyticsDashboard({ analytics, range }) {
       <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {[
           ["Views", number.format(analytics.pageviews), changeLabel(analytics.pageviewsChange)],
-          ["Tekil okur", number.format(analytics.visitors), changeLabel(analytics.visitorsChange)],
+          ["Unique readers", number.format(analytics.visitors), changeLabel(analytics.visitorsChange)],
           ["Per visitor", pagePerVisitor.toFixed(1), "page views"],
           ["Daily average", number.format(Math.round(dailyAverage)), "views"],
         ].map(([label, value, note]) => (
@@ -102,7 +102,7 @@ export function AnalyticsDashboard({ analytics, range }) {
               <div key={page.path} className="grid grid-cols-[36px_minmax(0,1fr)_80px_90px] gap-3 py-3">
                 <span className="font-semibold text-[#a1a1a1]">{String(index + 1).padStart(2, "0")}</span>
                 <strong className="truncate">{page.path}</strong>
-                <span className="text-right text-[#a1a1a1]">{number.format(page.visitors)} okur</span>
+                <span className="text-right text-[#a1a1a1]">{number.format(page.visitors)} readers</span>
                 <span className="text-right font-semibold">{number.format(page.pageviews)}</span>
               </div>
             ))}

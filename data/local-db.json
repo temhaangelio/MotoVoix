@@ -2,7 +2,7 @@
   "settings": {
     "siteName": "motorvoix",
     "domain": "motovoix.local",
-    "description": "Motosiklet haber masası.",
+    "description": "Service d’actualités moto indépendant.",
     "descriptionEn": "Independent motorcycle news desk.",
     "postsPerPage": 8,
     "language": "en",
@@ -18,7 +18,7 @@
     "moduleAds": true,
     "moduleAnalytics": true,
     "moduleThemes": false,
-    "adminName": "MotoVoix Editör",
+    "adminName": "MotoVoix Editor",
     "adminEmail": "admin@motovoix.local"
   },
   "posts": [
@@ -1344,8 +1344,8 @@
     {
       "id": "ad_demo",
       "title": "Dainese summer kit",
-      "description": "Demo reklam. Ziyaretçi akışında gösterilebilir.",
-      "ctaLabel": "Keşfet",
+      "description": "Demo ad. It can be displayed in the visitor feed.",
+      "ctaLabel": "Discover",
       "targetUrl": "https://www.dainese.com",
       "imageUrl": "",
       "language": "en",
@@ -1359,7 +1359,7 @@
       "issue_number": 12,
       "subject": "This week in motorcycle news",
       "preview_text": "Vespa Primavera, Yamaha HQ move, Honda WN7.",
-      "content": "Haftalık özet demo içeriği.",
+      "content": "Weekly motorcycle news demo content.",
       "status": "sent",
       "scheduled_at": null,
       "sent_at": "2026-08-17T08:00:00.000Z",
@@ -1373,8 +1373,8 @@
       "id": "nl_13",
       "issue_number": 13,
       "subject": "Launch briefing",
-      "preview_text": "Sıradaki sayı planlandı.",
-      "content": "Planlı bülten taslağı.",
+      "preview_text": "The next issue is scheduled.",
+      "content": "Scheduled newsletter draft.",
       "status": "scheduled",
       "scheduled_at": "2026-08-26T16:04:20.526Z",
       "sent_at": null,
@@ -1407,7 +1407,7 @@
       "name": "Léa Bouchon",
       "email": "lea.bouchon@gmail.com",
       "status": "active",
-      "source": "E-bülten",
+      "source": "Newsletter",
       "created_at": "2026-08-09T16:00:00.000Z"
     },
     {
@@ -1455,7 +1455,7 @@
       "name": "Manon Vesper",
       "email": "manon.vesper@gmail.com",
       "status": "pending",
-      "source": "E-bülten",
+      "source": "Newsletter",
       "created_at": "2026-08-21T16:00:00.000Z"
     },
     {
@@ -1669,7 +1669,7 @@
     "countries": [
       {
         "code": "TR",
-        "label": "Türkiye",
+        "label": "Turkey",
         "percentage": 54
       },
       {
@@ -1679,7 +1679,7 @@
       },
       {
         "code": "GB",
-        "label": "Birleşik Krallık",
+        "label": "United Kingdom",
         "percentage": 12
       },
       {
@@ -1689,7 +1689,7 @@
       },
       {
         "code": "IT",
-        "label": "İtalya",
+        "label": "Italy",
         "percentage": 8
       }
     ]
