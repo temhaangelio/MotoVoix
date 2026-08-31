@@ -1,23 +1,44 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { Search, X } from "lucide-react";
 import { useLanguage } from "./language-provider";
 import { getCategoryLabel } from "../../lib/categories";
 
 export default function NewsFeed({ posts }) {
   const [visibleCount, setVisibleCount] = useState(8);
+  const [query, setQuery] = useState("");
   const { language } = useLanguage();
-  const localizedPosts = posts.map((post) => ({ ...post, title: language === "fr" ? post.titleFr : post.titleEn, description: language === "fr" ? post.excerptFr : post.excerptEn }));
+  const localizedPosts = useMemo(() => posts.map((post) => ({
+    ...post,
+    title: language === "fr" ? post.titleFr : post.titleEn,
+    description: language === "fr" ? post.excerptFr : post.excerptEn,
+  })), [posts, language]);
 
-  const featured = localizedPosts[0];
-  const side = localizedPosts[1];
+  const filteredPosts = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase(language === "fr" ? "fr-FR" : "en-US");
+    if (!normalizedQuery) return localizedPosts;
+    return localizedPosts.filter((post) => [
+      post.title,
+      post.description,
+      getCategoryLabel(post.category, language),
+      post.tags,
+    ].filter(Boolean).join(" ").toLocaleLowerCase(language === "fr" ? "fr-FR" : "en-US").includes(normalizedQuery));
+  }, [localizedPosts, query, language]);
+
+  const featured = filteredPosts[0];
+  const side = filteredPosts[1];
 
   const gridPosts = useMemo(() => {
-    return localizedPosts.slice(2, visibleCount);
-  }, [posts, visibleCount, language]);
+    return filteredPosts.slice(2, visibleCount);
+  }, [filteredPosts, visibleCount]);
 
-  const hasMore = posts.length > visibleCount;
+  const hasMore = filteredPosts.length > visibleCount;
+
+  useEffect(() => {
+    setVisibleCount(8);
+  }, [query, language]);
 
   function handleLoadMore() {
     setVisibleCount((prev) => prev + 4);
@@ -25,6 +46,49 @@ export default function NewsFeed({ posts }) {
 
   return (
     <>
+      <div className="mb-10 sm:mb-14">
+        <div className="relative">
+          <Search aria-hidden className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-outline" size={20} />
+          <label className="sr-only" htmlFor="visitor-news-search">{language === "fr" ? "Rechercher dans les actualités" : "Search news"}</label>
+          <input
+            autoComplete="off"
+            className="min-h-14 w-full rounded-[16px] border border-outline-variant/30 bg-surface-container-low py-3 pl-12 pr-12 font-body text-base text-on-surface outline-none transition-colors placeholder:text-outline focus:border-primary"
+            id="visitor-news-search"
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={language === "fr" ? "Rechercher par titre, catégorie ou mot-clé…" : "Search by title, category, or keyword…"}
+            type="search"
+            value={query}
+          />
+          {query && (
+            <button
+              aria-label={language === "fr" ? "Effacer la recherche" : "Clear search"}
+              className="absolute right-2 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full text-outline transition-colors hover:bg-surface-container-high hover:text-primary"
+              onClick={() => setQuery("")}
+              type="button"
+            >
+              <X aria-hidden size={18} />
+            </button>
+          )}
+        </div>
+        {query.trim() && (
+          <p className="mt-3 font-label text-xs uppercase tracking-widest text-outline">
+            {language === "fr" ? `${filteredPosts.length} résultat${filteredPosts.length === 1 ? "" : "s"}` : `${filteredPosts.length} result${filteredPosts.length === 1 ? "" : "s"}`}
+          </p>
+        )}
+      </div>
+
+      {filteredPosts.length === 0 ? (
+        <div className="rounded-[18px] border border-outline-variant/20 bg-surface-container-low px-6 py-16 text-center sm:py-20">
+          <Search aria-hidden className="mx-auto mb-5 text-outline" size={28} />
+          <h2 className="font-headline text-3xl">{language === "fr" ? "Aucun article trouvé" : "No stories found"}</h2>
+          <p className="mx-auto mt-3 max-w-md font-body text-on-surface-variant">
+            {language === "fr" ? "Essayez un autre titre, une autre catégorie ou un autre mot-clé." : "Try another title, category, or keyword."}
+          </p>
+          <button className="mt-7 min-h-11 border-b-2 border-primary font-label text-xs uppercase tracking-widest" onClick={() => setQuery("")} type="button">
+            {language === "fr" ? "EFFACER LA RECHERCHE" : "CLEAR SEARCH"}
+          </button>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10 lg:gap-12">
         {featured && (
           <article className="md:col-span-8 group rounded-[14px]">
@@ -108,6 +172,7 @@ export default function NewsFeed({ posts }) {
           </article>
         ))}
       </div>
+      )}
 
       {hasMore && (
         <div className="mt-14 flex justify-center sm:mt-20">

@@ -1,15 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { useLanguage } from "./language-provider";
 import { getCategoryLabel } from "../../lib/categories";
 
 export default function NewsDetailContent({ post, relatedPosts }) {
   const { language } = useLanguage();
+  const [vote, setVote] = useState(null);
   const fr = language === "fr";
   const title = fr ? post.titleFr : post.titleEn;
   const description = fr ? post.excerptFr : post.excerptEn;
   const contentHtml = fr ? post.contentHtmlFr : post.contentHtmlEn;
+  const storageKey = `motovoix-article-vote:${post.slug}`;
+
+  useEffect(() => {
+    const savedVote = window.localStorage.getItem(storageKey);
+    setVote(savedVote === "up" || savedVote === "down" ? savedVote : null);
+  }, [storageKey]);
+
+  function handleVote(nextVote) {
+    if (vote === nextVote) {
+      window.localStorage.removeItem(storageKey);
+      setVote(null);
+      return;
+    }
+    window.localStorage.setItem(storageKey, nextVote);
+    setVote(nextVote);
+  }
 
   return (
     <main className="mx-auto max-w-7xl px-4 pt-24 pb-20 sm:px-6 md:px-8 md:pt-28 md:pb-24">
@@ -30,6 +49,34 @@ export default function NewsDetailContent({ post, relatedPosts }) {
             {post.image ? <img alt={title} className="w-full h-full object-cover rounded-[14px]" src={post.image} /> : <span className="font-label text-[10px] uppercase tracking-[0.25em] text-outline">{fr ? "Image à venir" : "Image coming soon"}</span>}
           </div>
           <article className="font-body text-base leading-8 text-zinc-200 sm:text-lg space-y-6 [&_p]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2 [&_a]:break-words [&_a]:text-primary [&_a]:underline" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <div className="mt-12 flex flex-col gap-5 rounded-[18px] border border-outline-variant/20 bg-surface-container-low p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div>
+              <p className="font-headline text-2xl">{fr ? "Cet article vous a-t-il été utile ?" : "Was this story helpful?"}</p>
+              <p className="mt-1 font-body text-sm text-on-surface-variant">
+                {vote ? (fr ? "Merci pour votre avis." : "Thanks for your feedback.") : (fr ? "Donnez-nous votre avis." : "Let us know what you think.")}
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <button
+                aria-label={fr ? "J’aime cet article" : "Thumbs up"}
+                aria-pressed={vote === "up"}
+                className={`grid size-12 place-items-center rounded-full border transition-colors ${vote === "up" ? "border-primary bg-primary text-on-primary" : "border-outline-variant/40 text-on-surface hover:border-primary hover:text-primary"}`}
+                onClick={() => handleVote("up")}
+                type="button"
+              >
+                <ThumbsUp aria-hidden fill={vote === "up" ? "currentColor" : "none"} size={20} />
+              </button>
+              <button
+                aria-label={fr ? "Je n’aime pas cet article" : "Thumbs down"}
+                aria-pressed={vote === "down"}
+                className={`grid size-12 place-items-center rounded-full border transition-colors ${vote === "down" ? "border-primary bg-primary text-on-primary" : "border-outline-variant/40 text-on-surface hover:border-primary hover:text-primary"}`}
+                onClick={() => handleVote("down")}
+                type="button"
+              >
+                <ThumbsDown aria-hidden fill={vote === "down" ? "currentColor" : "none"} size={20} />
+              </button>
+            </div>
+          </div>
         </article>
         <aside className="lg:col-span-4 space-y-8">
           <div className="bg-surface-container-low p-5 sm:p-8 rounded-[18px] border border-outline-variant/20">
