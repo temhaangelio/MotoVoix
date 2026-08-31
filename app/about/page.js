@@ -37,7 +37,7 @@ export default function AboutPage() {
             <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-5">DESK INFO</p>
             <div className="space-y-3 text-sm text-on-surface-variant">
               <p><span className="text-zinc-400">Founded:</span> 2026</p>
-              <p><span className="text-zinc-400">Focus:</span> Motorcycle News</p>
+              <p><span className="text-zinc-400">Focus:</span> Motorcycle and Atv News</p>
               <p><span className="text-zinc-400">Language:</span> English</p>
             </div>
           </aside>

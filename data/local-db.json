@@ -1674,7 +1674,7 @@
       },
       {
         "code": "DE",
-        "label": "Almanya",
+        "label": "Germany",
         "percentage": 16
       },
       {
@@ -1691,6 +1691,28 @@
         "code": "IT",
         "label": "Italy",
         "percentage": 8
+      }
+    ],
+    "devices": [
+      {
+        "code": "android",
+        "label": "Android",
+        "percentage": 46
+      },
+      {
+        "code": "iphone-other",
+        "label": "Other iPhone models",
+        "percentage": 38
+      },
+      {
+        "code": "iphone-17",
+        "label": "iPhone 17",
+        "percentage": 12
+      },
+      {
+        "code": "other",
+        "label": "Other",
+        "percentage": 4
       }
     ]
   }

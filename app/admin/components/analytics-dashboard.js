@@ -95,7 +95,7 @@ export function AnalyticsDashboard({ analytics, range }) {
             ))}
           </div>
         </Card>
-        <Card className="xl:col-span-8">
+        <Card className="xl:col-span-6">
           <h2 className="section-title">Most visited</h2>
           <div className="mt-5 divide-y divide-[#f1f1f1]">
             {analytics.topPages.map((page, index) => (
@@ -108,13 +108,29 @@ export function AnalyticsDashboard({ analytics, range }) {
             ))}
           </div>
         </Card>
-        <Card className="xl:col-span-4">
+        <Card className="xl:col-span-3">
           <h2 className="section-title">Audience breakdown</h2>
           <div className="mt-7 space-y-5">
             {analytics.countries.map((country) => (
               <div key={country.code} className="flex items-center justify-between">
                 <span className="font-semibold">{country.label}</span>
                 <span className="text-[#a1a1a1]">%{Math.round(country.percentage)}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+        <Card className="xl:col-span-3">
+          <h2 className="section-title">Device breakdown</h2>
+          <div className="mt-7 space-y-5">
+            {analytics.devices?.map((device) => (
+              <div key={device.code}>
+                <div className="mb-2 flex justify-between gap-3 text-sm font-semibold">
+                  <span>{device.label}</span>
+                  <span>%{Math.round(device.percentage)}</span>
+                </div>
+                <div className="h-2 rounded-full bg-[#ececec]">
+                  <div className="h-full rounded-full bg-black" style={{ width: `${Math.max(device.percentage, 1)}%` }} />
+                </div>
               </div>
             ))}
           </div>

@@ -22,6 +22,8 @@ export default function AdminDashboardPage() {
   const now = new Date();
   const dateParts = new Intl.DateTimeFormat("tr-TR", { timeZone, weekday: "long", day: "numeric", month: "long" }).formatToParts(now);
   const part = (type) => dateParts.find((item) => item.type === type)?.value ?? "";
+  const shortDateParts = new Intl.DateTimeFormat("en-US", { timeZone, weekday: "short", month: "short" }).formatToParts(now);
+  const shortPart = (type) => shortDateParts.find((item) => item.type === type)?.value ?? "";
   const numericParts = new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now);
   const numberPart = (type) => Number(numericParts.find((item) => item.type === type)?.value ?? 0);
   const year = numberPart("year");
@@ -50,7 +52,7 @@ export default function AdminDashboardPage() {
       />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-12">
         <Card className="flex min-h-[300px] flex-col justify-between xl:col-span-2">
-          <div className="text-[26px] font-bold capitalize tracking-[-.04em]">{part("weekday").slice(0, 3)} <span className="capitalize text-[#a1a1a1]">{part("month").slice(0, 3)}</span></div>
+          <div className="text-[26px] font-bold capitalize tracking-[-.04em]">{shortPart("weekday")} <span className="capitalize text-[#a1a1a1]">{shortPart("month")}</span></div>
           <div className="text-[108px] font-bold leading-[.8] tracking-[-.06em]">{today}</div>
         </Card>
         <Card className="min-h-[300px] xl:col-span-3">
