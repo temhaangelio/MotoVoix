@@ -1,6 +1,7 @@
 ---
 title: "Vespa Primavera 2026 Has Arrived"
-slug: "vespa-primavera-2026-geldi"
+slug: "vespa-primavera-2026-has-arrived"
+legacySlug: "vespa-primavera-2026-geldi"
 description: "Vespa refreshed its iconic Primavera for 2026 with a rear disc brake, keyless start, a new LCD cluster, and fresh colors across both gasoline and electric versions."
 category: "motorcycle"
 tags: "vespa, scooter, design, electric, mobility"

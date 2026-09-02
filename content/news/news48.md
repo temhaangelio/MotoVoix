@@ -1,9 +1,10 @@
 ---
 title: "Elektrikli Motosiklet Satın Alma Rehberi"
-slug: "elektrikli-motosiklet-satin-alma-rehberi"
+slug: "electric-motorcycle-buying-guide"
+legacySlug: "elektrikli-motosiklet-satin-alma-rehberi"
 description: "Gerçek menzil, şarj süresi, batarya garantisi ve toplam kullanım maliyetini değerlendirin."
 category: "satın alma"
-tags: "elektrikli motosiklet, batarya, menzil, şarj"
+tags: "electric motorcycle, battery, range, charging"
 date: "2026-08-26T18:20:00+03:00"
 image: "/images/news/elektrikli-motosiklet-satin-alma.png"
 ---

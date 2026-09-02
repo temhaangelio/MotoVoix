@@ -1,6 +1,7 @@
 ---
 title: "Honda WN7 Wins iF Design Gold"
-slug: "honda-wn7ye-altin-tasarim-odulu"
+slug: "honda-wn7-wins-if-design-gold"
+legacySlug: "honda-wn7ye-altin-tasarim-odulu"
 description: "Honda's electric motorcycle WN7 received the Gold Award in Product Design at iF DESIGN AWARD 2026, marking Honda's first ever iF Gold."
 category: "motorcycle"
 tags: "honda, electric-motorcycle, design, if-design, award"

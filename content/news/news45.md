@@ -1,9 +1,10 @@
 ---
 title: "Kadın Sürücüler İçin Motosiklet Seçimi"
-slug: "kadin-suruculer-icin-motosiklet-secimi"
+slug: "choosing-a-motorcycle-for-female-riders"
+legacySlug: "kadin-suruculer-icin-motosiklet-secimi"
 description: "Cinsiyetten çok ergonomi, ağırlık, kullanım amacı ve kişisel güven üzerinden doğru motosikleti seçin."
 category: "satın alma"
-tags: "kadın sürücü, motosiklet seçimi, ergonomi, başlangıç"
+tags: "female rider, motorcycle selection, ergonomics, beginner"
 date: "2026-08-26T17:50:00+03:00"
 image: "/images/news/kadin-suruculer-motosiklet-secimi.png"
 ---

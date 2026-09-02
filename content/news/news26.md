@@ -1,9 +1,10 @@
 ---
 title: "Düşük Hızda Motosiklet Kontrolü"
-slug: "dusuk-hizda-motosiklet-kontrolu"
+slug: "low-speed-motorcycle-control"
+legacySlug: "dusuk-hizda-motosiklet-kontrolu"
 description: "U dönüşü, slalom, park ve dar alan manevralarında dengeyi geliştiren temel teknikler."
 category: "sürüş"
-tags: "düşük hız, u dönüşü, slalom, denge"
+tags: "low speed, u-turn, slalom, balance"
 date: "2026-08-26T14:40:00+03:00"
 image: "/images/news/dusuk-hizda-motosiklet-kontrolu.png"
 ---

@@ -86,7 +86,7 @@ export function AdsManager({ ads }) {
             <Switch checked={active} onCheckedChange={setActive} label="Publish ad now" />
           </div>
           {message ? <p aria-live="polite" className="rounded-2xl bg-[#f5f5f5] p-3 text-sm">{message}</p> : null}
-          <Button type="submit" disabled={pending} className="w-full">{pending ? "Tueving…" : "Add ad"}</Button>
+          <Button type="submit" disabled={pending} className="w-full">{pending ? "Saving…" : "Add ad"}</Button>
         </form>
       </Card>
 

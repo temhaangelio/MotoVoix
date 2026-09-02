@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Satarken Değeri Nasıl Artırılır?"
-slug: "motosiklet-satarken-degeri-nasil-artirilir"
+slug: "how-to-increase-the-value-of-a-motorcycle-when-selling"
+legacySlug: "motosiklet-satarken-degeri-nasil-artirilir"
 description: "Bakım kayıtları, doğru temizlik, şeffaf ilan ve kaliteli fotoğraflarla güven oluşturun."
 category: "satın alma"
-tags: "motosiklet satışı, ikinci el, ilan, bakım kaydı"
+tags: "motorcycle sale, used motorcycle, listing, maintenance record"
 date: "2026-08-26T17:40:00+03:00"
 image: "/images/news/motosiklet-satis-degeri.png"
 ---

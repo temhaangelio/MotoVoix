@@ -3,7 +3,7 @@ title: "Şehir İçi Motosiklet Kullanma Rehberi"
 slug: "sehir-ici-motosiklet-kullanma-rehberi"
 description: "Kör noktalar, kavşaklar, kapı riski ve yoğun trafikte görünürlük için savunmacı sürüş önerileri."
 category: "sürüş"
-tags: "şehir içi, trafik, kör nokta, savunmacı sürüş"
+tags: "urban riding, traffic, blind spot, defensive riding"
 date: "2026-08-26T12:50:00+03:00"
 image: "/images/news/sehir-ici-motosiklet-rehberi.png"
 ---

@@ -1,9 +1,10 @@
 ---
 title: "Kısa Boylu Sürücüler İçin Motosiklet Ayarları"
-slug: "kisa-boylu-suruculer-icin-motosiklet-ayarlari"
+slug: "motorcycle-settings-for-short-riders"
+legacySlug: "kisa-boylu-suruculer-icin-motosiklet-ayarlari"
 description: "Sele, süspansiyon ve duruş tekniğiyle yere erişimi güvenli biçimde geliştirme seçenekleri."
 category: "rehber"
-tags: "kısa boy, sele yüksekliği, süspansiyon, ergonomi"
+tags: "short rider, seat height, suspension, ergonomics"
 date: "2026-08-26T18:00:00+03:00"
 image: "/images/news/kisa-boylu-suruculer-ayarlar.png"
 ---

@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Aküsü Bakım Rehberi"
-slug: "motosiklet-akusu-bakim-rehberi"
+slug: "motorcycle-battery-maintenance-guide"
+legacySlug: "motosiklet-akusu-bakim-rehberi"
 description: "Aküyü doğru şarj etmek, depolamak ve zayıflama belirtilerini erken fark etmek için rehber."
 category: "bakım"
-tags: "akü bakımı, şarj, voltaj, depolama"
+tags: "battery maintenance, charging, voltage, storage"
 date: "2026-08-26T16:10:00+03:00"
 image: "/images/news/motosiklet-akusu-bakimi.png"
 ---

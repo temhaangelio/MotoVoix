@@ -3,7 +3,7 @@ title: "Uzun Motosiklet Yolculuğu Rehberi"
 slug: "uzun-motosiklet-yolculugu-rehberi"
 description: "Yolculuk öncesinde motosiklet, ekipman ve rota hazırlığı için önemli öneriler."
 category: "rehber"
-tags: "uzun yol, motosiklet bakımı, ekipman, rota planlama, touring"
+tags: "long-distance riding, motorcycle maintenance, gear, route planning, touring"
 date: "2026-08-26T10:00:00+03:00"
 image: "/images/news/uzun-motosiklet-yolculugu-rehberi.png"
 ---

@@ -1,9 +1,10 @@
 ---
 title: "Dünyanın En Güzel Motosiklet Rotaları"
-slug: "dunyanin-en-guzel-motosiklet-rotalari"
+slug: "the-world-s-most-beautiful-motorcycle-routes"
+legacySlug: "dunyanin-en-guzel-motosiklet-rotalari"
 description: "Her motosiklet tutkununun hayatında en az bir kez sürmesi gereken, manzarası ve virajlarıyla unutulmayan yollar."
 category: "gezi"
-tags: "motosiklet rotaları, gezi, touring, virajlı yollar, yolculuk"
+tags: "motorcycle routes, travel, touring, winding roads, journey"
 date: "2026-08-26T09:00:00+03:00"
 image: "/images/news/dunyanin-en-guzel-motosiklet-rotalari.png"
 ---

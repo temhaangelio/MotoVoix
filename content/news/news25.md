@@ -1,9 +1,10 @@
 ---
 title: "Motosiklette Acil Fren Nasıl Yapılır?"
-slug: "motosiklette-acil-fren-nasil-yapilir"
+slug: "how-to-do-emergency-braking-on-a-motorcycle"
+legacySlug: "motosiklette-acil-fren-nasil-yapilir"
 description: "ABS’li ve ABS’siz motosikletlerde kontrollü, güçlü ve dengeli frenlemenin temel adımları."
 category: "sürüş"
-tags: "acil fren, ABS, frenleme, sürüş eğitimi"
+tags: "emergency braking, ABS, braking, rider training"
 date: "2026-08-26T14:30:00+03:00"
 image: "/images/news/acil-fren-rehberi.png"
 ---

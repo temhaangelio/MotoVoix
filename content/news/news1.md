@@ -1,6 +1,7 @@
 ---
 title: "Triumph's Dapper Motorcycle"
-slug: "triumphtan-dapper-motosiklet"
+slug: "triumph-s-dapper-motorcycle"
+legacySlug: "triumphtan-dapper-motosiklet"
 description: "Triumph Motorcycles created a one-off Speed Twin 1200 Cafe Racer DGR Edition with a handmade Harris Tweed seat for the 15th anniversary of The Distinguished Gentleman's Ride."
 category: "motorcycle"
 tags: "triumph, motorcycle, dgr, limited-edition, design"

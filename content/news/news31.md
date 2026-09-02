@@ -3,7 +3,7 @@ title: "Motosikletle Otoyol Kullanma Rehberi"
 slug: "motosikletle-otoyol-kullanma-rehberi"
 description: "Yüksek hız farkı, rüzgâr, takip mesafesi ve çıkış planlaması için temel otoyol önerileri."
 category: "sürüş"
-tags: "otoyol, şerit konumu, takip mesafesi, touring"
+tags: "highway, lane position, following distance, touring"
 date: "2026-08-26T15:30:00+03:00"
 image: "/images/news/otoyol-kullanma-rehberi.png"
 ---

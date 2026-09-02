@@ -1,6 +1,7 @@
 ---
 title: "Suzuki Steps into Solid-State Batteries"
-slug: "suzuki-kati-hal-piline-el-atti"
+slug: "suzuki-steps-into-solid-state-batteries"
+legacySlug: "suzuki-kati-hal-piline-el-atti"
 description: "Suzuki Motor Corporation announced the acquisition of Kanadevia's solid-state battery business, with transfer completion scheduled for July 1, 2026."
 category: "motorcycle"
 tags: "suzuki, electric-vehicle, battery, solid-state, japan"

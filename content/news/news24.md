@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Hırsızlığına Karşı Korunma"
-slug: "motosiklet-hirsizligina-karsi-korunma"
+slug: "protection-against-motorcycle-theft"
+legacySlug: "motosiklet-hirsizligina-karsi-korunma"
 description: "Doğru park noktası, katmanlı kilit sistemi, alarm ve takip cihazıyla riski azaltın."
 category: "güvenlik"
-tags: "motosiklet hırsızlığı, kilit, alarm, takip cihazı"
+tags: "motorcycle theft, lock, alarm, tracker"
 date: "2026-08-26T14:20:00+03:00"
 image: "/images/news/motosiklet-hirsizligina-karsi-korunma.png"
 ---

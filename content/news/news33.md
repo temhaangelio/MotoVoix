@@ -1,9 +1,10 @@
 ---
 title: "Motosikletle Yurt Dışına Çıkış Rehberi"
-slug: "motosikletle-yurt-disina-cikis-rehberi"
+slug: "guide-to-going-abroad-by-motorcycle"
+legacySlug: "motosikletle-yurt-disina-cikis-rehberi"
 description: "Belgeler, sigorta, sınır geçişleri, yol kuralları ve bagaj için hazırlık listesi."
 category: "gezi"
-tags: "yurt dışı, sınır geçişi, belge, motosiklet turu"
+tags: "international travel, border crossing, documents, motorcycle tour"
 date: "2026-08-26T15:50:00+03:00"
 image: "/images/news/motosikletle-yurt-disina-cikis.png"
 ---

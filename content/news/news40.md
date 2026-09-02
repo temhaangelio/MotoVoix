@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Yıkarken Yapılan Hatalar"
-slug: "motosiklet-yikarken-yapilan-hatalar"
+slug: "mistakes-made-while-washing-motorcycles"
+legacySlug: "motosiklet-yikarken-yapilan-hatalar"
 description: "Basınçlı su, sıcak motor, zincir ve elektrik parçalarında kaçınılması gereken uygulamalar."
 category: "bakım"
-tags: "motosiklet yıkama, temizlik, zincir, korozyon"
+tags: "motorcycle washing, cleaning, chain, corrosion"
 date: "2026-08-26T17:00:00+03:00"
 image: "/images/news/motosiklet-yikama-hatalari.png"
 ---

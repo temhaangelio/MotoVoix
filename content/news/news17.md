@@ -3,7 +3,7 @@ title: "Zincir Temizliği ve Yağlama Rehberi"
 slug: "zincir-temizligi-ve-yaglama-rehberi"
 description: "Aktarma zincirini doğru ürünlerle temizlemek, yağlamak ve aşınmayı kontrol etmek için adım adım rehber."
 category: "bakım"
-tags: "zincir bakımı, yağlama, temizlik, dişli"
+tags: "chain maintenance, lubrication, cleaning, sprocket"
 date: "2026-08-26T13:10:00+03:00"
 image: "/images/news/zincir-temizligi-ve-yaglama.png"
 ---

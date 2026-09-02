@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Ekipmanlarında Yeni Teknolojiler"
-slug: "motosiklet-ekipmanlarinda-yeni-teknolojiler"
+slug: "new-technologies-in-motorcycle-equipment"
+legacySlug: "motosiklet-ekipmanlarinda-yeni-teknolojiler"
 description: "Akıllı kasklardan hava yastıklı montlara kadar sürüş güvenliğini geliştiren yenilikler."
 category: "teknoloji"
-tags: "akıllı kask, hava yastığı, interkom, motosiklet ekipmanı"
+tags: "smart helmet, airbag, intercom, motorcycle gear"
 date: "2026-08-26T12:10:00+03:00"
 image: "/images/news/motosiklet-ekipmanlarinda-yeni-teknolojiler.png"
 ---

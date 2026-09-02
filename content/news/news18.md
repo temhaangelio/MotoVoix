@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Kaskı Nasıl Seçilir?"
-slug: "motosiklet-kaski-nasil-secilir"
+slug: "how-to-choose-a-motorcycle-helmet"
+legacySlug: "motosiklet-kaski-nasil-secilir"
 description: "Doğru beden, güvenlik standardı, kullanım tipi ve konfor özellikleriyle kask seçme rehberi."
 category: "ekipman"
-tags: "kask seçimi, güvenlik standardı, beden, ekipman"
+tags: "helmet selection, safety standard, size, gear"
 date: "2026-08-26T13:20:00+03:00"
 image: "/images/news/motosiklet-kaski-nasil-secilir.png"
 ---

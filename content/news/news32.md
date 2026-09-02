@@ -1,9 +1,10 @@
 ---
 title: "Grup Sürüşünün Temel Kuralları"
-slug: "grup-surusunun-temel-kurallari"
+slug: "basic-rules-of-group-riding"
+legacySlug: "grup-surusunun-temel-kurallari"
 description: "Dizilim, takip mesafesi, iletişim ve kaybolan sürücü prosedürüyle düzenli grup sürüşü."
 category: "sürüş"
-tags: "grup sürüşü, dizilim, iletişim, güvenlik"
+tags: "group riding, formation, communication, safety"
 date: "2026-08-26T15:40:00+03:00"
 image: "/images/news/grup-surusu-kurallari.png"
 ---

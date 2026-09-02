@@ -3,7 +3,7 @@ title: "Motosiklet Lastiği Seçme Rehberi"
 slug: "motosiklet-lastigi-secme-rehberi"
 description: "Sürüş tarzına, hava koşullarına ve yol türüne uygun lastik nasıl seçilir?"
 category: "rehber"
-tags: "motosiklet lastiği, lastik seçimi, güvenlik, bakım, sürüş"
+tags: "motorcycle tire, tire selection, safety, maintenance, riding"
 date: "2026-08-26T11:00:00+03:00"
 image: "/images/news/motosiklet-lastigi-secme-rehberi.png"
 ---

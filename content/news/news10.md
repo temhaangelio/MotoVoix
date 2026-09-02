@@ -1,9 +1,10 @@
 ---
 title: "Yeni Başlayanların Yaptığı 10 Hata"
-slug: "yeni-baslayanlarin-yaptigi-10-hata"
+slug: "10-mistakes-beginners-make"
+legacySlug: "yeni-baslayanlarin-yaptigi-10-hata"
 description: "Acemi motosiklet sürücülerinin güvenliği ve konforu etkileyen en yaygın hataları."
 category: "sürüş"
-tags: "yeni başlayanlar, güvenlik, sürüş eğitimi, acemi sürücü"
+tags: "beginners, safety, rider training, novice rider"
 date: "2026-08-26T12:00:00+03:00"
 image: "/images/news/yeni-baslayanlarin-yaptigi-10-hata.png"
 ---

@@ -1,9 +1,10 @@
 ---
 title: "Navigasyon ve Telefon Tutucu Seçimi"
-slug: "motosiklet-navigasyon-ve-telefon-tutucu-secimi"
+slug: "navigation-and-phone-holder-selection"
+legacySlug: "motosiklet-navigasyon-ve-telefon-tutucu-secimi"
 description: "Titreşim koruması, su dayanımı, şarj ve görüş güvenliği açısından doğru bağlantı sistemini seçin."
 category: "ekipman"
-tags: "navigasyon, telefon tutucu, titreşim, şarj"
+tags: "navigation, phone mount, vibration, charging"
 date: "2026-08-26T16:00:00+03:00"
 image: "/images/news/navigasyon-telefon-tutucu.png"
 ---

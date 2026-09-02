@@ -3,7 +3,7 @@ title: "Gece Motosiklet Kullanma Rehberi"
 slug: "gece-motosiklet-kullanma-rehberi"
 description: "Karanlıkta görüş mesafesi, far kullanımı, görünürlük ve yorgunluk yönetimi."
 category: "sürüş"
-tags: "gece sürüşü, far, görünürlük, yorgunluk"
+tags: "night riding, headlight, visibility, fatigue"
 date: "2026-08-26T14:50:00+03:00"
 image: "/images/news/gece-motosiklet-kullanimi.png"
 ---

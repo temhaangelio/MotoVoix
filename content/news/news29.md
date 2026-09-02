@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Düştüğünde Nasıl Kaldırılır?"
-slug: "motosiklet-dustugunde-nasil-kaldirilir"
+slug: "how-to-pick-up-a-motorcycle-when-it-falls"
+legacySlug: "motosiklet-dustugunde-nasil-kaldirilir"
 description: "Motosikleti ve belinizi daha fazla zorlamadan uygulayabileceğiniz güvenli kaldırma tekniği."
 category: "rehber"
-tags: "motosiklet kaldırma, düşme, güvenlik, teknik"
+tags: "motorcycle lifting, fall, safety, technique"
 date: "2026-08-26T15:10:00+03:00"
 image: "/images/news/motosiklet-nasil-kaldirilir.png"
 ---

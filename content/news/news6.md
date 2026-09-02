@@ -1,6 +1,7 @@
 ---
 title: "CFMOTO's New Face: The Magician"
-slug: "cfmotounun-yeni-yuzu-the-magician"
+slug: "cfmoto-s-new-face-the-magician"
+legacySlug: "cfmotounun-yeni-yuzu-the-magician"
 description: "CFMOTO announced Spanish Extreme Enduro star Mario Roman Serrano as a brand ambassador to bring the MT series adventure identity to a global audience."
 category: "motorcycle"
 tags: "cfmoto, motorcycle, enduro, brand-ambassador, adventure"

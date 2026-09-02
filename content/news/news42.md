@@ -1,9 +1,10 @@
 ---
 title: "Yüksek Kilometreli Motosiklet Alınır mı?"
-slug: "yuksek-kilometreli-motosiklet-alinir-mi"
+slug: "should-you-buy-a-high-mileage-motorcycle"
+legacySlug: "yuksek-kilometreli-motosiklet-alinir-mi"
 description: "Kilometreden daha önemli bakım geçmişi, kullanım biçimi ve mekanik sağlık göstergeleri."
 category: "satın alma"
-tags: "yüksek kilometre, ikinci el, bakım geçmişi, ekspertiz"
+tags: "high mileage, used motorcycle, maintenance history, inspection"
 date: "2026-08-26T17:20:00+03:00"
 image: "/images/news/yuksek-kilometreli-motosiklet.png"
 ---

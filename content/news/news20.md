@@ -1,9 +1,10 @@
 ---
 title: "Artçıyla Güvenli Sürüş Rehberi"
-slug: "artciyla-guvenli-surus-rehberi"
+slug: "guide-to-safe-driving-with-pilgrims"
+legacySlug: "artciyla-guvenli-surus-rehberi"
 description: "Yolcu iletişimi, ekipman, süspansiyon ve değişen fren mesafesi için temel öneriler."
 category: "sürüş"
-tags: "artçı, yolcu, iki kişi sürüş, güvenlik"
+tags: "pillion, passenger, two-up riding, safety"
 date: "2026-08-26T13:40:00+03:00"
 image: "/images/news/artciyla-guvenli-surus.png"
 ---

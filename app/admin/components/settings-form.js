@@ -135,7 +135,7 @@ export function SettingsForm({ initialValues, section }) {
 
       {message ? <p aria-live="polite" className={`rounded-2xl p-4 text-sm ${message.success ? "bg-emerald-50 text-emerald-800" : "bg-[#fff1f0] text-[#b42318]"}`}>{message.message}</p> : null}
       <div className="flex justify-end">
-        <Button type="submit" disabled={pending}>{pending ? "Tueving…" : "Tueve"}</Button>
+        <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
       </div>
     </form>
   );

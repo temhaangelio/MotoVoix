@@ -1,6 +1,7 @@
 ---
 title: "Yamaha Is Leaving California"
-slug: "yamaha-californiaya-veda-ediyor"
+slug: "yamaha-is-leaving-california"
+legacySlug: "yamaha-californiaya-veda-ediyor"
 description: "Yamaha Motor Corporation USA is relocating its long-time U.S. headquarters from California to Georgia in a move affecting about 250 employees between 2026 and 2028."
 category: "motorcycle"
 tags: "yamaha, business, usa, corporate, motorsport"

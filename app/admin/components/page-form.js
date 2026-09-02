@@ -21,7 +21,7 @@ export function PageForm({ page }) {
     try {
       const result = await savePageAction(new FormData(event.currentTarget));
       if (!result?.success) {
-        setMessage(result?.message || "Tueve failed.");
+        setMessage(result?.message || "Save failed.");
         return;
       }
       router.push("/admin/sayfalar");
@@ -54,7 +54,7 @@ export function PageForm({ page }) {
         {message ? <p className="text-sm text-[#b42318]">{message}</p> : null}
         <div className="flex justify-end gap-2">
           <Link href="/admin/sayfalar" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
-          <Button type="submit" disabled={pending}>{pending ? "Tueving…" : "Tueve"}</Button>
+          <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
         </div>
       </div>
     </form>

@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Modifikasyonlarında Yasal ve Güvenli Sınırlar"
-slug: "motosiklet-modifikasyonlarinda-yasal-ve-guvenli-sinirlar"
+slug: "legal-and-safe-limits-in-motorcycle-modifications"
+legacySlug: "motosiklet-modifikasyonlarinda-yasal-ve-guvenli-sinirlar"
 description: "Egzoz, aydınlatma, ayna, plaka ve süspansiyon değişikliklerinde güvenlik ve uygunluk rehberi."
 category: "rehber"
-tags: "modifikasyon, egzoz, aydınlatma, muayene, güvenlik"
+tags: "modification, exhaust, lighting, inspection, safety"
 date: "2026-08-26T18:30:00+03:00"
 image: "/images/news/motosiklet-modifikasyonlari.png"
 ---

@@ -1,9 +1,10 @@
 ---
 title: "Süspansiyon Ayarı Rehberi"
-slug: "motosiklet-suspansiyon-ayari-rehberi"
+slug: "suspension-tuning-guide"
+legacySlug: "motosiklet-suspansiyon-ayari-rehberi"
 description: "Ön yük, sıkıştırma ve geri sekme ayarlarının sürüşe etkisini temel düzeyde anlayın."
 category: "bakım"
-tags: "süspansiyon, ön yük, damping, sag"
+tags: "suspension, preload, damping, sag"
 date: "2026-08-26T16:40:00+03:00"
 image: "/images/news/suspansiyon-ayari.png"
 ---

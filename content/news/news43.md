@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Sigortası Seçme Rehberi"
-slug: "motosiklet-sigortasi-secme-rehberi"
+slug: "guide-to-choosing-motorcycle-insurance"
+legacySlug: "motosiklet-sigortasi-secme-rehberi"
 description: "Zorunlu trafik sigortası, kasko kapsamı, muafiyet ve ek teminatları karşılaştırma rehberi."
 category: "rehber"
-tags: "motosiklet sigortası, kasko, trafik sigortası, teminat"
+tags: "motorcycle insurance, comprehensive insurance, liability insurance, coverage"
 date: "2026-08-26T17:30:00+03:00"
 image: "/images/news/motosiklet-sigortasi.png"
 ---

@@ -8,17 +8,13 @@ import { buttonVariants } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { EmptyState } from "../components/ui/empty-state";
 import { Table, TableWrap, Td, Th } from "../components/ui/table";
+import { AdminDate } from "../components/admin-date";
 
 const statusLabels = { draft: "Draft", scheduled: "Scheduled", sent: "Sent", cancelled: "Cancelled" };
 const subscriberStatusLabels = { active: "Active", pending: "Pending", unsubscribed: "Unsubscribed" };
 
 function rate(value, total) {
   return total ? `%${((value / total) * 100).toFixed(1).replace(".", ",")}` : "—";
-}
-
-function campaignDate(newsletter) {
-  const value = newsletter.sent_at ?? newsletter.scheduled_at ?? newsletter.created_at;
-  return new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "short", year: "numeric" }).format(new Date(value));
 }
 
 export default function NewsletterAdminPage() {
@@ -52,7 +48,7 @@ export default function NewsletterAdminPage() {
           <Card className="xl:col-span-7">
             {scheduled ? (
               <>
-                <div className="text-sm font-medium text-[#a1a1a1]">Next send · {campaignDate(scheduled)}</div>
+                <div className="text-sm font-medium text-[#a1a1a1]">Next send · <AdminDate value={scheduled.sent_at ?? scheduled.scheduled_at ?? scheduled.created_at} /></div>
                 <div className="mt-4 flex items-start justify-between gap-4">
                   <div>
                     <h2 className="section-title">#{scheduled.issue_number} · {scheduled.subject}</h2>
@@ -110,7 +106,7 @@ export default function NewsletterAdminPage() {
                       <Td className="text-[#777]">{subscriber.email}</Td>
                       <Td><Badge className={subscriber.status === "active" ? "bg-black text-white" : ""}>{subscriberStatusLabels[subscriber.status]}</Badge></Td>
                       <Td className="text-[#777]">{subscriber.source || "Web sitesi"}</Td>
-                      <Td className="text-right text-[#a1a1a1]">{new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "short", year: "numeric" }).format(new Date(subscriber.created_at))}</Td>
+                      <Td className="text-right text-[#a1a1a1]"><AdminDate value={subscriber.created_at} /></Td>
                     </tr>
                   ))}
                 </tbody>
@@ -142,7 +138,7 @@ export default function NewsletterAdminPage() {
                       <Td><Badge className={newsletter.status === "sent" ? "bg-black text-white" : ""}>{statusLabels[newsletter.status]}</Badge></Td>
                       <Td className="text-right">{newsletter.recipient_count ? newsletter.recipient_count.toLocaleString("tr-TR") : "—"}</Td>
                       <Td className="text-right">{rate(newsletter.open_count, newsletter.recipient_count)}</Td>
-                      <Td className="text-right text-[#a1a1a1]">{campaignDate(newsletter)}</Td>
+                      <Td className="text-right text-[#a1a1a1]"><AdminDate value={newsletter.sent_at ?? newsletter.scheduled_at ?? newsletter.created_at} /></Td>
                     </tr>
                   ))}
                 </tbody>

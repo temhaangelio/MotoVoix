@@ -1,9 +1,10 @@
 ---
 title: "Adventure, Naked, Scooter veya Touring: Hangisi Size Uygun?"
-slug: "adventure-naked-scooter-touring-hangisi-size-uygun"
+slug: "adventure-naked-scooter-or-touring-which-is-right-for-you"
+legacySlug: "adventure-naked-scooter-touring-hangisi-size-uygun"
 description: "Kullanım amacı, konfor, maliyet ve sürüş karakterine göre doğru motosiklet türünü seçin."
 category: "satın alma"
-tags: "adventure, naked, scooter, touring, motosiklet seçimi"
+tags: "adventure, naked, scooter, touring, motorcycle selection"
 date: "2026-08-26T13:30:00+03:00"
 image: "/images/news/motosiklet-turleri-hangisi-size-uygun.png"
 ---

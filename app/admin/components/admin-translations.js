@@ -132,6 +132,7 @@ const TURKISH_COPY = {
   "Unique readers": ["Unique readers", "Lecteurs uniques"], "Discover": ["Discover", "Découvrir"],
   "Germany": ["Germany", "Allemagne"],
   "Device breakdown": ["Device breakdown", "Répartition par appareil"],
+  "Direct": ["Direct", "Accès direct"],
   "Other iPhone models": ["Other iPhone models", "Autres modèles d’iPhone"],
   "Other": ["Other", "Autres"],
   "Mon": ["Mon", "Lun"], "Tue": ["Tue", "Mar"], "Wed": ["Wed", "Mer"], "Thu": ["Thu", "Jeu"],

@@ -1,9 +1,10 @@
 ---
 title: "Yağmurda Güvenli Motosiklet Kullanımı"
-slug: "yagmurda-guvenli-motosiklet-kullanimi"
+slug: "safe-motorcycle-use-in-the-rain"
+legacySlug: "yagmurda-guvenli-motosiklet-kullanimi"
 description: "Islak zeminde tutuşu, görüşü ve fren güvenliğini korumak için uygulanabilir öneriler."
 category: "sürüş"
-tags: "yağmur, ıslak zemin, güvenli sürüş, fren"
+tags: "rain, wet road, safe riding, brakes"
 date: "2026-08-26T12:30:00+03:00"
 image: "/images/news/yagmurda-guvenli-motosiklet-kullanimi.png"
 ---

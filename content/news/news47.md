@@ -1,9 +1,10 @@
 ---
 title: "Motosikletle Evcil Hayvan Taşınır mı?"
-slug: "motosikletle-evcil-hayvan-tasinir-mi"
+slug: "can-pets-be-transported-by-motorcycle"
+legacySlug: "motosikletle-evcil-hayvan-tasinir-mi"
 description: "Hayvan refahı, güvenli taşıyıcı, koruma ve yasal gereklilikler açısından dikkat edilmesi gerekenler."
 category: "rehber"
-tags: "evcil hayvan, taşıma, güvenlik, hayvan refahı"
+tags: "pet, transport, safety, animal welfare"
 date: "2026-08-26T18:10:00+03:00"
 image: "/images/news/motosikletle-evcil-hayvan.png"
 ---

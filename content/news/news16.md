@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Bakım Takvimi"
-slug: "motosiklet-bakim-takvimi"
+slug: "motorcycle-maintenance-schedule"
+legacySlug: "motosiklet-bakim-takvimi"
 description: "Günlük, aylık ve kilometre bazlı kontrollerle motosikletinizi güvenli ve sağlıklı tutun."
 category: "bakım"
-tags: "bakım takvimi, servis, motosiklet bakımı, kontrol"
+tags: "maintenance schedule, service, motorcycle maintenance, check"
 date: "2026-08-26T13:00:00+03:00"
 image: "/images/news/motosiklet-bakim-takvimi.png"
 ---

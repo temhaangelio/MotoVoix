@@ -1,9 +1,10 @@
 ---
 title: "Motosiklette Hararet Sorunları"
-slug: "motosiklette-hararet-sorunlari"
+slug: "temperature-problems-in-motorcycle"
+legacySlug: "motosiklette-hararet-sorunlari"
 description: "Fan, soğutma sıvısı, radyatör ve trafikte aşırı ısınma belirtilerini doğru yönetin."
 category: "bakım"
-tags: "hararet, radyatör, soğutma sıvısı, fan"
+tags: "overheating, radiator, coolant, fan"
 date: "2026-08-26T16:50:00+03:00"
 image: "/images/news/motosiklette-hararet.png"
 ---

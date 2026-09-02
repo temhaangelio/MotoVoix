@@ -1,9 +1,10 @@
 ---
 title: "İkinci El Motosiklet Alırken Kontrol Listesi"
-slug: "ikinci-el-motosiklet-alirken-kontrol-listesi"
+slug: "checklist-when-buying-a-second-hand-motorcycle"
+legacySlug: "ikinci-el-motosiklet-alirken-kontrol-listesi"
 description: "Şasi, motor, yürüyen aksam, servis geçmişi ve evrakları kapsayan pratik satın alma rehberi."
 category: "satın alma"
-tags: "ikinci el, motosiklet alımı, ekspertiz, kontrol listesi"
+tags: "used motorcycle, motorcycle purchase, inspection, checklist"
 date: "2026-08-26T12:20:00+03:00"
 image: "/images/news/ikinci-el-motosiklet-kontrol-listesi.png"
 ---

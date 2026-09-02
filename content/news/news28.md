@@ -1,9 +1,10 @@
 ---
 title: "Rüzgârlı Havada Güvenli Sürüş"
-slug: "ruzgarli-havada-guvenli-motosiklet-surusu"
+slug: "safe-driving-in-windy-weather"
+legacySlug: "ruzgarli-havada-guvenli-motosiklet-surusu"
 description: "Yan rüzgâr, kamyon türbülansı ve ani rüzgâr kesintilerinde motosikleti dengede tutma yöntemleri."
 category: "sürüş"
-tags: "rüzgâr, yan rüzgâr, türbülans, güvenli sürüş"
+tags: "wind, crosswind, turbulence, safe riding"
 date: "2026-08-26T15:00:00+03:00"
 image: "/images/news/ruzgarli-havada-guvenli-surus.png"
 ---

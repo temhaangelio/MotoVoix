@@ -1,9 +1,10 @@
 ---
 title: "Viraj Teknikleri: Bakış, Pozisyon ve Gaz Kontrolü"
-slug: "viraj-teknikleri-bakis-pozisyon-gaz-kontrolu"
+slug: "cornering-techniques-look-position-and-throttle-control"
+legacySlug: "viraj-teknikleri-bakis-pozisyon-gaz-kontrolu"
 description: "Yol sürüşünde daha akıcı ve güvenli viraj almak için temel prensipler."
 category: "sürüş"
-tags: "viraj, bakış tekniği, gaz kontrolü, sürüş eğitimi"
+tags: "cornering, vision technique, throttle control, rider training"
 date: "2026-08-26T12:40:00+03:00"
 image: "/images/news/viraj-teknikleri.png"
 ---

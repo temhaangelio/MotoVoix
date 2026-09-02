@@ -1,9 +1,10 @@
 ---
 title: "Yakıt Tüketimini Azaltmanın Yolları"
-slug: "motosiklette-yakit-tuketimini-azaltmanin-yollari"
+slug: "ways-to-reduce-fuel-consumption"
+legacySlug: "motosiklette-yakit-tuketimini-azaltmanin-yollari"
 description: "Sürüş tekniği, lastik basıncı, bakım ve bagaj düzeniyle daha verimli kilometreler."
 category: "rehber"
-tags: "yakıt tüketimi, ekonomi, bakım, verimli sürüş"
+tags: "fuel consumption, economy, maintenance, efficient riding"
 date: "2026-08-26T14:00:00+03:00"
 image: "/images/news/yakit-tuketimini-azaltma.png"
 ---

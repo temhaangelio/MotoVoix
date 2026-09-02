@@ -9,9 +9,11 @@ import { FormField } from "./ui/form-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Textarea } from "./ui/textarea";
+import { useLanguage } from "../../components/language-provider";
 
 export function NewsletterForm() {
   const router = useRouter();
+  const { language } = useLanguage();
   const [message, setMessage] = useState(null);
   const [pending, setPending] = useState(false);
 
@@ -21,7 +23,7 @@ export function NewsletterForm() {
     try {
       const result = await saveNewsletterAction(new FormData(event.currentTarget));
       if (!result?.success) {
-        setMessage(result?.message || "Tueve failed.");
+        setMessage(result?.message || "Save failed.");
         return;
       }
       router.push("/admin/e-bulten");
@@ -48,12 +50,12 @@ export function NewsletterForm() {
               <option value="sent">Sent (demo)</option>
             </Select>
           </FormField>
-          <FormField label="Scheduled send" htmlFor="scheduledAt"><Input id="scheduledAt" name="scheduledAt" type="datetime-local" /></FormField>
+          <FormField label="Scheduled send" htmlFor="scheduledAt"><Input id="scheduledAt" lang={language === "fr" ? "fr-FR" : "en-US"} name="scheduledAt" type="datetime-local" /></FormField>
         </div>
         {message ? <p className="text-sm text-[#b42318]">{message}</p> : null}
         <div className="flex justify-end gap-2">
           <Link href="/admin/e-bulten" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
-          <Button type="submit" disabled={pending}>{pending ? "Tueving…" : "Tueve"}</Button>
+          <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
         </div>
       </div>
     </form>

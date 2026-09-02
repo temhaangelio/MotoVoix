@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Uzun Süre Nasıl Saklanır?"
-slug: "motosiklet-uzun-sure-nasil-saklanir"
+slug: "how-to-store-a-motorcycle-for-a-long-time"
+legacySlug: "motosiklet-uzun-sure-nasil-saklanir"
 description: "Akü, yakıt, lastik, nem ve korozyon için doğru uzun dönem depolama hazırlığı."
 category: "bakım"
-tags: "depolama, akü, yakıt, kışlama, bakım"
+tags: "storage, battery, fuel, winter storage, maintenance"
 date: "2026-08-26T17:10:00+03:00"
 image: "/images/news/motosikleti-uzun-sure-saklama.png"
 ---

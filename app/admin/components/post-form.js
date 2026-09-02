@@ -11,6 +11,7 @@ import { Select } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { RichTextEditor } from "./rich-text-editor";
 import { getCategoryLabel } from "../../../lib/categories";
+import { useLanguage } from "../../components/language-provider";
 
 function localDateTime(value) {
   if (!value) return "";
@@ -20,6 +21,7 @@ function localDateTime(value) {
 
 export function PostForm({ post }) {
   const router = useRouter();
+  const { language } = useLanguage();
   const [message, setMessage] = useState(null);
   const [pending, setPending] = useState(false);
   const [bodyEn, setBodyEn] = useState(post?.bodyEn || post?.body || "");
@@ -32,7 +34,7 @@ export function PostForm({ post }) {
     try {
       const result = await savePostAction(new FormData(event.currentTarget));
       if (!result?.success) {
-        setMessage(result?.message || "Tueve failed.");
+        setMessage(result?.message || "Save failed.");
         return;
       }
       router.push("/admin/yazilar");
@@ -73,13 +75,13 @@ export function PostForm({ post }) {
               <option value="scheduled">Scheduled</option>
             </Select>
           </FormField>
-          <FormField label="Scheduled date" htmlFor="scheduledAt"><Input id="scheduledAt" name="scheduledAt" type="datetime-local" defaultValue={localDateTime(post?.scheduled_at)} /></FormField>
+          <FormField label="Scheduled date" htmlFor="scheduledAt"><Input id="scheduledAt" lang={language === "fr" ? "fr-FR" : "en-US"} name="scheduledAt" type="datetime-local" defaultValue={localDateTime(post?.scheduled_at)} /></FormField>
           <FormField label="Source name" htmlFor="sourceName"><Input id="sourceName" name="sourceName" defaultValue={post?.source_name || ""} /></FormField>
           <FormField label="Source URL" htmlFor="sourceUrl"><Input id="sourceUrl" name="sourceUrl" defaultValue={post?.source_url || ""} /></FormField>
           {message ? <p className="rounded-2xl bg-[#fff1f0] p-3 text-sm text-[#b42318]">{message}</p> : null}
           <div className="flex gap-2">
             <Link href="/admin/yazilar" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
-            <Button type="submit" disabled={pending}>{pending ? "Tueving…" : "Tueve"}</Button>
+            <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
           </div>
         </div>
       </aside>

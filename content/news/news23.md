@@ -1,9 +1,10 @@
 ---
 title: "Kışın Motosiklet Kullanılır mı?"
-slug: "kisin-motosiklet-kullanilir-mi"
+slug: "can-you-use-a-motorcycle-in-winter"
+legacySlug: "kisin-motosiklet-kullanilir-mi"
 description: "Soğuk asfalt, buzlanma, termal ekipman ve motosiklet bakımıyla kış sürüşünün sınırları."
 category: "sürüş"
-tags: "kış sürüşü, soğuk hava, buzlanma, termal ekipman"
+tags: "winter riding, cold weather, ice, thermal gear"
 date: "2026-08-26T14:10:00+03:00"
 image: "/images/news/kisin-motosiklet-kullanimi.png"
 ---

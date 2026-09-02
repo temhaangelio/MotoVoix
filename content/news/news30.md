@@ -1,9 +1,10 @@
 ---
 title: "Motosiklet Kazası Sonrasında Yapılması Gerekenler"
-slug: "motosiklet-kazasi-sonrasinda-yapilmasi-gerekenler"
+slug: "what-to-do-after-a-motorcycle-accident"
+legacySlug: "motosiklet-kazasi-sonrasinda-yapilmasi-gerekenler"
 description: "Kaza alanı güvenliği, sağlık yardımı, kayıt ve sigorta sürecini doğru sırayla yönetin."
 category: "güvenlik"
-tags: "trafik kazası, ilk yardım, kaza tutanağı, sigorta"
+tags: "traffic accident, first aid, accident report, insurance"
 date: "2026-08-26T15:20:00+03:00"
 image: "/images/news/kaza-sonrasi-yapilacaklar.png"
 ---

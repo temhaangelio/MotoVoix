@@ -1,9 +1,10 @@
 ---
 title: "Fren Balatasının Bittiği Nasıl Anlaşılır?"
-slug: "motosiklet-fren-balatasinin-bittigi-nasil-anlasilir"
+slug: "how-to-tell-if-the-brake-pads-are-worn-out"
+legacySlug: "motosiklet-fren-balatasinin-bittigi-nasil-anlasilir"
 description: "Balata kalınlığı, ses, fren hissi ve disk yüzeyinden değişim ihtiyacını erken fark edin."
 category: "bakım"
-tags: "fren balatası, fren diski, bakım, güvenlik"
+tags: "brake pads, brake disc, maintenance, safety"
 date: "2026-08-26T16:30:00+03:00"
 image: "/images/news/fren-balatasi-kontrolu.png"
 ---

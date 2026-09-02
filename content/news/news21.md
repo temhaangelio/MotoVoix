@@ -3,7 +3,7 @@ title: "Motosikletle Kamp Yapma Rehberi"
 slug: "motosikletle-kamp-yapma-rehberi"
 description: "Hafif ekipman, dengeli bagaj ve güvenli kamp alanı seçimiyle iki teker üzerinde konaklama rehberi."
 category: "gezi"
-tags: "motosiklet kampı, kamp ekipmanı, bagaj, gezi"
+tags: "motorcycle camping, camping gear, luggage, travel"
 date: "2026-08-26T13:50:00+03:00"
 image: "/images/news/motosikletle-kamp-rehberi.png"
 ---

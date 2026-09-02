@@ -1,9 +1,10 @@
 ---
 title: "Motor Yağı Nasıl Seçilir?"
-slug: "motosiklet-motor-yagi-nasil-secilir"
+slug: "how-to-choose-engine-oil"
+legacySlug: "motosiklet-motor-yagi-nasil-secilir"
 description: "Viskozite, performans standardı, ıslak debriyaj uyumu ve değişim aralığını doğru okuyun."
 category: "bakım"
-tags: "motor yağı, viskozite, JASO, bakım"
+tags: "engine oil, viscosity, JASO, maintenance"
 date: "2026-08-26T16:20:00+03:00"
 image: "/images/news/motor-yagi-secimi.png"
 ---
