@@ -39,7 +39,7 @@ export default function NewsPage() {
         <section className="mb-14 rounded-[18px] border border-outline-variant/20 sm:mb-20">
           <div className="flex flex-col justify-between gap-8 px-5 py-8 sm:px-8 sm:py-10 md:flex-row md:items-end md:px-10 md:py-16">
             <div className="max-w-2xl">
-              <span className="font-label text-xs uppercase tracking-[0.3em] text-primary mb-4 block"><LocalizedText en="HEADLINES / BREAKING" fr="À LA UNE / DERNIÈRE MINUTE" /></span>
+              <span className="font-label text-xs uppercase tracking-[0.3em] text-primary mb-4 block"><LocalizedText en="HEADLINES / BREAKING NEWS" fr="À LA UNE / DERNIÈRE MINUTE" /></span>
               <h1 className="font-headline text-[3.2rem] font-light tracking-tight leading-[0.92] mb-5 text-zinc-50 sm:text-6xl md:text-7xl lg:text-8xl"><LocalizedText en="Motorcycle and Atv News." fr="Actualités moto et quad." /></h1>
               <p className="max-w-xl font-body text-base leading-relaxed text-zinc-200 sm:text-lg md:text-xl"><LocalizedText en="New models, manufacturer announcements, racing updates, and key industry moves in one stream." fr="Nouveaux modèles, annonces des constructeurs, compétition et mouvements clés du secteur, réunis dans un seul flux." /></p>
             </div>
