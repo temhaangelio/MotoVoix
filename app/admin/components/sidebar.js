@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BrandMark } from "../../components/brand-mark";
 import LanguageSwitcher from "../../components/language-switcher";
 import { useLanguage } from "../../components/language-provider";
+import { LogoutButton } from "./logout-button";
 
 const items = [
   [{ en: "Dashboard", fr: "Tableau de bord" }, "/admin", null],
@@ -53,6 +54,7 @@ export function Sidebar({ active, siteName, modules }) {
           <span>{language === "fr" ? "Voir le site" : "View site"}</span>
           <span>↗</span>
         </Link>
+        <LogoutButton className="flex h-11 w-full items-center justify-between rounded-[14px] px-4 text-left text-[15px] font-medium text-[#a1a1a1] transition-colors hover:bg-white hover:text-[#b42318] disabled:opacity-50" />
       </nav>
     </aside>
   );

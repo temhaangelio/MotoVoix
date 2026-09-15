@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { BrandMark } from "../../components/brand-mark";
 import LanguageSwitcher from "../../components/language-switcher";
 import { useLanguage } from "../../components/language-provider";
+import { LogoutButton } from "./logout-button";
 
 const items = [
   [{ en: "Dashboard", fr: "Tableau de bord" }, "/admin", null],
@@ -74,6 +75,7 @@ export function MobileNavigation({ active, siteName, modules }) {
             <Link href="/news" className="mt-auto rounded-2xl bg-white p-4 font-semibold">
               {language === "fr" ? "Voir le site" : "View site"} ↗
             </Link>
+            <LogoutButton className="mt-2 flex w-full items-center justify-between rounded-2xl bg-white p-4 text-left font-semibold text-[#b42318] disabled:opacity-50" />
           </aside>
         </div>
       ) : null}
