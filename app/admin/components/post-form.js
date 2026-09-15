@@ -6,6 +6,7 @@ import { useState } from "react";
 import { savePostAction } from "../actions";
 import { Button, buttonVariants } from "./ui/button";
 import { FormField } from "./ui/form-field";
+import { ImagePickerField } from "./image-picker-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Textarea } from "./ui/textarea";
@@ -67,7 +68,7 @@ export function PostForm({ post }) {
           <FormField label="Slug" htmlFor="slug" hint="Generated from the title if left blank."><Input id="slug" name="slug" defaultValue={post?.slug || ""} /></FormField>
           <FormField label="Category" htmlFor="category"><Input id="category" name="category" defaultValue={getCategoryLabel(post?.category || "motorcycle", "en")} /></FormField>
           <FormField label="Tags" htmlFor="tags"><Input id="tags" name="tags" defaultValue={post?.tags || ""} /></FormField>
-          <FormField label="Cover image" htmlFor="image" hint="Example: /images/news/news1.png"><Input id="image" name="image" defaultValue={post?.image || ""} /></FormField>
+          <FormField label="Cover image" htmlFor="image" hint="Upload an image or choose one from the library."><ImagePickerField id="image" name="image" defaultValue={post?.image || ""} /></FormField>
           <FormField label="Status" htmlFor="status">
             <Select id="status" name="status" defaultValue={post?.status || "published"}>
               <option value="published">Published</option>

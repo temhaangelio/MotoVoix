@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ConfirmDialog } from "./ui/confirm-dialog";
 import { FormField } from "./ui/form-field";
+import { ImagePickerField } from "./image-picker-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Switch } from "./ui/switch";
@@ -30,6 +31,8 @@ export function AdsManager({ ads }) {
   const [adToDelete, setAdToDelete] = useState(null);
   const [adToEdit, setAdToEdit] = useState(null);
   const [editError, setEditError] = useState(null);
+  // form.reset() kontrollü görsel alanını temizlemiyor; key değişince baştan kurulur.
+  const [imageFieldKey, setImageFieldKey] = useState(0);
   const editFormRef = useRef(null);
 
   async function submit(event) {
@@ -43,6 +46,7 @@ export function AdsManager({ ads }) {
     setMessage(result.message);
     if (result.success) {
       form.reset();
+      setImageFieldKey((key) => key + 1);
       setActive(true);
       router.refresh();
     }
@@ -89,7 +93,7 @@ export function AdsManager({ ads }) {
             <FormField label="Button label" htmlFor="ad-cta"><Input id="ad-cta" name="ctaLabel" defaultValue="Discover" required /></FormField>
             <FormField label="Hedef adres" htmlFor="ad-url"><Input id="ad-url" name="targetUrl" type="url" placeholder="https://" required /></FormField>
           </div>
-          <FormField label="Image URL" htmlFor="ad-image"><Input id="ad-image" name="imageUrl" placeholder="/images/news/news1.png" /></FormField>
+          <FormField label="Image URL" htmlFor="ad-image"><ImagePickerField key={imageFieldKey} id="ad-image" name="imageUrl" /></FormField>
           <FormField label="Language" htmlFor="ad-language">
             <Select id="ad-language" name="language" defaultValue="en">
               <option value="en">English</option>
@@ -152,7 +156,7 @@ export function AdsManager({ ads }) {
               <FormField label="Button label" htmlFor="edit-ad-cta"><Input id="edit-ad-cta" name="ctaLabel" required defaultValue={adToEdit.ctaLabel} /></FormField>
               <FormField label="Destination URL" htmlFor="edit-ad-url"><Input id="edit-ad-url" name="targetUrl" type="url" required defaultValue={adToEdit.targetUrl} /></FormField>
             </div>
-            <FormField label="Image URL" htmlFor="edit-ad-image"><Input id="edit-ad-image" name="imageUrl" defaultValue={adToEdit.imageUrl} /></FormField>
+            <FormField label="Image URL" htmlFor="edit-ad-image"><ImagePickerField id="edit-ad-image" name="imageUrl" defaultValue={adToEdit.imageUrl || ""} /></FormField>
             <div className="grid gap-4 sm:grid-cols-2">
               <FormField label="Language" htmlFor="edit-ad-language">
                 <Select id="edit-ad-language" name="language" defaultValue={adToEdit.language}>

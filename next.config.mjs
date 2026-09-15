@@ -6,6 +6,16 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // updateproject.sh yeni build'i canlı .next'e dokunmadan ayrı klasöre alır
+  // (NEXT_DIST_DIR=.next-build), sonra yer değiştirir. Normalde .next.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+  experimental: {
+    serverActions: {
+      // Panelden görsel yükleme 8 MB'a kadar (lib/news-images.js); varsayılan
+      // 1 MB yetmiyor. Üstündeki pay multipart başlıkları için.
+      bodySizeLimit: "10mb",
+    },
+  },
   turbopack: {
     root: __dirname,
   },

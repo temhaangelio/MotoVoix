@@ -8,7 +8,7 @@ export default function AdminLoginPage() {
   return (
     <main className="grid min-h-screen place-items-center px-4 py-10">
       <section className="w-full max-w-[460px] rounded-[28px] bg-white p-7 shadow-sm sm:p-10">
-        <Link href="/admin" className="mb-10 flex items-center gap-3">
+        <Link href="/admin" prefetch={false} className="mb-10 flex items-center gap-3">
           <BrandMark className="text-black" />
           <span>
             <strong className="block">MotoVoix</strong>

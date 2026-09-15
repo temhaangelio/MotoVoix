@@ -1,5 +1,9 @@
 .DS_Store
 .next/
+.next-*/
+logs/
+.update.lock
+info.txt
 node_modules/
 .vercel
 .env

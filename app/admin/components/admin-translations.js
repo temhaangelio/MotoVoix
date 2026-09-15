@@ -141,6 +141,18 @@ const TURKISH_COPY = {
   "May": ["May", "Mai"], "Jun": ["Jun", "Juin"], "Jul": ["Jul", "Juil"], "Aug": ["Aug", "Août"],
   "Sep": ["Sep", "Sept"], "Oct": ["Oct", "Oct"], "Nov": ["Nov", "Nov"], "Dec": ["Dec", "Déc"],
   "Demo ad. It can be displayed in the visitor feed.": ["Demo ad. It can be displayed in the visitor feed.", "Publicité de démonstration. Elle peut être affichée dans le fil public."],
+  "Görsel yükle": ["Upload image", "Téléverser une image"], "Yükleniyor…": ["Uploading…", "Téléversement…"],
+  "Kütüphaneden seç": ["Choose from library", "Choisir dans la médiathèque"], "Görsel kütüphanesi": ["Image library", "Médiathèque"],
+  "Kütüphaneyi kapat": ["Close library", "Fermer la médiathèque"], "Görseller yükleniyor…": ["Loading images…", "Chargement des images…"],
+  "Henüz görsel yok": ["No images yet", "Aucune image pour l’instant"], "Görsel yüklendi.": ["Image uploaded.", "Image téléversée."],
+  "Görsel yükleyin veya kütüphaneden seçin.": ["Upload an image or choose one from the library.", "Téléversez une image ou choisissez-en une dans la médiathèque."],
+  "Bir görsel dosyası seçin.": ["Choose an image file.", "Choisissez un fichier image."],
+  "Görsel en fazla 8 MB olabilir.": ["The image must be 8 MB or smaller.", "L’image ne doit pas dépasser 8 Mo."],
+  "Yalnızca JPG, PNG, WebP, GIF veya AVIF yüklenebilir.": ["Only JPG, PNG, WebP, GIF or AVIF images can be uploaded.", "Seules les images JPG, PNG, WebP, GIF ou AVIF sont acceptées."],
+  "Sunucu public/images/news klasörüne yazamıyor. Klasör izinlerini kontrol edin.": ["The server cannot write to public/images/news. Check the folder permissions.", "Le serveur ne peut pas écrire dans public/images/news. Vérifiez les droits du dossier."],
+  "Yükleme başarısız.": ["Upload failed.", "Échec du téléversement."],
+  "Yükleme başarısız. Dosya sunucu için fazla büyük olabilir.": ["Upload failed. The file may be too large for the server.", "Échec du téléversement. Le fichier est peut-être trop volumineux pour le serveur."],
+  "Görseller yüklenemedi.": ["Images could not be loaded.", "Impossible de charger les images."],
 };
 
 const COPY = {

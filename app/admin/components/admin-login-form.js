@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 export function AdminLoginForm() {
-  const router = useRouter();
   const [message, setMessage] = useState(null);
   const [pending, setPending] = useState(false);
 
@@ -21,19 +19,24 @@ export function AdminLoginForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: data.get("email"), password: data.get("password") }),
+        cache: "no-store",
       });
       const result = await response.json().catch(() => null);
 
       if (!response.ok || !result?.success) {
         setMessage(result?.message || "Sign-in failed.");
+        setPending(false);
         return;
       }
 
-      router.push("/admin");
-      router.refresh();
+      // router.push burada kullanılmıyor: giriş öncesi /admin için yapılan
+      // prefetch, proxy tarafından /admin/giris'e yönlendirilmiş olarak
+      // istemci önbelleğinde kalıyor ve yeni çereze rağmen tekrar giriş
+      // sayfasına dönülüyordu. Tam sayfa geçişi önbelleği atlar ve yeni
+      // oturum çereziyle temiz bir istek gönderir.
+      window.location.replace("/admin");
     } catch {
       setMessage("Could not connect to the server. Refresh and try again.");
-    } finally {
       setPending(false);
     }
   }

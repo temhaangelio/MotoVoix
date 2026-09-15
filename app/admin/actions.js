@@ -26,6 +26,7 @@ import { NEWS_TAG, SETTINGS_TAG } from "../../lib/news";
 import { PAGES_TAG } from "../../lib/pages";
 import { createMessage, deleteMessage, updateMessageStatus } from "../../lib/messages";
 import { SESSION_COOKIE } from "../../lib/auth-session";
+import { listNewsImages, saveNewsImage } from "../../lib/news-images";
 
 function revalidateSite() {
   // Ziyaretçi okumaları unstable_cache üzerinden geldiği için yol
@@ -54,6 +55,20 @@ export async function logoutAdminAction() {
   const jar = await cookies();
   jar.delete(SESSION_COOKIE);
   return { success: true };
+}
+
+export async function uploadNewsImageAction(formData) {
+  const { error } = await requireAdmin();
+  if (error) return error;
+
+  return saveNewsImage(formData.get("file"));
+}
+
+export async function listNewsImagesAction() {
+  const { error } = await requireAdmin();
+  if (error) return error;
+
+  return { success: true, images: await listNewsImages() };
 }
 
 export async function savePostAction(formData) {
