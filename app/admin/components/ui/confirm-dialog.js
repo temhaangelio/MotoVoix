@@ -16,6 +16,7 @@ export function ConfirmDialog({
   variant = "primary",
   onConfirm,
   onOpenChange,
+  children,
 }) {
   const titleId = useId();
   const descriptionId = useId();
@@ -73,6 +74,7 @@ export function ConfirmDialog({
         </div>
         <h2 id={titleId} className="mt-5 text-[26px] font-bold leading-tight tracking-[-.04em]">{title}</h2>
         <p id={descriptionId} className="mt-2 text-[15px] font-medium leading-relaxed text-[#777]">{description}</p>
+        {children ? <div className="mt-5 space-y-4 text-left">{children}</div> : null}
         {error ? <p role="alert" className="mt-4 rounded-2xl bg-[#fff1f0] p-3 text-sm font-medium text-[#b42318]">{error}</p> : null}
         <div className="mt-7 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button variant="secondary" disabled={pending} onClick={() => onOpenChange(false)}>{cancelLabel}</Button>

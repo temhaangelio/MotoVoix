@@ -6,7 +6,7 @@ import { PageForm } from "../../../components/page-form";
 
 export default async function EditPageAdmin({ params }) {
   const { id } = await params;
-  const page = getPageById(id);
+  const page = await getPageById(id);
   if (!page) notFound();
   return (
     <AppShell active="/admin/sayfalar">

@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Pencil, Trash2 } from "lucide-react";
+import { ExternalLink, Pencil, Trash2 } from "lucide-react";
 import { deletePageAction } from "../actions";
+import { pagePath } from "../../../lib/page-path";
 import { ActionMenu } from "./ui/action-menu";
 import { Badge } from "./ui/badge";
 import { ConfirmDialog } from "./ui/confirm-dialog";
@@ -54,6 +55,7 @@ export function PagesTable({ pages }) {
                       <ActionMenu
                         label={`${page.title} actions`}
                         items={[
+                          { label: "View", href: pagePath(page.slug), target: "_blank", icon: <ExternalLink size={15} /> },
                           { label: "Edit", href: `/admin/sayfalar/${page.id}/duzenle`, icon: <Pencil size={15} /> },
                           { label: "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => setPageToDelete(page) },
                         ]}

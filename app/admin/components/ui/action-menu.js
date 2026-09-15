@@ -81,7 +81,14 @@ export function ActionMenu({ label = "Actions", items, trigger, triggerClassName
           >
             {items.map((item) =>
               item.href ? (
-                <Link key={item.label} href={item.href} role="menuitem" onClick={() => setOpen(false)} className={itemClass(item.destructive)}>
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  role="menuitem"
+                  onClick={() => setOpen(false)}
+                  className={itemClass(item.destructive)}
+                  {...(item.target ? { target: item.target, rel: "noreferrer" } : {})}
+                >
                   {item.icon}
                   {item.label}
                 </Link>

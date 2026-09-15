@@ -6,8 +6,8 @@ import { PageHeader } from "../components/page-header";
 import { PostsTable } from "../components/posts-table";
 import { buttonVariants } from "../components/ui/button";
 
-export default function PostsPage() {
-  const posts = getPosts();
+export default async function PostsPage() {
+  const posts = await getPosts();
   return (
     <AppShell active="/admin/yazilar">
       <div className="mx-auto w-full max-w-[1600px]">

@@ -6,7 +6,7 @@ import { PostForm } from "../../../components/post-form";
 
 export default async function EditPostPage({ params }) {
   const { id } = await params;
-  const post = getPostById(id);
+  const post = await getPostById(id);
   if (!post) notFound();
   return (
     <AppShell active="/admin/yazilar">

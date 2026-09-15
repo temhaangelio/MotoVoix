@@ -94,7 +94,7 @@ export function SettingsForm({ initialValues, section }) {
             <div className="flex items-center justify-between gap-4 pt-4">
               <div>
                 <strong className="text-[15px]">Maintenance mode</strong>
-                <p className="mt-1 text-[13px] text-[#a1a1a1]">Stored for demo purposes; it does not disable the visitor site.</p>
+                <p className="mt-1 text-[13px] text-[#a1a1a1]">When on, visitors see a maintenance page. The admin panel stays reachable.</p>
               </div>
               <Switch label="Maintenance mode" checked={values.maintenanceMode} onCheckedChange={(value) => setField("maintenanceMode", value)} />
             </div>
@@ -111,7 +111,7 @@ export function SettingsForm({ initialValues, section }) {
               ["Posts", "Create and manage content", "modulePosts"],
               ["Newsletter", "Newsletter and subscriber management", "moduleNewsletter"],
               ["Ads", "Create and publish ads", "moduleAds"],
-              ["Analytics", "Local demo analytics", "moduleAnalytics"],
+              ["Analytics", "Visitor statistics", "moduleAnalytics"],
             ].map(([title, description, name]) => (
               <div key={name} className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0">
                 <div>

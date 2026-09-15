@@ -4,7 +4,7 @@ import { AdminTranslations } from "./components/admin-translations";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Admin | MotoVoix",
+  title: { default: "Admin", template: "%s | Admin" },
   robots: { index: false, follow: false },
 };
 

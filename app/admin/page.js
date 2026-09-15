@@ -15,10 +15,12 @@ function relativeTime(value) {
   return `${Math.floor(hours / 24)} days ago`;
 }
 
-export default function AdminDashboardPage() {
-  const postStats = getDashboardPostStats();
-  const newsletterData = getNewsletterDashboard();
-  const analytics = getAnalytics(7);
+export default async function AdminDashboardPage() {
+  const [postStats, newsletterData, analytics] = await Promise.all([
+    getDashboardPostStats(),
+    getNewsletterDashboard(),
+    getAnalytics(7),
+  ]);
   const now = new Date();
   const dateParts = new Intl.DateTimeFormat("tr-TR", { timeZone, weekday: "long", day: "numeric", month: "long" }).formatToParts(now);
   const part = (type) => dateParts.find((item) => item.type === type)?.value ?? "";
@@ -45,7 +47,7 @@ export default function AdminDashboardPage() {
         note={`${part("weekday")}, ${part("month")} ${part("day")} · ${postStats.publishedThisWeek} posts published this week`}
         actions={
           <div className="flex gap-2">
-            <div className="hidden h-11 items-center rounded-full bg-white px-5 text-sm font-medium text-[#a1a1a1] md:flex">Local demo database</div>
+            <div className="hidden h-11 items-center rounded-full bg-white px-5 text-sm font-medium text-[#a1a1a1] md:flex">MySQL · live data</div>
             <Link href="/admin/yazilar/yeni" className={buttonVariants()}>New post <ArrowRight className="ml-3 size-4" /></Link>
           </div>
         }

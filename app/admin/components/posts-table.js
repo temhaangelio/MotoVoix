@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowDownUp, ImagePlus, Pencil, Search, Trash2 } from "lucide-react";
+import { ArrowDownUp, ExternalLink, ImagePlus, Pencil, Search, Trash2 } from "lucide-react";
 import { deletePostAction } from "../actions";
 import { ActionMenu } from "./ui/action-menu";
 import { Badge } from "./ui/badge";
@@ -104,6 +104,9 @@ export function PostsTable({ posts }) {
                         <ActionMenu
                           label={`${post.title} actions`}
                           items={[
+                            ...(post.status === "published"
+                              ? [{ label: "View", href: `/haber/${post.slug}`, target: "_blank", icon: <ExternalLink size={15} /> }]
+                              : []),
                             { label: "Edit", href: `/admin/yazilar/${post.id}/duzenle`, icon: <Pencil size={15} /> },
                             { label: "Generate image", href: `/admin/yazilar/${post.id}/gorsel-uret`, icon: <ImagePlus size={15} /> },
                             { label: language === "fr" ? "Supprimer" : "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => { setDeleteError(null); setPostToDelete(post); } },

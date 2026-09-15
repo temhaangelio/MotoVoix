@@ -12,6 +12,8 @@ const items = [
   [{ en: "Ads", fr: "Publicités" }, "/admin/reklamlar", "ads"],
   [{ en: "Pages", fr: "Pages" }, "/admin/sayfalar", null],
   [{ en: "Analytics", fr: "Statistiques" }, "/admin/istatistik", "analytics"],
+  [{ en: "Messages", fr: "Messages" }, "/admin/mesajlar", null],
+  [{ en: "Users", fr: "Utilisateurs" }, "/admin/kullanicilar", null],
   [{ en: "Settings", fr: "Paramètres" }, "/admin/ayarlar", null],
 ];
 

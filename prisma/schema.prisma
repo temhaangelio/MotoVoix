@@ -1,0 +1,278 @@
+// MotoVoix - MySQL şeması
+// Alan adları bilerek mevcut JSON anahtarlarıyla birebir aynı tutuldu
+// (created_at, source_name, titleEn ...). Böylece lib/local-db.js Prisma
+// nesnelerini olduğu gibi döndürebiliyor ve 31 çağrı noktasında alan adı
+// değişikliği gerekmiyor. Kolon adları @map ile snake_case.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ---------------------------------------------------------------- içerik
+
+enum PostStatus {
+  draft
+  published
+  scheduled
+}
+
+model Post {
+  id         String  @id @default(cuid()) @db.VarChar(40)
+  slug       String  @unique @db.VarChar(191)
+  legacySlug String? @map("legacy_slug") @db.VarChar(191)
+
+  // Varsayılan dil alanları. lib/news.js bunları En/Fr için fallback olarak
+  // kullanıyor; ileride tamamen En/Fr'ye geçilirse bu dördü düşürülebilir.
+  title       String @db.VarChar(255)
+  description String @db.Text
+  excerpt     String @db.Text
+  body        String @db.MediumText
+
+  titleEn   String @default("") @map("title_en") @db.VarChar(255)
+  excerptEn String @map("excerpt_en") @db.Text
+  bodyEn    String @map("body_en") @db.MediumText
+
+  titleFr   String @default("") @map("title_fr") @db.VarChar(255)
+  excerptFr String @map("excerpt_fr") @db.Text
+  bodyFr    String @map("body_fr") @db.MediumText
+
+  category String @default("motorcycle") @db.VarChar(64)
+  tags     String @default("") @db.VarChar(255)
+  image    String @default("") @db.VarChar(255)
+
+  status PostStatus @default(draft)
+  reads  Int        @default(0)
+
+  date         DateTime
+  created_at   DateTime  @default(now()) @map("created_at")
+  published_at DateTime? @map("published_at")
+  scheduled_at DateTime? @map("scheduled_at")
+
+  source_name String @default("") @map("source_name") @db.VarChar(191)
+  source_url  String @default("") @map("source_url") @db.VarChar(500)
+
+  feedback PostFeedback[]
+
+  @@index([status, published_at])
+  @@index([category])
+  @@index([legacySlug])
+  @@map("posts")
+}
+
+model Page {
+  id         String   @id @default(cuid()) @db.VarChar(40)
+  slug       String   @unique @db.VarChar(191)
+  title      String   @db.VarChar(255)
+  // Sayfadaki H1. Bos birakilirsa title kullanilir.
+  heading    String   @default("") @db.VarChar(255)
+  excerpt    String   @db.Text
+  body       String   @db.MediumText
+  menu_order Int      @default(0) @map("menu_order")
+  published  Boolean  @default(true)
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@index([published, menu_order])
+  @@map("pages")
+}
+
+model Ad {
+  id          String   @id @default(cuid()) @db.VarChar(40)
+  title       String   @db.VarChar(255)
+  description String   @db.Text
+  ctaLabel    String   @default("") @map("cta_label") @db.VarChar(120)
+  targetUrl   String   @default("") @map("target_url") @db.VarChar(500)
+  imageUrl    String   @default("") @map("image_url") @db.VarChar(500)
+  language    String   @default("en") @db.VarChar(5)
+  active      Boolean  @default(true)
+  created_at  DateTime @default(now()) @map("created_at")
+
+  @@index([active, language])
+  @@map("ads")
+}
+
+// -------------------------------------------------------------- e-bülten
+
+enum NewsletterStatus {
+  draft
+  scheduled
+  sent
+}
+
+model Newsletter {
+  id                String           @id @default(cuid()) @db.VarChar(40)
+  issue_number      Int              @unique @map("issue_number")
+  subject           String           @db.VarChar(255)
+  preview_text      String           @default("") @map("preview_text") @db.VarChar(255)
+  content           String           @db.MediumText
+  status            NewsletterStatus @default(draft)
+  scheduled_at      DateTime?        @map("scheduled_at")
+  sent_at           DateTime?        @map("sent_at")
+  recipient_count   Int              @default(0) @map("recipient_count")
+  open_count        Int              @default(0) @map("open_count")
+  click_count       Int              @default(0) @map("click_count")
+  unsubscribe_count Int              @default(0) @map("unsubscribe_count")
+  created_at        DateTime         @default(now()) @map("created_at")
+
+  @@index([status, created_at])
+  @@map("newsletters")
+}
+
+enum SubscriberStatus {
+  pending
+  active
+  unsubscribed
+}
+
+model Subscriber {
+  id         String           @id @default(cuid()) @db.VarChar(40)
+  email      String           @unique @db.VarChar(191)
+  name       String           @default("") @db.VarChar(191)
+  status     SubscriberStatus @default(active)
+  source     String           @default("Web sitesi") @db.VarChar(64)
+  created_at DateTime         @default(now()) @map("created_at")
+
+  @@index([status])
+  @@map("subscribers")
+}
+
+// --------------------------------------------------------------- ayarlar
+
+// Tek satırlık singleton: id her zaman 1.
+model Settings {
+  id Int @id @default(1)
+
+  siteName      String @default("motorvoix") @map("site_name") @db.VarChar(120)
+  domain        String @default("") @db.VarChar(191)
+  description   String @db.Text
+  descriptionEn String @map("description_en") @db.Text
+  contactEmail  String @default("") @map("contact_email") @db.VarChar(191)
+  language      String @default("en") @db.VarChar(5)
+  feedLayout    String @default("card") @map("feed_layout") @db.VarChar(20)
+  postsPerPage  Int    @default(8) @map("posts_per_page")
+
+  newsletterEnabled     Boolean @default(true) @map("newsletter_enabled")
+  newsletterTitle       String  @default("") @map("newsletter_title") @db.VarChar(255)
+  newsletterDescription String  @map("newsletter_description") @db.Text
+  showSubscriberCount   Boolean @default(true) @map("show_subscriber_count")
+  maintenanceMode       Boolean @default(false) @map("maintenance_mode")
+
+  modulePosts      Boolean @default(true) @map("module_posts")
+  moduleNewsletter Boolean @default(true) @map("module_newsletter")
+  moduleAds        Boolean @default(true) @map("module_ads")
+  moduleAnalytics  Boolean @default(true) @map("module_analytics")
+  moduleThemes     Boolean @default(false) @map("module_themes")
+
+  adminName  String @default("") @map("admin_name") @db.VarChar(191)
+  adminEmail String @default("") @map("admin_email") @db.VarChar(191)
+
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
+
+// Admin girişi. Parola scrypt ile hash'lenir (lib/auth-password.js);
+// oturum çerezi HMAC ile imzalanır (lib/auth-session.js).
+// Hesap oluşturma/sıfırlama: node scripts/create-admin.mjs
+model User {
+  id           String   @id @default(cuid()) @db.VarChar(40)
+  email        String   @unique @db.VarChar(191)
+  name         String   @default("") @db.VarChar(191)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  role         String   @default("admin") @db.VarChar(20)
+  created_at   DateTime @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+// ------------------------------------------------------------ istatistik
+
+model AnalyticsDaily {
+  date      DateTime @id @db.Date
+  pageviews Int      @default(0)
+  visitors  Int      @default(0)
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("analytics_daily")
+}
+
+// sources / countries / devices tek tabloda, kind ile ayrılıyor.
+model AnalyticsBreakdown {
+  id         Int      @id @default(autoincrement())
+  kind       String   @db.VarChar(20) // "source" | "country" | "device"
+  code       String   @default("") @db.VarChar(40)
+  label      String   @db.VarChar(120)
+  hits       Int      @default(0)
+  percentage Int      @default(0)
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@unique([kind, label])
+  @@index([kind])
+  @@map("analytics_breakdown")
+}
+
+model AnalyticsTopPage {
+  id        Int      @id @default(autoincrement())
+  path      String   @unique @db.VarChar(255)
+  pageviews Int      @default(0)
+  visitors  Int      @default(0)
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("analytics_top_pages")
+}
+
+// Oylar şu an yalnızca localStorage'da tutuluyor
+// (app/components/news-detail-content.js). MySQL'e geçince kalıcı hale
+// getirmek isterseniz hazır dursun; kullanılmazsa boş kalır.
+model PostFeedback {
+  id         Int      @id @default(autoincrement())
+  postId     String   @map("post_id") @db.VarChar(40)
+  vote       String   @db.VarChar(10) // "up" | "down"
+  visitorKey String   @default("") @map("visitor_key") @db.VarChar(64)
+  created_at DateTime @default(now()) @map("created_at")
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, visitorKey])
+  @@index([postId])
+  @@map("post_feedback")
+}
+
+// ------------------------------------------------------------- iletisim
+
+enum ContactStatus {
+  new
+  read
+  archived
+}
+
+// /contact formundan gelen mesajlar. Panelde /admin/mesajlar altinda
+// goruntulenip silinebiliyor.
+model ContactMessage {
+  id         String        @id @default(cuid()) @db.VarChar(40)
+  name       String        @db.VarChar(191)
+  email      String        @db.VarChar(191)
+  subject    String        @default("") @db.VarChar(255)
+  message    String        @db.Text
+  status     ContactStatus @default(new)
+  ip_hash    String        @default("") @map("ip_hash") @db.VarChar(64)
+  created_at DateTime      @default(now()) @map("created_at")
+
+  @@index([status, created_at])
+  @@map("contact_messages")
+}
+
+// Gunluk tekil ziyaretci tespiti. Ayni gun ayni anahtar tekrar
+// gelirse benzersiz kisit sayesinde ziyaretci sayaci artmiyor.
+model AnalyticsVisit {
+  date       DateTime @db.Date
+  visitorKey String   @map("visitor_key") @db.VarChar(64)
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@id([date, visitorKey])
+  @@map("analytics_visits")
+}

@@ -26,7 +26,7 @@ export function AnalyticsDashboard({ analytics, range }) {
   return (
     <>
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <p className="text-[15px] font-medium text-[#a1a1a1]">Last {range} days · local demo data</p>
+        <p className="text-[15px] font-medium text-[#a1a1a1]">Last {range} days · live site traffic</p>
         <div className="flex gap-2">
           {ranges.map((days) => (
             <Link key={days} href={days === 30 ? "/admin/istatistik" : `/admin/istatistik?aralik=${days}`} className={buttonVariants({ variant: days === range ? "primary" : "outline", size: "sm" })}>

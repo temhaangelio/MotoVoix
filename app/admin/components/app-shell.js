@@ -10,8 +10,8 @@ const routeModules = {
   "/admin/istatistik": "analytics",
 };
 
-export function AppShell({ active, children }) {
-  const settings = getSettings();
+export async function AppShell({ active, children }) {
+  const settings = await getSettings();
   const modules = {
     posts: settings.modulePosts,
     newsletter: settings.moduleNewsletter,

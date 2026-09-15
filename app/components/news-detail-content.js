@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
@@ -45,8 +47,8 @@ export default function NewsDetailContent({ post, relatedPosts }) {
       </section>
       <section className="mt-10 grid grid-cols-1 gap-8 lg:mt-12 lg:grid-cols-12 lg:gap-12">
         <article className="lg:col-span-8">
-          <div className="aspect-[4/3] sm:aspect-[21/9] overflow-hidden mb-8 sm:mb-10 bg-surface-container-low border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
-            {post.image ? <img alt={title} className="w-full h-full object-cover rounded-[14px]" src={post.image} /> : <span className="font-label text-[10px] uppercase tracking-[0.25em] text-outline">{fr ? "Image à venir" : "Image coming soon"}</span>}
+          <div className="relative aspect-[4/3] sm:aspect-[21/9] overflow-hidden mb-8 sm:mb-10 bg-surface-container-low border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
+            {post.image ? <Image alt={title} className="object-cover rounded-[14px]" fill priority sizes="(max-width: 1024px) 100vw, 66vw" src={post.image} /> : <span className="font-label text-[10px] uppercase tracking-[0.25em] text-outline">{fr ? "Image à venir" : "Image coming soon"}</span>}
           </div>
           <article className="font-body text-base leading-8 text-zinc-200 sm:text-lg space-y-6 [&_p]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2 [&_a]:break-words [&_a]:text-primary [&_a]:underline" dangerouslySetInnerHTML={{ __html: contentHtml }} />
           <div className="mt-12 flex flex-col gap-5 rounded-[18px] border border-outline-variant/20 bg-surface-container-low p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">

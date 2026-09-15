@@ -9,7 +9,7 @@ import { buttonVariants } from "../../../components/ui/button";
 
 export default async function GeneratePostImagePage({ params }) {
   const { id } = await params;
-  const post = getPostById(id);
+  const post = await getPostById(id);
   if (!post) notFound();
 
   return (

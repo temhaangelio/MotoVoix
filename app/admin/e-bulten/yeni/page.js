@@ -5,7 +5,7 @@ import { NewsletterForm } from "../../components/newsletter-form";
 export default function NewNewsletterPage() {
   return (
     <AppShell active="/admin/e-bulten">
-      <PageHeader title="New newsletter" note="The send is saved to the local demo database." />
+      <PageHeader title="New newsletter" note="The issue is saved to the MySQL database." />
       <NewsletterForm />
     </AppShell>
   );

@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ExternalLink, Trash2 } from "lucide-react";
-import { createAdAction, deleteAdAction, toggleAdAction } from "../actions";
+import { useRef, useState } from "react";
+import { ExternalLink, Pencil, Trash2 } from "lucide-react";
+import { createAdAction, deleteAdAction, toggleAdAction, updateAdAction } from "../actions";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -28,6 +28,9 @@ export function AdsManager({ ads }) {
   const [active, setActive] = useState(true);
   const [message, setMessage] = useState(null);
   const [adToDelete, setAdToDelete] = useState(null);
+  const [adToEdit, setAdToEdit] = useState(null);
+  const [editError, setEditError] = useState(null);
+  const editFormRef = useRef(null);
 
   async function submit(event) {
     event.preventDefault();
@@ -51,6 +54,21 @@ export function AdsManager({ ads }) {
     if (result.success) router.refresh();
   }
 
+  async function saveEdit() {
+    const form = editFormRef.current;
+    if (!form || !form.reportValidity()) return false;
+
+    const formData = new FormData(form);
+    const result = await updateAdAction(formData);
+    if (!result.success) {
+      setEditError(result.message);
+      return false;
+    }
+    setMessage(result.message);
+    router.refresh();
+    return true;
+  }
+
   async function removeSelected() {
     if (!adToDelete) return false;
     const result = await deleteAdAction(adToDelete.id);
@@ -63,7 +81,7 @@ export function AdsManager({ ads }) {
     <div className="grid gap-5 xl:grid-cols-12">
       <Card className="h-fit xl:col-span-5">
         <h2 className="section-title">New ad</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[#a1a1a1]">The ad is saved to the demo database; Supabase is not used.</p>
+        <p className="mt-2 text-sm leading-relaxed text-[#a1a1a1]">The ad is saved to the MySQL database.</p>
         <form onSubmit={submit} className="mt-6 space-y-5">
           <FormField label="Title" htmlFor="ad-title"><Input id="ad-title" name="title" required /></FormField>
           <FormField label="Description" htmlFor="ad-description"><Textarea id="ad-description" name="description" required /></FormField>
@@ -105,13 +123,53 @@ export function AdsManager({ ads }) {
             </div>
             <div className="flex items-center gap-3">
               <Switch checked={ad.active} onCheckedChange={(checked) => toggle(ad, checked)} label={`${ad.title} publishing`} />
-              <button type="button" onClick={() => setAdToDelete(ad)} className="grid size-10 place-items-center rounded-full text-[#b42318] hover:bg-[#fff1f0]">
+              <button type="button" aria-label={`Edit ${ad.title}`} onClick={() => { setAdToEdit(ad); setEditError(null); }} className="grid size-10 place-items-center rounded-full text-[#4a4a4a] hover:bg-[#f2f2f2] hover:text-black">
+                <Pencil size={16} />
+              </button>
+              <button type="button" aria-label={`Delete ${ad.title}`} onClick={() => setAdToDelete(ad)} className="grid size-10 place-items-center rounded-full text-[#b42318] hover:bg-[#fff1f0]">
                 <Trash2 size={16} />
               </button>
             </div>
           </Card>
         ))}
       </div>
+
+      <ConfirmDialog
+        open={Boolean(adToEdit)}
+        title="Edit ad"
+        description={adToEdit ? adToEdit.title : ""}
+        confirmLabel="Save"
+        error={editError}
+        onOpenChange={(open) => { if (!open) setAdToEdit(null); setEditError(null); }}
+        onConfirm={saveEdit}
+      >
+        {adToEdit ? (
+          <form ref={editFormRef} className="space-y-4" onSubmit={(event) => event.preventDefault()}>
+            <input type="hidden" name="id" value={adToEdit.id} />
+            <FormField label="Title" htmlFor="edit-ad-title"><Input id="edit-ad-title" name="title" required defaultValue={adToEdit.title} /></FormField>
+            <FormField label="Description" htmlFor="edit-ad-description"><Textarea id="edit-ad-description" name="description" required defaultValue={adToEdit.description} /></FormField>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FormField label="Button label" htmlFor="edit-ad-cta"><Input id="edit-ad-cta" name="ctaLabel" required defaultValue={adToEdit.ctaLabel} /></FormField>
+              <FormField label="Destination URL" htmlFor="edit-ad-url"><Input id="edit-ad-url" name="targetUrl" type="url" required defaultValue={adToEdit.targetUrl} /></FormField>
+            </div>
+            <FormField label="Image URL" htmlFor="edit-ad-image"><Input id="edit-ad-image" name="imageUrl" defaultValue={adToEdit.imageUrl} /></FormField>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FormField label="Language" htmlFor="edit-ad-language">
+                <Select id="edit-ad-language" name="language" defaultValue={adToEdit.language}>
+                  <option value="en">English</option>
+                  <option value="fr">Français</option>
+                </Select>
+              </FormField>
+              <FormField label="Status" htmlFor="edit-ad-active">
+                <Select id="edit-ad-active" name="active" defaultValue={adToEdit.active ? "true" : "false"}>
+                  <option value="true">Published</option>
+                  <option value="false">Draft</option>
+                </Select>
+              </FormField>
+            </div>
+          </form>
+        ) : null}
+      </ConfirmDialog>
 
       <ConfirmDialog
         open={Boolean(adToDelete)}

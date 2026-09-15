@@ -16,11 +16,11 @@ export function AdminLoginForm() {
     setMessage(null);
 
     try {
-      const password = new FormData(event.currentTarget).get("password");
+      const data = new FormData(event.currentTarget);
       const response = await fetch("/admin/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email: data.get("email"), password: data.get("password") }),
       });
       const result = await response.json().catch(() => null);
 
@@ -40,6 +40,7 @@ export function AdminLoginForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
+      <Input name="email" type="email" placeholder="Email" autoComplete="username" required />
       <Input name="password" type="password" placeholder="Password" autoComplete="current-password" required />
       {message ? <p className="text-sm font-medium text-[#b42318]">{message}</p> : null}
       <Button type="submit" disabled={pending} className="w-full">{pending ? "Signing in…" : "Sign in"}</Button>

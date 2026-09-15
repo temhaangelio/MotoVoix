@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<title>MotoVoix</title>
+<rect width="64" height="64" rx="14" fill="#131313"/>
+<circle cx="32" cy="32" r="25" fill="#ffb4a2"/>
+<g fill="#131313"><circle cx="32.00" cy="18.60" r="6.5"/><circle cx="44.74" cy="27.86" r="6.5"/><circle cx="39.88" cy="42.84" r="6.5"/><circle cx="24.12" cy="42.84" r="6.5"/><circle cx="19.26" cy="27.86" r="6.5"/></g>
+</svg>

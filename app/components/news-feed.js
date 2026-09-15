@@ -2,12 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, X } from "lucide-react";
 import { useLanguage } from "./language-provider";
 import { getCategoryLabel } from "../../lib/categories";
 
-export default function NewsFeed({ posts }) {
-  const [visibleCount, setVisibleCount] = useState(8);
+export default function NewsFeed({ posts, pageSize = 8 }) {
+  const [visibleCount, setVisibleCount] = useState(pageSize);
   const [query, setQuery] = useState("");
   const { language } = useLanguage();
   const localizedPosts = useMemo(() => posts.map((post) => ({
@@ -95,7 +96,14 @@ export default function NewsFeed({ posts }) {
             <Link href={`/haber/${featured.slug}`}>
               <div className="relative aspect-[4/3] sm:aspect-[21/9] overflow-hidden mb-5 sm:mb-6 bg-surface-container-low border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
                 {featured.image ? (
-                  <img alt={featured.title} className="w-full h-full object-cover rounded-[14px]" src={featured.image} />
+                  <Image
+                    alt={featured.title}
+                    className="object-cover rounded-[14px]"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 66vw"
+                    src={featured.image}
+                  />
                 ) : (
                   <span className="font-label text-[10px] uppercase tracking-[0.25em] text-outline">Image coming soon</span>
                 )}
@@ -130,9 +138,15 @@ export default function NewsFeed({ posts }) {
           <article className="md:col-span-4 group bg-surface-container-low p-5 sm:p-8 flex flex-col justify-between rounded-[14px] overflow-hidden border border-outline-variant/20">
             <div>
               <Link href={`/haber/${side.slug}`}>
-                <div className="aspect-video bg-surface-container-high mb-6 overflow-hidden border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
+                <div className="relative aspect-video bg-surface-container-high mb-6 overflow-hidden border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
                   {side.image ? (
-                    <img alt={side.title} className="w-full h-full object-cover rounded-[14px]" src={side.image} />
+                    <Image
+                      alt={side.title}
+                      className="object-cover rounded-[14px]"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      src={side.image}
+                    />
                   ) : (
                     <span className="font-label text-[10px] uppercase tracking-[0.25em] text-outline">Image coming soon</span>
                   )}
@@ -152,9 +166,15 @@ export default function NewsFeed({ posts }) {
         {gridPosts.map((post) => (
           <article className="md:col-span-4 group bg-surface-container-low p-5 sm:p-6 rounded-[14px] border border-outline-variant/20" key={post.slug}>
             <Link href={`/haber/${post.slug}`}>
-              <div className="aspect-video bg-surface-container-high mb-6 overflow-hidden border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
+              <div className="relative aspect-video bg-surface-container-high mb-6 overflow-hidden border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
                 {post.image ? (
-                    <img alt={post.title} className="w-full h-full object-cover rounded-[14px]" src={post.image} />
+                    <Image
+                      alt={post.title}
+                      className="object-cover rounded-[14px]"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      src={post.image}
+                    />
                 ) : (
                   <span className="font-label text-[10px] uppercase tracking-[0.25em] text-outline">Image coming soon</span>
                 )}

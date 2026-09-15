@@ -1,0 +1,10 @@
+Host : 89.116.38.188
+Port : 3306
+DB: motovoix
+User : usr_motovoix
+Pass : MtGd..!1616TpNkt@8390
+
+MtGd..!1616TpNkt8390
+
+
+"admin@motovoix.com" "Admin!GD00" "Admin User"

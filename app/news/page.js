@@ -1,36 +1,92 @@
 import Link from "next/link";
-import { getAllNews } from "../../lib/news";
+import Image from "next/image";
+import { getNewsCards } from "../../lib/news";
+import { preparePublicPage } from "../../lib/public-page";
 import SiteHeader from "../components/site-header";
 import NewsFeed from "../components/news-feed";
+import NewsSubscribeInline from "../components/news-subscribe-inline";
+import { MaintenanceNotice } from "../components/maintenance-notice";
 import { LocalizedText } from "../components/language-provider";
 import { Wordmark } from "../components/wordmark";
+import { absoluteUrl, siteName } from "../../lib/site";
 
-export const dynamic = "force-dynamic";
+// Akış statik üretilip 5 dakikada bir tazeleniyor; admin panelinden yayın
+// yapıldığında revalidatePath("/news") zaten anında güncelliyor.
+export const revalidate = 300;
+
+const PAGE_TITLE = "Motorcycle and ATV News";
+const PAGE_DESCRIPTION =
+  "New models, manufacturer announcements, racing updates, and key industry moves in one stream.";
 
 export const metadata = {
-  title: "News | MotoVoix",
-  description: "Motorcycle news",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  alternates: { canonical: absoluteUrl("/news") },
+  openGraph: {
+    type: "website",
+    title: `${PAGE_TITLE} | ${siteName}`,
+    description: PAGE_DESCRIPTION,
+    url: absoluteUrl("/news"),
+    images: [{ url: absoluteUrl("/images/header-bg.png"), width: 1200, height: 630, alt: PAGE_TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${PAGE_TITLE} | ${siteName}`,
+    description: PAGE_DESCRIPTION,
+    images: [absoluteUrl("/images/header-bg.png")],
+  },
 };
 
-export default function NewsPage() {
-  const posts = getAllNews();
+export default async function NewsPage() {
+  const [posts, settings] = await Promise.all([getNewsCards(), preparePublicPage("/news")]);
+  if (settings.maintenanceMode) return <MaintenanceNotice settings={settings} />;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: absoluteUrl("/news"),
+    isPartOf: { "@type": "WebSite", name: siteName, url: absoluteUrl("/") },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: posts.slice(0, 20).map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: absoluteUrl(`/haber/${post.slug}`),
+        name: post.titleEn,
+      })),
+    },
+  };
 
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="absolute inset-0 -z-10 pointer-events-none">
-        <img
+        <Image
           alt=""
           aria-hidden="true"
           className="header-hero-image header-hero-light w-full max-w-7xl h-auto mx-auto opacity-40 -translate-y-8 sm:-translate-y-14 md:-translate-y-20"
-          style={{ objectPosition: "center top" }}
+          height={1024}
+          priority
+          sizes="100vw"
           src="/images/header-bg.png"
+          style={{ objectPosition: "center top" }}
+          width={1536}
         />
-        <img
+        <Image
           alt=""
           aria-hidden="true"
           className="header-hero-image header-hero-dark w-full max-w-7xl h-auto mx-auto opacity-40 -translate-y-8 sm:-translate-y-14 md:-translate-y-20"
-          style={{ objectPosition: "center top" }}
+          height={1024}
+          priority
+          sizes="100vw"
           src="/images/header-bg-dark.png"
+          style={{ objectPosition: "center top" }}
+          width={1536}
         />
       </div>
       <SiteHeader />
@@ -46,7 +102,7 @@ export default function NewsPage() {
           </div>
         </section>
 
-        <NewsFeed posts={posts} />
+        <NewsFeed posts={posts} pageSize={settings.postsPerPage || 8} />
       </main>
 
       <section className="w-full border-t border-outline-variant/10 bg-surface-container-low py-16 sm:py-20 md:py-24">
@@ -55,10 +111,7 @@ export default function NewsPage() {
             <h3 className="font-headline text-4xl mb-4 sm:text-5xl"><LocalizedText en="Headlines in your inbox." fr="L’actualité dans votre boîte mail." /></h3>
             <p className="font-body text-on-surface-variant"><LocalizedText en="Subscribe for new model launches, industry updates, and this week’s standout motorcycle stories." fr="Abonnez-vous pour suivre les nouveaux modèles, l’actualité du secteur et les sujets moto de la semaine." /></p>
           </div>
-          <div className="flex w-full flex-col gap-3 md:w-auto md:min-w-[28rem] md:flex-row md:items-end md:gap-4">
-            <input aria-label="Email address" className="min-h-12 w-full bg-transparent border border-outline px-4 py-3 font-label text-base uppercase tracking-[0.18em] text-on-surface transition-all focus:border-primary focus:outline-none md:w-80" placeholder="Email" type="email" />
-            <button className="min-h-12 w-full bg-primary-container px-8 py-3 font-label text-sm uppercase tracking-widest text-on-primary-container transition-all hover:opacity-90 md:w-auto md:px-12"><LocalizedText en="Subscribe" fr="S’abonner" /></button>
-          </div>
+          <NewsSubscribeInline />
         </div>
       </section>
 

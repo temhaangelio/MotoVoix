@@ -7,26 +7,20 @@ import { Badge } from "../components/ui/badge";
 import { buttonVariants } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { EmptyState } from "../components/ui/empty-state";
-import { Table, TableWrap, Td, Th } from "../components/ui/table";
 import { AdminDate } from "../components/admin-date";
+import { NewslettersTable } from "../components/newsletters-table";
+import { SubscribersTable } from "../components/subscribers-table";
 
-const statusLabels = { draft: "Draft", scheduled: "Scheduled", sent: "Sent", cancelled: "Cancelled" };
-const subscriberStatusLabels = { active: "Active", pending: "Pending", unsubscribed: "Unsubscribed" };
-
-function rate(value, total) {
-  return total ? `%${((value / total) * 100).toFixed(1).replace(".", ",")}` : "—";
-}
-
-export default function NewsletterAdminPage() {
-  const { newsletters, subscribers, stats } = getNewsletterDashboard();
+export default async function NewsletterAdminPage() {
+  const { newsletters, subscribers, stats } = await getNewsletterDashboard();
   const scheduled = newsletters.filter((item) => item.status === "scheduled" && item.scheduled_at).sort((a, b) => new Date(a.scheduled_at).getTime() - new Date(b.scheduled_at).getTime())[0];
   const sentCampaigns = newsletters.filter((item) => item.status === "sent");
   const chartCampaigns = sentCampaigns.slice(0, 6).reverse();
   const cards = [
     ["Subscribers", stats.active.toLocaleString("en-US"), `${stats.pending} pending`],
     ["Opens", `${stats.openRate.toFixed(1)}%`, `${stats.sent} sends`],
-    ["Clicks", `%${stats.clickRate.toFixed(1).replace(".", ",")}`, "demo rate"],
-    ["Unsubscribes", stats.unsubscribed.toLocaleString("tr-TR"), "people"],
+    ["Clicks", `%${stats.clickRate.toFixed(1).replace(".", ",")}`, "of recipients"],
+    ["Unsubscribes", stats.unsubscribed.toLocaleString("en-US"), "people"],
   ];
 
   return (
@@ -84,66 +78,14 @@ export default function NewsletterAdminPage() {
             )}
           </Card>
           <Card className="xl:col-span-12">
-            <div className="mb-5 flex justify-between">
-              <h2 className="section-title">Subscribers</h2>
-              <span className="text-[#a1a1a1]">{subscribers.length} people</span>
-            </div>
-            <TableWrap>
-              <Table>
-                <thead>
-                  <tr>
-                    <Th>Name</Th>
-                    <Th>Email</Th>
-                    <Th>Status</Th>
-                    <Th>Source</Th>
-                    <Th className="text-right">Signup date</Th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subscribers.map((subscriber) => (
-                    <tr key={subscriber.id}>
-                      <Td className="font-semibold">{subscriber.name || "—"}</Td>
-                      <Td className="text-[#777]">{subscriber.email}</Td>
-                      <Td><Badge className={subscriber.status === "active" ? "bg-black text-white" : ""}>{subscriberStatusLabels[subscriber.status]}</Badge></Td>
-                      <Td className="text-[#777]">{subscriber.source || "Web sitesi"}</Td>
-                      <Td className="text-right text-[#a1a1a1]"><AdminDate value={subscriber.created_at} /></Td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </TableWrap>
+            <SubscribersTable subscribers={subscribers} />
           </Card>
           <Card className="xl:col-span-12">
             <div className="mb-5 flex justify-between">
               <h2 className="section-title">Newsletters</h2>
               <span className="text-[#a1a1a1]">{newsletters.length} issues</span>
             </div>
-            <TableWrap>
-              <Table>
-                <thead>
-                  <tr>
-                    <Th>Issue</Th>
-                    <Th>Subject</Th>
-                    <Th>Status</Th>
-                    <Th className="text-right">Recipients</Th>
-                    <Th className="text-right">Opens</Th>
-                    <Th className="text-right">Date</Th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {newsletters.map((newsletter) => (
-                    <tr key={newsletter.id}>
-                      <Td className="font-bold">#{newsletter.issue_number}</Td>
-                      <Td className="font-semibold">{newsletter.subject}</Td>
-                      <Td><Badge className={newsletter.status === "sent" ? "bg-black text-white" : ""}>{statusLabels[newsletter.status]}</Badge></Td>
-                      <Td className="text-right">{newsletter.recipient_count ? newsletter.recipient_count.toLocaleString("tr-TR") : "—"}</Td>
-                      <Td className="text-right">{rate(newsletter.open_count, newsletter.recipient_count)}</Td>
-                      <Td className="text-right text-[#a1a1a1]"><AdminDate value={newsletter.sent_at ?? newsletter.scheduled_at ?? newsletter.created_at} /></Td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </TableWrap>
+            <NewslettersTable newsletters={newsletters} />
           </Card>
         </div>
       </div>

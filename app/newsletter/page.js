@@ -1,13 +1,25 @@
 import Link from "next/link";
 import SiteHeader from "../components/site-header";
 import NewsletterSubscribeForm from "../components/newsletter-subscribe-form";
+import { MaintenanceNotice } from "../components/maintenance-notice";
+import { preparePublicPage } from "../../lib/public-page";
+import { getActiveSubscriberCount } from "../../lib/local-db";
+
+export const revalidate = 300;
 
 export const metadata = {
-  title: "Newsletter | MotoVoix",
+  title: "Newsletter",
   description: "Subscribe to the MotoVoix newsletter.",
 };
 
-export default function NewsletterPage() {
+const FALLBACK_TITLE = "Get the week's essential motorcycle stories.";
+const FALLBACK_DESCRIPTION =
+  "Subscribe to receive launch news, manufacturer moves, racing updates, and key industry headlines in one clean briefing.";
+
+export default async function NewsletterPage() {
+  const settings = await preparePublicPage("/newsletter");
+  if (settings.maintenanceMode) return <MaintenanceNotice settings={settings} />;
+  const subscriberCount = settings.showSubscriberCount ? await getActiveSubscriberCount() : 0;
   return (
     <>
       <SiteHeader />
@@ -17,19 +29,31 @@ export default function NewsletterPage() {
           <div className="max-w-2xl">
             <span className="mb-4 block font-label text-xs uppercase tracking-[0.3em] text-primary">NEWSLETTER / JOIN</span>
             <h1 className="font-headline text-5xl leading-[0.94] text-zinc-50 sm:text-6xl md:text-7xl">
-              Get the week&apos;s essential motorcycle stories.
+              {settings.newsletterTitle || FALLBACK_TITLE}
             </h1>
             <p className="mt-5 max-w-xl font-body text-base leading-7 text-on-surface-variant sm:text-lg">
-              Subscribe to receive launch news, manufacturer moves, racing updates, and key industry headlines in one clean briefing.
+              {settings.newsletterDescription || FALLBACK_DESCRIPTION}
             </p>
+            {subscriberCount > 0 ? (
+              <p className="mt-6 font-label text-xs uppercase tracking-[0.2em] text-primary">
+                {subscriberCount.toLocaleString("en-US")} riders subscribed
+              </p>
+            ) : null}
           </div>
 
           <div className="rounded-[22px] border border-outline-variant/20 bg-surface-container p-5 sm:p-6 md:p-8">
-            <NewsletterSubscribeForm />
-
-            <p className="mt-4 font-body text-sm leading-7 text-on-surface-variant">
-              No spam. No clutter. Just a concise roundup from MotoVoix.
-            </p>
+            {settings.newsletterEnabled ? (
+              <>
+                <NewsletterSubscribeForm />
+                <p className="mt-4 font-body text-sm leading-7 text-on-surface-variant">
+                  No spam. No clutter. Just a concise roundup from MotoVoix.
+                </p>
+              </>
+            ) : (
+              <p className="font-body text-sm leading-7 text-on-surface-variant">
+                Subscriptions are currently closed. Please check back soon.
+              </p>
+            )}
           </div>
         </section>
 

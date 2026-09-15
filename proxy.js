@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { SESSION_COOKIE, verifySessionToken } from "./lib/auth-session";
 
 function isPublicAdminPath(pathname) {
   return pathname === "/admin/giris" || pathname.startsWith("/admin/giris/") || pathname.startsWith("/admin/api/");
@@ -10,7 +11,7 @@ function nextWithPath(request) {
   return NextResponse.next({ request: { headers } });
 }
 
-export function proxy(request) {
+export async function proxy(request) {
   const { pathname } = request.nextUrl;
 
   if (!pathname.startsWith("/admin")) {
@@ -21,12 +22,16 @@ export function proxy(request) {
     return nextWithPath(request);
   }
 
-  const session = request.cookies.get("mv_admin")?.value;
-  if (session !== "1") {
+  // Çerez artık imzalı bir jeton; elle "1" yazılarak geçilemiyor.
+  const session = await verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value);
+  if (!session) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/giris";
     url.search = "";
-    return NextResponse.redirect(url);
+    const response = NextResponse.redirect(url);
+    // Süresi dolmuş / bozuk çerezi temizle.
+    response.cookies.delete(SESSION_COOKIE);
+    return response;
   }
 
   return nextWithPath(request);

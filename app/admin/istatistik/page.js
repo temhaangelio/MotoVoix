@@ -7,7 +7,7 @@ export default async function AnalyticsPage({ searchParams }) {
   const query = await searchParams;
   const value = Array.isArray(query.aralik) ? query.aralik[0] : query.aralik;
   const range = value === "7" ? 7 : 30;
-  const analytics = getAnalytics(range);
+  const analytics = await getAnalytics(range);
   return (
     <AppShell active="/admin/istatistik">
       <PageHeader title="Analytics" />
