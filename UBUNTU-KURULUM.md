@@ -153,7 +153,7 @@ Build `.next-build`'e alınır, site bu sırada açık kalır. Build patlarsa ca
 | `./updateproject.sh --no-pull` | Kod aynı, `.env` değişti; yeniden build. |
 | `./updateproject.sh --rollback` | Son sürüm sorunlu; önceki build'e dön. Tekrar çalıştırınca geri gelir. |
 
-- `sudo ./updateproject.sh` olur. Proje başka kullanıcıdaysa script ona düşer; ikisi de root'sa root PM2 listesi kullanılır.
+- `sudo ./updateproject.sh` olur; root olarak kalır. PM2 de aynı kullanıcıda olmalı.
 - Git öncelikli: `reset --hard origin/main`. Sunucudaki kod ezilir. `.env` ve `public/images/` kalır.
 - `Permission denied` → `chmod +x updateproject.sh` veya `bash updateproject.sh`.
 - Rollback yalnız build'i döndürür. Uygulanan migration geri alınmaz.

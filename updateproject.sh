@@ -9,7 +9,7 @@
 #   ./updateproject.sh             origin ile eşitle (sunucu ezilir), yeni commit varsa build
 #   ./updateproject.sh --no-pull   kodu çekmeden yeniden build al (.env değişti, önceki deneme yarım kaldı)
 #   ./updateproject.sh --rollback  canlı build ile önceki build'i yer değiştir
-# root / sudo ile de çalışır; proje başka kullanıcıdaysa o kullanıcıya düşer.
+# root / sudo ile de çalışır (kullanıcı değiştirmez).
 #
 # Loglar: logs/update-*.log (son 20 tanesi tutulur)
 
@@ -46,23 +46,6 @@ on_error() {
 
 require_cmd() {
   command -v "$1" >/dev/null 2>&1 || die "'$1' bulunamadı. $2"
-}
-
-# sudo / root ile gelindiyse proje sahibine düş (PM2 kullanıcıya özel).
-# Proje de root'a aitse root olarak devam.
-drop_root() {
-  [[ $EUID -eq 0 ]] || return 0
-  local owner
-  owner="$(stat -c '%U' "$APP_DIR")"
-  if [[ "$owner" == "root" ]]; then
-    warn "root olarak devam. PM2 de root ile başlamış olmalı."
-    return 0
-  fi
-  log "root ile çağrıldı; $owner olarak devam"
-  if command -v runuser >/dev/null 2>&1; then
-    exec runuser -u "$owner" -- bash "$SELF" "$@"
-  fi
-  exec sudo -u "$owner" -- bash "$SELF" "$@"
 }
 
 preflight() {
@@ -194,7 +177,6 @@ deployed_commit() {
 
 main() {
   cd "$APP_DIR"
-  drop_root "$@"
 
   local mode="update"
   case "${1:-}" in
