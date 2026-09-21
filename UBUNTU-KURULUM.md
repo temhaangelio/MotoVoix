@@ -65,6 +65,7 @@ WinSCP ile kopyalama: `updateproject.sh` `git pull` ile çalışır, `.git` şar
 DATABASE_URL="mysql://motovoix:SIFRE@127.0.0.1:3306/motovoix"
 ADMIN_SESSION_SECRET="openssl rand -base64 32 çıktısı"
 NEXT_PUBLIC_SITE_URL="https://motovoix.com"
+NOKTA_UPDATE_SECRET="openssl rand -base64 32 çıktısı"
 NODE_ENV="production"
 ```
 
@@ -124,7 +125,18 @@ sudo certbot --nginx -d motovoix.com -d www.motovoix.com
 
 ## Güncelleme
 
-Windows'ta commit + push, sonra sunucuda:
+Windows'ta commit + push, sonra tarayıcı / webhook:
+
+```
+GET  https://motovoix.com/noktaupdate?key=NOKTA_UPDATE_SECRET
+POST https://motovoix.com/noktaupdate   (key query, x-nokta-key veya Bearer)
+     ?action=rebuild   → --no-pull
+     ?action=rollback  → --rollback
+```
+
+İstek 202 döner, script arka planda çalışır (PM2 restart isteği kesmesin diye). Log: `logs/update-*.log`.
+
+Ya da sunucuda:
 
 ```bash
 cd /var/www/motovoix
@@ -141,10 +153,10 @@ Build `.next-build`'e alınır, site bu sırada açık kalır. Build patlarsa ca
 | `./updateproject.sh --no-pull` | Kod aynı, `.env` değişti; yeniden build. |
 | `./updateproject.sh --rollback` | Son sürüm sorunlu; önceki build'e dön. Tekrar çalıştırınca geri gelir. |
 
-- `sudo` ile çalıştırma; projenin sahibi olan kullanıcıyla çalıştır.
+- `sudo ./updateproject.sh` olur. Proje başka kullanıcıdaysa script ona düşer; ikisi de root'sa root PM2 listesi kullanılır.
+- Git öncelikli: `reset --hard origin/main`. Sunucudaki kod ezilir. `.env` ve `public/images/` kalır.
 - `Permission denied` → `chmod +x updateproject.sh` veya `bash updateproject.sh`.
 - Rollback yalnız build'i döndürür. Uygulanan migration geri alınmaz.
-- Sunucuya elle koyduğun bir görseli sonra repoya da eklersen `git pull` "untracked working tree files would be overwritten" der: sunucudakini sil, scripti tekrar çalıştır.
 
 PM2'yi eskiden `pm2 start npm --name motovoix -- start` ile başlattıysan bir kez:
 

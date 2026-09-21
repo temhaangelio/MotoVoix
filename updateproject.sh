@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # MotoVoix sunucu güncellemesi:
-#   git pull -> npm ci (lock değiştiyse) -> prisma migrate deploy -> build -> PM2 restart -> sağlık kontrolü
+#   git fetch + reset --hard origin -> npm ci (lock değiştiyse) -> prisma migrate deploy -> build -> PM2 restart -> sağlık kontrolü
 #
 # Build ayrı klasöre (.next-build) alınır; canlı site bu sırada çalışmaya devam eder.
 # Build patlarsa canlı site hiç değişmez. Başarılıysa .next ile yer değiştirir, eski build
 # .next-prev olarak kalır. Yeni build /news'e 200 dönmezse otomatik olarak eskisine döner.
 #
-#   ./updateproject.sh             yeni commit varsa güncelle
+#   ./updateproject.sh             origin ile eşitle (sunucu ezilir), yeni commit varsa build
 #   ./updateproject.sh --no-pull   kodu çekmeden yeniden build al (.env değişti, önceki deneme yarım kaldı)
 #   ./updateproject.sh --rollback  canlı build ile önceki build'i yer değiştir
+# root / sudo ile de çalışır; proje başka kullanıcıdaysa o kullanıcıya düşer.
 #
 # Loglar: logs/update-*.log (son 20 tanesi tutulur)
 
@@ -47,8 +48,24 @@ require_cmd() {
   command -v "$1" >/dev/null 2>&1 || die "'$1' bulunamadı. $2"
 }
 
+# sudo / root ile gelindiyse proje sahibine düş (PM2 kullanıcıya özel).
+# Proje de root'a aitse root olarak devam.
+drop_root() {
+  [[ $EUID -eq 0 ]] || return 0
+  local owner
+  owner="$(stat -c '%U' "$APP_DIR")"
+  if [[ "$owner" == "root" ]]; then
+    warn "root olarak devam. PM2 de root ile başlamış olmalı."
+    return 0
+  fi
+  log "root ile çağrıldı; $owner olarak devam"
+  if command -v runuser >/dev/null 2>&1; then
+    exec runuser -u "$owner" -- bash "$SELF" "$@"
+  fi
+  exec sudo -u "$owner" -- bash "$SELF" "$@"
+}
+
 preflight() {
-  [[ $EUID -ne 0 ]] || die "root ile çalıştırma. Projenin sahibi olan kullanıcıyla çalıştır (PM2 listesi kullanıcıya özeldir)."
   require_cmd git   "sudo apt install -y git"
   require_cmd node  "Node 22 kur (UBUNTU-KURULUM.md, adım 1)."
   require_cmd npm   "Node ile birlikte gelir."
@@ -76,26 +93,25 @@ start_log() {
 }
 
 pull_code() {
-  local current before after script_before
-  current="$(git rev-parse --abbrev-ref HEAD)"
-  [[ "$current" == "$BRANCH" ]] || die "Sunucu '$current' dalında, '$BRANCH' bekleniyordu."
+  local before script_before
+  log "Kod çekiliyor (origin/$BRANCH); sunucudaki farklar silinecek"
 
-  # chmod ile değişen izinler değişiklik sayılmasın; yalnızca içeriğe bak.
-  if ! git -c core.fileMode=false diff --quiet || ! git -c core.fileMode=false diff --cached --quiet; then
-    git -c core.fileMode=false status --short --untracked-files=no
-    die "Sunucuda commit edilmemiş değişiklik var. Değişikliği Windows'ta yapıp push et; buradakini 'git checkout -- <dosya>' ile geri al."
-  fi
-
-  log "Kod çekiliyor (origin/$BRANCH)"
   git fetch --prune origin "$BRANCH"
   before="$(git rev-parse HEAD)"
-  after="$(git rev-parse "origin/$BRANCH")"
-  [[ "$before" != "$after" ]] || return 0
-
   script_before="$(git hash-object "$SELF")"
-  git merge --ff-only "origin/$BRANCH" \
-    || die "İleri sarılamadı: sunucuda origin'de olmayan commit var. 'git log origin/$BRANCH..HEAD' ile bak."
-  git log --oneline "$before..HEAD" | head -20
+
+  # git öncelikli: yerel commit, dirty dosya, ff-only takılması yok.
+  git checkout -f -B "$BRANCH" "origin/$BRANCH"
+  git reset --hard "origin/$BRANCH"
+  # Ignore edilenler (.env, node_modules, .next) durur.
+  # Panelden yüklenen görseller ve loglar da kalsın.
+  git clean -fd -e public/images -e logs -e .update.lock
+
+  if [[ "$before" != "$(git rev-parse HEAD)" ]]; then
+    git log --oneline "$before..HEAD" | head -20
+  else
+    log "origin/$BRANCH zaten HEAD ($(git rev-parse --short HEAD))"
+  fi
 
   # Script kendini güncellediyse kalan adımları yeni sürüm yapsın.
   if [[ "$(git hash-object "$SELF")" != "$script_before" ]]; then
@@ -178,6 +194,7 @@ deployed_commit() {
 
 main() {
   cd "$APP_DIR"
+  drop_root "$@"
 
   local mode="update"
   case "${1:-}" in

@@ -7,7 +7,7 @@ export default function robots() {
         userAgent: "*",
         allow: "/",
         // Yönetim paneli ve API uçları dizine girmesin.
-        disallow: ["/admin", "/admin/", "/api/"],
+        disallow: ["/admin", "/admin/", "/api/", "/noktaupdate"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),
