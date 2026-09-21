@@ -112,11 +112,13 @@ install_deps() {
     log "package-lock.json değişmemiş, npm ci atlanıyor; Prisma client yenileniyor"
     npm run db:generate
   else
-    # npm ci node_modules'u silip baştan kurar; yalnızca lock değişince çalışır.
     # --include=dev: tailwind/postcss/prisma build için gerekli, NODE_ENV=production olsa bile.
     log "Bağımlılıklar kuruluyor (npm ci)"
-    npm ci --include=dev --no-audit --no-fund
-    echo "$want" > "$INSTALL_STAMP"
+    if ! npm ci --include=dev --no-audit --no-fund; then
+      warn "package-lock.json uyumsuz, npm install ile kilit yenileniyor"
+      npm install --include=dev --no-audit --no-fund
+    fi
+    echo "$(sha256sum package-lock.json | cut -d' ' -f1)" > "$INSTALL_STAMP"
   fi
 }
 
