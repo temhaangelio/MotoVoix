@@ -56,7 +56,7 @@ export function PagesTable({ pages }) {
                         label={`${page.title} actions`}
                         items={[
                           { label: "View", href: pagePath(page.slug), target: "_blank", icon: <ExternalLink size={15} /> },
-                          { label: "Edit", href: `/admin/sayfalar/${page.id}/duzenle`, icon: <Pencil size={15} /> },
+                          { label: "Edit", href: `/admin/pages/${page.id}/edit`, icon: <Pencil size={15} /> },
                           { label: "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => setPageToDelete(page) },
                         ]}
                       />

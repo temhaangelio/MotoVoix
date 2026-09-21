@@ -24,11 +24,11 @@ export default async function MessageDetailPage({ params }) {
   }
 
   return (
-    <AppShell active="/admin/mesajlar">
+    <AppShell active="/admin/messages">
       <PageHeader
         title={message.name}
         note={message.email}
-        actions={<Link href="/admin/mesajlar" className={buttonVariants({ variant: "secondary" })}>Back to messages</Link>}
+        actions={<Link href="/admin/messages" className={buttonVariants({ variant: "secondary" })}>Back to messages</Link>}
       />
 
       <div className="mx-auto grid w-full max-w-[1100px] gap-5 xl:grid-cols-12">

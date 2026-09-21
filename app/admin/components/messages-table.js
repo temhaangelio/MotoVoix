@@ -71,7 +71,7 @@ export function MessagesTable({ messages }) {
                       <ActionMenu
                         label={`${item.email} actions`}
                         items={[
-                          { label: "View", href: `/admin/mesajlar/${item.id}`, icon: <Eye size={15} /> },
+                          { label: "View", href: `/admin/messages/${item.id}`, icon: <Eye size={15} /> },
                           ...(item.status === "new"
                             ? [{ label: "Mark as read", icon: <MailOpen size={15} />, onSelect: () => setStatus(item.id, "read") }]
                             : []),
@@ -116,7 +116,7 @@ export function MessageActions({ message }) {
       setError(result.message);
       return false;
     }
-    router.push("/admin/mesajlar");
+    router.push("/admin/messages");
     router.refresh();
     return true;
   }

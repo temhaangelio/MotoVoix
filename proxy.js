@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { SESSION_COOKIE, verifySessionToken } from "./lib/auth-session";
 
 function isPublicAdminPath(pathname) {
-  return pathname === "/admin/giris" || pathname.startsWith("/admin/giris/") || pathname.startsWith("/admin/api/");
+  return pathname === "/admin/login" || pathname.startsWith("/admin/login/") || pathname.startsWith("/admin/api/");
 }
 
 function nextWithPath(request) {
@@ -26,7 +26,7 @@ export async function proxy(request) {
   const session = await verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value);
   if (!session) {
     const url = request.nextUrl.clone();
-    url.pathname = "/admin/giris";
+    url.pathname = "/admin/login";
     url.search = "";
     const response = NextResponse.redirect(url);
     // Süresi dolmuş / bozuk çerezi temizle.

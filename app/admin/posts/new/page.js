@@ -4,7 +4,7 @@ import { PostForm } from "../../components/post-form";
 
 export default function NewPostPage() {
   return (
-    <AppShell active="/admin/yazilar">
+    <AppShell active="/admin/posts">
       <PageHeader title="New post" note="The record is saved to the MySQL database." />
       <PostForm />
     </AppShell>

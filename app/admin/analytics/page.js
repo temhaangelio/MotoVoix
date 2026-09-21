@@ -9,7 +9,7 @@ export default async function AnalyticsPage({ searchParams }) {
   const range = value === "7" ? 7 : 30;
   const analytics = await getAnalytics(range);
   return (
-    <AppShell active="/admin/istatistik">
+    <AppShell active="/admin/analytics">
       <PageHeader title="Analytics" />
       <AnalyticsDashboard analytics={analytics} range={range} />
     </AppShell>

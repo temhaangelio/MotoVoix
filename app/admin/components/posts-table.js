@@ -90,7 +90,7 @@ export function PostsTable({ posts }) {
                 {filtered.map((post) => (
                   <tr key={post.id} className="group hover:bg-[#f7f7f7]">
                     <Td className="align-top">
-                      <Link href={`/admin/yazilar/${post.id}/duzenle`} className="block text-base font-bold tracking-[-.022em] hover:underline">{post.title}</Link>
+                      <Link href={`/admin/posts/${post.id}/edit`} className="block text-base font-bold tracking-[-.022em] hover:underline">{post.title}</Link>
                       <p className="mt-2 line-clamp-2 text-sm text-[#777]">{post.excerpt || post.description}</p>
                     </Td>
                     <Td>{getCategoryLabel(post.category, language)}</Td>
@@ -105,10 +105,10 @@ export function PostsTable({ posts }) {
                           label={`${post.title} actions`}
                           items={[
                             ...(post.status === "published"
-                              ? [{ label: "View", href: `/haber/${post.slug}`, target: "_blank", icon: <ExternalLink size={15} /> }]
+                              ? [{ label: "View", href: `/news/${post.slug}`, target: "_blank", icon: <ExternalLink size={15} /> }]
                               : []),
-                            { label: "Edit", href: `/admin/yazilar/${post.id}/duzenle`, icon: <Pencil size={15} /> },
-                            { label: "Generate image", href: `/admin/yazilar/${post.id}/gorsel-uret`, icon: <ImagePlus size={15} /> },
+                            { label: "Edit", href: `/admin/posts/${post.id}/edit`, icon: <Pencil size={15} /> },
+                            { label: "Generate image", href: `/admin/posts/${post.id}/generate-image`, icon: <ImagePlus size={15} /> },
                             { label: language === "fr" ? "Supprimer" : "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => { setDeleteError(null); setPostToDelete(post); } },
                           ]}
                         />

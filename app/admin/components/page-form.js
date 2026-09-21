@@ -24,7 +24,7 @@ export function PageForm({ page }) {
         setMessage(result?.message || "Save failed.");
         return;
       }
-      router.push("/admin/sayfalar");
+      router.push("/admin/pages");
       router.refresh();
     } catch {
       setMessage("The server returned an unexpected response.");
@@ -56,7 +56,7 @@ export function PageForm({ page }) {
         </div>
         {message ? <p className="text-sm text-[#b42318]">{message}</p> : null}
         <div className="flex justify-end gap-2">
-          <Link href="/admin/sayfalar" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
+          <Link href="/admin/pages" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
           <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default async function MessagesPage() {
   ];
 
   return (
-    <AppShell active="/admin/mesajlar">
+    <AppShell active="/admin/messages">
       <PageHeader title="Messages" note={`${stats.unread} unread of ${stats.total}`} />
 
       <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-3">

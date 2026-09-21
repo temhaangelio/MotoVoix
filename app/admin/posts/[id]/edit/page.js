@@ -9,7 +9,7 @@ export default async function EditPostPage({ params }) {
   const post = await getPostById(id);
   if (!post) notFound();
   return (
-    <AppShell active="/admin/yazilar">
+    <AppShell active="/admin/posts">
       <PageHeader title="Edit post" note={post.title} />
       <PostForm post={post} />
     </AppShell>

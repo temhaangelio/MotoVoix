@@ -7,7 +7,7 @@ export default async function AdsPage() {
   const ads = await getAds();
   const active = ads.filter((ad) => ad.active).length;
   return (
-    <AppShell active="/admin/reklamlar">
+    <AppShell active="/admin/ads">
       <PageHeader title="Ads" note={`${ads.length} ads · ${active} published`} />
       <AdsManager ads={ads} />
     </AppShell>

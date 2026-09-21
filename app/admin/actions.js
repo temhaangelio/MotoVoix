@@ -38,7 +38,7 @@ function revalidateSite() {
   updateTag(PAGES_TAG);
   revalidatePath("/admin", "layout");
   revalidatePath("/news");
-  revalidatePath("/haber", "layout");
+  revalidatePath("/news", "layout");
   revalidatePath("/newsletter");
   revalidatePath("/sitemap.xml");
 }
@@ -240,7 +240,7 @@ export async function subscribeAction(formData) {
   const email = String(formData.get("email") || "").trim();
   if (!email.includes("@")) return { success: false, message: "Enter a valid email address." };
   const result = await addSubscriber(email, "Web sitesi");
-  revalidatePath("/admin/e-bulten");
+  revalidatePath("/admin/newsletter");
   return { success: result.ok, message: result.message };
 }
 
@@ -262,7 +262,7 @@ export async function saveUserAction(formData) {
     // Düzenlemede boş parola alanı "değiştirme" demek.
     const result = await updateUser(id, payload);
     if (!result.ok) return { success: false, message: result.message };
-    revalidatePath("/admin/kullanicilar");
+    revalidatePath("/admin/users");
     return { success: true, message: id === current.id ? "Your account has been updated." : "User updated." };
   }
 
@@ -271,7 +271,7 @@ export async function saveUserAction(formData) {
   const result = await createUser(payload);
   if (!result.ok) return { success: false, message: result.message };
 
-  revalidatePath("/admin/kullanicilar");
+  revalidatePath("/admin/users");
   return { success: true, message: "User created." };
 }
 
@@ -286,7 +286,7 @@ export async function deleteUserAction(id) {
   const result = await deleteUser(id);
   if (!result.ok) return { success: false, message: result.message };
 
-  revalidatePath("/admin/kullanicilar");
+  revalidatePath("/admin/users");
   return { success: true, message: "User deleted." };
 }
 
@@ -341,7 +341,7 @@ export async function saveSubscriberAction(formData) {
   const result = id ? await updateSubscriber(id, payload) : await createSubscriber(payload);
   if (!result.ok) return { success: false, message: result.message };
 
-  revalidatePath("/admin/e-bulten");
+  revalidatePath("/admin/newsletter");
   return { success: true, message: id ? "Subscriber updated." : "Subscriber added." };
 }
 
@@ -352,7 +352,7 @@ export async function deleteSubscriberAction(id) {
   const ok = await deleteSubscriber(id);
   if (!ok) return { success: false, message: "Subscriber could not be deleted." };
 
-  revalidatePath("/admin/e-bulten");
+  revalidatePath("/admin/newsletter");
   return { success: true, message: "Subscriber deleted." };
 }
 
@@ -372,7 +372,7 @@ export async function sendContactMessageAction(formData) {
     ip,
   });
 
-  if (result.ok) revalidatePath("/admin/mesajlar");
+  if (result.ok) revalidatePath("/admin/messages");
   return { success: result.ok, message: result.message };
 }
 
@@ -383,7 +383,7 @@ export async function setMessageStatusAction(id, status) {
   const updated = await updateMessageStatus(id, status);
   if (!updated) return { success: false, message: "Message not found." };
 
-  revalidatePath("/admin/mesajlar");
+  revalidatePath("/admin/messages");
   return { success: true, message: "Message updated." };
 }
 
@@ -394,7 +394,7 @@ export async function deleteMessageAction(id) {
   const ok = await deleteMessage(id);
   if (!ok) return { success: false, message: "Message could not be deleted." };
 
-  revalidatePath("/admin/mesajlar");
+  revalidatePath("/admin/messages");
   return { success: true, message: "Message deleted." };
 }
 

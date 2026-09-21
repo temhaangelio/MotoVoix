@@ -24,9 +24,9 @@ export default async function NewsletterAdminPage() {
   ];
 
   return (
-    <AppShell active="/admin/e-bulten">
+    <AppShell active="/admin/newsletter">
       <div className="mx-auto w-full max-w-[1600px]">
-        <PageHeader title="Newsletter" note={`${stats.active.toLocaleString("en-US")} active subscribers · ${stats.sent} issues sent`} actions={<Link href="/admin/e-bulten/yeni" className={buttonVariants()}>New newsletter <ArrowRight className="ml-3 size-4" /></Link>} />
+        <PageHeader title="Newsletter" note={`${stats.active.toLocaleString("en-US")} active subscribers · ${stats.sent} issues sent`} actions={<Link href="/admin/newsletter/new" className={buttonVariants()}>New newsletter <ArrowRight className="ml-3 size-4" /></Link>} />
         <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {cards.map(([label, value, note]) => (
             <Card key={label} className="flex h-[132px] flex-col justify-between">

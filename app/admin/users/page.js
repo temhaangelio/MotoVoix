@@ -9,11 +9,11 @@ export default async function UsersAdminPage() {
   const [users, current] = await Promise.all([getUsers(), getCurrentUser()]);
 
   return (
-    <AppShell active="/admin/kullanicilar">
+    <AppShell active="/admin/users">
       <PageHeader
         title="Users"
         note={`${users.length} panel ${users.length === 1 ? "account" : "accounts"}`}
-        actions={<Link href="/admin/kullanicilar/yeni" className={buttonVariants()}>New user</Link>}
+        actions={<Link href="/admin/users/new" className={buttonVariants()}>New user</Link>}
       />
       <UsersTable users={users} currentUserId={current?.id} />
     </AppShell>

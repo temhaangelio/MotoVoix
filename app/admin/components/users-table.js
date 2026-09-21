@@ -60,7 +60,7 @@ export function UsersTable({ users, currentUserId }) {
                         <ActionMenu
                           label={`${user.email} actions`}
                           items={[
-                            { label: "Edit", href: `/admin/kullanicilar/${user.id}/duzenle`, icon: <Pencil size={15} /> },
+                            { label: "Edit", href: `/admin/users/${user.id}/edit`, icon: <Pencil size={15} /> },
                             ...(isCurrent
                               ? []
                               : [{ label: "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => setUserToDelete(user) }]),

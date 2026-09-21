@@ -4,10 +4,10 @@ import { MobileNavigation } from "./mobile-navigation";
 import { Sidebar } from "./sidebar";
 
 const routeModules = {
-  "/admin/yazilar": "posts",
-  "/admin/e-bulten": "newsletter",
-  "/admin/reklamlar": "ads",
-  "/admin/istatistik": "analytics",
+  "/admin/posts": "posts",
+  "/admin/newsletter": "newsletter",
+  "/admin/ads": "ads",
+  "/admin/analytics": "analytics",
 };
 
 export async function AppShell({ active, children }) {

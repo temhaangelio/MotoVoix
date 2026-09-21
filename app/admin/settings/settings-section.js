@@ -6,7 +6,7 @@ import { SettingsForm } from "../components/settings-form";
 export async function SettingsSection({ section, title, note }) {
   const settings = await getSettings();
   return (
-    <AppShell active="/admin/ayarlar">
+    <AppShell active="/admin/settings">
       <div className="w-full">
         <PageHeader title={title} note={note} />
         <SettingsForm initialValues={settings} section={section} />

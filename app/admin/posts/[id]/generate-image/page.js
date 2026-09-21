@@ -13,13 +13,13 @@ export default async function GeneratePostImagePage({ params }) {
   if (!post) notFound();
 
   return (
-    <AppShell active="/admin/yazilar">
+    <AppShell active="/admin/posts">
       <div className="mx-auto w-full max-w-[1180px]">
         <PageHeader
           title="Generate image"
           note="Turn the post into a shareable Instagram card"
           actions={(
-            <Link href="/admin/yazilar" className={buttonVariants({ variant: "outline" })}>
+            <Link href="/admin/posts" className={buttonVariants({ variant: "outline" })}>
               <ArrowLeft className="mr-2 size-4" />Back to posts
             </Link>
           )}

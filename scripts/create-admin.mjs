@@ -43,7 +43,7 @@ try {
   });
 
   console.log(existing ? "Parola güncellendi:" : "Admin hesabı oluşturuldu:", user.email, `(${user.role})`);
-  console.log("Giriş: /admin/giris");
+  console.log("Giriş: /admin/login");
 } catch (error) {
   console.error("İşlem başarısız:", error.message);
   process.exitCode = 1;

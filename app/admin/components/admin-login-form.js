@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-export function AdminLoginForm() {
-  const [message, setMessage] = useState(null);
+export function AdminLoginForm({ initialMessage = null }) {
+  const [message, setMessage] = useState(initialMessage);
   const [pending, setPending] = useState(false);
 
   async function onSubmit(event) {
@@ -30,7 +30,7 @@ export function AdminLoginForm() {
       }
 
       // router.push burada kullanılmıyor: giriş öncesi /admin için yapılan
-      // prefetch, proxy tarafından /admin/giris'e yönlendirilmiş olarak
+      // prefetch, proxy tarafından /admin/login'e yönlendirilmiş olarak
       // istemci önbelleğinde kalıyor ve yeni çereze rağmen tekrar giriş
       // sayfasına dönülüyordu. Tam sayfa geçişi önbelleği atlar ve yeni
       // oturum çereziyle temiz bir istek gönderir.
@@ -42,7 +42,9 @@ export function AdminLoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    // method/action, JS yüklenmeden gönderimde tarayıcının varsayılan GET ile
+    // şifreyi URL'e yazmasını engeller.
+    <form method="post" action="/admin/api/login" onSubmit={onSubmit} className="space-y-4">
       <Input name="email" type="email" placeholder="Email" autoComplete="username" required />
       <Input name="password" type="password" placeholder="Password" autoComplete="current-password" required />
       {message ? <p className="text-sm font-medium text-[#b42318]">{message}</p> : null}

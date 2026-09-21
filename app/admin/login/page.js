@@ -4,7 +4,16 @@ import { BrandMark } from "../../components/brand-mark";
 
 export const metadata = { title: "Sign in", robots: { index: false, follow: false } };
 
-export default function AdminLoginPage() {
+const ERROR_MESSAGES = {
+  missing: "Email and password are required.",
+  invalid: "Incorrect email or password.",
+  server: "Session secret is not configured on the server.",
+};
+
+export default async function AdminLoginPage({ searchParams }) {
+  const query = await searchParams;
+  const initialMessage = ERROR_MESSAGES[query?.error] || null;
+
   return (
     <main className="grid min-h-screen place-items-center px-4 py-10">
       <section className="w-full max-w-[460px] rounded-[28px] bg-white p-7 shadow-sm sm:p-10">
@@ -17,7 +26,7 @@ export default function AdminLoginPage() {
         </Link>
         <h1 className="page-title !text-[32px]">Admin sign in</h1>
         <p className="mb-8 mt-3 text-[15px] leading-relaxed text-[#a1a1a1]">Sign in with your admin account.</p>
-        <AdminLoginForm />
+        <AdminLoginForm initialMessage={initialMessage} />
       </section>
     </main>
   );

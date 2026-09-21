@@ -9,7 +9,7 @@ export default async function EditPageAdmin({ params }) {
   const page = await getPageById(id);
   if (!page) notFound();
   return (
-    <AppShell active="/admin/sayfalar">
+    <AppShell active="/admin/pages">
       <PageHeader title="Edit page" note={page.title} />
       <PageForm page={page} />
     </AppShell>

@@ -48,7 +48,7 @@ export default async function AdminDashboardPage() {
         actions={
           <div className="flex gap-2">
             <div className="hidden h-11 items-center rounded-full bg-white px-5 text-sm font-medium text-[#a1a1a1] md:flex">MySQL · live data</div>
-            <Link href="/admin/yazilar/yeni" className={buttonVariants()}>New post <ArrowRight className="ml-3 size-4" /></Link>
+            <Link href="/admin/posts/new" className={buttonVariants()}>New post <ArrowRight className="ml-3 size-4" /></Link>
           </div>
         }
       />
@@ -73,7 +73,7 @@ export default async function AdminDashboardPage() {
           </div>
           <div className="mt-6 space-y-4">
             {postStats.recent.map((post) => (
-              <Link href={`/admin/yazilar/${post.id}/duzenle`} key={post.id} className="flex gap-3">
+              <Link href={`/admin/posts/${post.id}/edit`} key={post.id} className="flex gap-3">
                 <span className={`w-[3px] rounded-full ${post.status === "published" ? "bg-black" : "bg-[#dcdcdc]"}`} />
                 <div>
                   <strong className="block text-base tracking-[-.022em]">{post.title}</strong>

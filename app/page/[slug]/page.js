@@ -6,8 +6,8 @@ import { absoluteUrl } from "../../../lib/site";
 import SiteHeader from "../../components/site-header";
 import { MaintenanceNotice } from "../../components/maintenance-notice";
 
-// Panelden eklenen her yayındaki sayfa /sayfa/<slug> adresinde açılır.
-// about / contact / privacy / terms kendi rotalarını kullanır; /sayfa/about
+// Panelden eklenen her yayındaki sayfa /page/<slug> adresinde açılır.
+// about / contact / privacy / terms kendi rotalarını kullanır; /page/about
 // gibi adresler next.config.mjs'teki 308 yönlendirmesiyle oraya gider.
 
 export const revalidate = 300;
@@ -30,13 +30,13 @@ export async function generateMetadata({ params }) {
   return {
     title: page.title,
     description: page.excerpt,
-    alternates: { canonical: absoluteUrl(`/sayfa/${page.slug}`) },
+    alternates: { canonical: absoluteUrl(`/page/${page.slug}`) },
   };
 }
 
 export default async function CustomPage({ params }) {
   const { slug } = await params;
-  const [page, settings] = await Promise.all([resolvePage(slug), preparePublicPage(`/sayfa/${slug}`)]);
+  const [page, settings] = await Promise.all([resolvePage(slug), preparePublicPage(`/page/${slug}`)]);
   if (settings.maintenanceMode) return <MaintenanceNotice settings={settings} />;
   if (!page) notFound();
 

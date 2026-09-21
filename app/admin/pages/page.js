@@ -8,8 +8,8 @@ import { buttonVariants } from "../components/ui/button";
 export default async function PagesAdminPage() {
   const pages = await getPages();
   return (
-    <AppShell active="/admin/sayfalar">
-      <PageHeader title="Pages" note={`${pages.length} custom pages`} actions={<Link href="/admin/sayfalar/yeni" className={buttonVariants()}>New page</Link>} />
+    <AppShell active="/admin/pages">
+      <PageHeader title="Pages" note={`${pages.length} custom pages`} actions={<Link href="/admin/pages/new" className={buttonVariants()}>New page</Link>} />
       <PagesTable pages={pages} />
     </AppShell>
   );

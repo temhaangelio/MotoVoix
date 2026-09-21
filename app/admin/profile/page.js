@@ -6,10 +6,10 @@ import { UserForm } from "../components/user-form";
 
 export default async function ProfilePage() {
   const user = await getCurrentUser();
-  if (!user) redirect("/admin/giris");
+  if (!user) redirect("/admin/login");
 
   return (
-    <AppShell active="/admin/profil">
+    <AppShell active="/admin/profile">
       <PageHeader title="Profile" note="Your own panel account. Leave the password blank to keep it unchanged." />
       <UserForm user={user} redirectTo="/admin" />
     </AppShell>

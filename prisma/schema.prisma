@@ -250,7 +250,7 @@ enum ContactStatus {
   archived
 }
 
-// /contact formundan gelen mesajlar. Panelde /admin/mesajlar altinda
+// /contact formundan gelen mesajlar. Panelde /admin/messages altinda
 // goruntulenip silinebiliyor.
 model ContactMessage {
   id         String        @id @default(cuid()) @db.VarChar(40)

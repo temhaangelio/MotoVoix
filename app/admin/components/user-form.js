@@ -9,7 +9,7 @@ import { FormField } from "./ui/form-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 
-export function UserForm({ user, redirectTo = "/admin/kullanicilar" }) {
+export function UserForm({ user, redirectTo = "/admin/users" }) {
   const router = useRouter();
   const [message, setMessage] = useState(null);
   const [pending, setPending] = useState(false);

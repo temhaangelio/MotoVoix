@@ -84,7 +84,7 @@ export default function NewsDetailContent({ post, relatedPosts }) {
           <div className="bg-surface-container-low p-5 sm:p-8 rounded-[18px] border border-outline-variant/20">
             <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-5">{fr ? "ARTICLES ASSOCIÉS" : "RELATED STORIES"}</p>
             <div className="space-y-6">
-              {relatedPosts.map((item) => <Link className="block group" href={`/haber/${item.slug}`} key={item.slug}><h3 className="font-headline text-2xl group-hover:text-primary transition-colors">{fr ? item.titleFr : item.titleEn}</h3><p className="text-sm text-zinc-400 mt-1">{getCategoryLabel(item.category, language)}</p></Link>)}
+              {relatedPosts.map((item) => <Link className="block group" href={`/news/${item.slug}`} key={item.slug}><h3 className="font-headline text-2xl group-hover:text-primary transition-colors">{fr ? item.titleFr : item.titleEn}</h3><p className="text-sm text-zinc-400 mt-1">{getCategoryLabel(item.category, language)}</p></Link>)}
             </div>
           </div>
           <Link className="inline-block font-label text-xs uppercase tracking-widest border-b border-primary pb-1" href="/news">{fr ? "RETOUR À L’ACCUEIL" : "BACK TO HOME"}</Link>

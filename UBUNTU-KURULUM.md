@@ -152,5 +152,5 @@ PM2'yi eskiden `pm2 start npm --name motovoix -- start` ile başlattıysan bir k
 pm2 delete motovoix && pm2 start ecosystem.config.cjs && pm2 save
 ```
 
-Admin: `/admin/giris`  
+Admin: `/admin/login`  
 Log: `pm2 logs motovoix`, güncelleme logları `logs/update-*.log`

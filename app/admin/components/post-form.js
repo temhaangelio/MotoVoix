@@ -38,7 +38,7 @@ export function PostForm({ post }) {
         setMessage(result?.message || "Save failed.");
         return;
       }
-      router.push("/admin/yazilar");
+      router.push("/admin/posts");
       router.refresh();
     } catch {
       setMessage("The server returned an unexpected response. Refresh and try again.");
@@ -81,7 +81,7 @@ export function PostForm({ post }) {
           <FormField label="Source URL" htmlFor="sourceUrl"><Input id="sourceUrl" name="sourceUrl" defaultValue={post?.source_url || ""} /></FormField>
           {message ? <p className="rounded-2xl bg-[#fff1f0] p-3 text-sm text-[#b42318]">{message}</p> : null}
           <div className="flex gap-2">
-            <Link href="/admin/yazilar" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
+            <Link href="/admin/posts" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
             <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
           </div>
         </div>

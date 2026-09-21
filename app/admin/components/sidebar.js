@@ -8,14 +8,14 @@ import { LogoutButton } from "./logout-button";
 
 const items = [
   [{ en: "Dashboard", fr: "Tableau de bord" }, "/admin", null],
-  [{ en: "Posts", fr: "Articles" }, "/admin/yazilar", "posts"],
-  [{ en: "Newsletter", fr: "Infolettre" }, "/admin/e-bulten", "newsletter"],
-  [{ en: "Ads", fr: "Publicités" }, "/admin/reklamlar", "ads"],
-  [{ en: "Pages", fr: "Pages" }, "/admin/sayfalar", null],
-  [{ en: "Analytics", fr: "Statistiques" }, "/admin/istatistik", "analytics"],
-  [{ en: "Messages", fr: "Messages" }, "/admin/mesajlar", null],
-  [{ en: "Users", fr: "Utilisateurs" }, "/admin/kullanicilar", null],
-  [{ en: "Settings", fr: "Paramètres" }, "/admin/ayarlar", null],
+  [{ en: "Posts", fr: "Articles" }, "/admin/posts", "posts"],
+  [{ en: "Newsletter", fr: "Infolettre" }, "/admin/newsletter", "newsletter"],
+  [{ en: "Ads", fr: "Publicités" }, "/admin/ads", "ads"],
+  [{ en: "Pages", fr: "Pages" }, "/admin/pages", null],
+  [{ en: "Analytics", fr: "Statistiques" }, "/admin/analytics", "analytics"],
+  [{ en: "Messages", fr: "Messages" }, "/admin/messages", null],
+  [{ en: "Users", fr: "Utilisateurs" }, "/admin/users", null],
+  [{ en: "Settings", fr: "Paramètres" }, "/admin/settings", null],
 ];
 
 function isSelected(active, href) {

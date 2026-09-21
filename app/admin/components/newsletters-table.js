@@ -72,7 +72,7 @@ export function NewslettersTable({ newsletters }) {
                     <ActionMenu
                       label={`Issue ${newsletter.issue_number} actions`}
                       items={[
-                        { label: "Edit", href: `/admin/e-bulten/${newsletter.id}/duzenle`, icon: <Pencil size={15} /> },
+                        { label: "Edit", href: `/admin/newsletter/${newsletter.id}/edit`, icon: <Pencil size={15} /> },
                         { label: "Delete", destructive: true, icon: <Trash2 size={15} />, onSelect: () => setToDelete(newsletter) },
                       ]}
                     />

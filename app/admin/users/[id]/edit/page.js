@@ -11,7 +11,7 @@ export default async function EditUserPage({ params }) {
   if (!user) notFound();
 
   return (
-    <AppShell active="/admin/kullanicilar">
+    <AppShell active="/admin/users">
       <PageHeader title="Edit user" note={user.email} />
       <UserForm user={user} />
     </AppShell>

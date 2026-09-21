@@ -15,7 +15,7 @@ export function LogoutButton({ className }) {
       await logoutAdminAction();
       // Girişteki gibi tam sayfa geçişi: istemci önbelleğinde kalan panel
       // sayfaları oturum kapandıktan sonra geri tuşuyla gösterilmesin.
-      window.location.replace("/admin/giris");
+      window.location.replace("/admin/login");
     } catch {
       // Çerez silinemediyse giriş sayfasına gitmek yanıltıcı olur; burada kal.
       setPending(false);

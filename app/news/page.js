@@ -53,7 +53,7 @@ export default async function NewsPage() {
       itemListElement: posts.slice(0, 20).map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: absoluteUrl(`/haber/${post.slug}`),
+        url: absoluteUrl(`/news/${post.slug}`),
         name: post.titleEn,
       })),
     },

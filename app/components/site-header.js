@@ -10,7 +10,7 @@ import { useLanguage } from "./language-provider";
 import { Wordmark } from "./wordmark";
 
 const NAV_ITEMS = [
-  { href: "/news", en: "News", fr: "Actualités", match: (pathname) => pathname === "/news" || pathname.startsWith("/haber/") },
+  { href: "/news", en: "News", fr: "Actualités", match: (pathname) => pathname === "/news" || pathname.startsWith("/news/") },
   { href: "/newsletter", en: "Newsletter", fr: "Infolettre", match: (pathname) => pathname === "/newsletter" },
   { href: "/about", en: "About", fr: "À propos", match: (pathname) => pathname === "/about" },
   { href: "/contact", en: "Contact", fr: "Contact", match: (pathname) => pathname === "/contact" },

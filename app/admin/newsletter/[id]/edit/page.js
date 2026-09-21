@@ -11,7 +11,7 @@ export default async function EditNewsletterPage({ params }) {
   if (!newsletter) notFound();
 
   return (
-    <AppShell active="/admin/e-bulten">
+    <AppShell active="/admin/newsletter">
       <PageHeader title="Edit newsletter" note={newsletter.subject} />
       <NewsletterForm newsletter={newsletter} />
     </AppShell>

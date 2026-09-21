@@ -34,7 +34,7 @@ export default async function sitemap() {
   }));
 
   const postEntries = posts.map((post) => ({
-    url: absoluteUrl(`/haber/${post.slug}`),
+    url: absoluteUrl(`/news/${post.slug}`),
     lastModified: post.published_at ?? post.date ?? post.created_at,
     changeFrequency: "weekly",
     priority: 0.8,

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
     return { title: "Story not found", robots: { index: false, follow: false } };
   }
 
-  const url = absoluteUrl(`/haber/${post.slug}`);
+  const url = absoluteUrl(`/news/${post.slug}`);
   const images = post.image ? [{ url: absoluteUrl(post.image), alt: post.titleEn }] : undefined;
   const published = toIso(post.published_at ?? post.date);
 
@@ -64,7 +64,7 @@ export default async function NewsDetailPage({ params }) {
   const post = await getNewsBySlug(slug);
 
   // Okunma sayacı yalnızca gerçek ziyaretçide, yanıt gönderildikten sonra artar.
-  const settings = await preparePublicPage(`/haber/${slug}`, {
+  const settings = await preparePublicPage(`/news/${slug}`, {
     onVisit: post ? () => incrementPostReads(post.id) : undefined,
   });
   if (settings.maintenanceMode) return <MaintenanceNotice settings={settings} />;
@@ -74,7 +74,7 @@ export default async function NewsDetailPage({ params }) {
   }
 
   const relatedPosts = await getRelatedNews(post.slug, 3);
-  const url = absoluteUrl(`/haber/${post.slug}`);
+  const url = absoluteUrl(`/news/${post.slug}`);
   const published = toIso(post.published_at ?? post.date);
 
   const articleJsonLd = {

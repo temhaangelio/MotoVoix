@@ -93,7 +93,7 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-10 lg:gap-12">
         {featured && (
           <article className="md:col-span-8 group rounded-[14px]">
-            <Link href={`/haber/${featured.slug}`}>
+            <Link href={`/news/${featured.slug}`}>
               <div className="relative aspect-[4/3] sm:aspect-[21/9] overflow-hidden mb-5 sm:mb-6 bg-surface-container-low border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
                 {featured.image ? (
                   <Image
@@ -114,10 +114,10 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
             </Link>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
               <div className="md:col-span-2">
-                <Link href={`/haber/${featured.slug}`}>
+                <Link href={`/news/${featured.slug}`}>
                   <h2 className="w-full font-headline text-3xl leading-tight mb-3 sm:text-4xl group-hover:text-primary transition-colors duration-300">{featured.title}</h2>
                 </Link>
-                <Link href={`/haber/${featured.slug}`}>
+                <Link href={`/news/${featured.slug}`}>
                   <p className="w-full font-body text-sm leading-7 text-on-surface-variant mb-5 sm:mb-6 sm:text-base">{featured.description}</p>
                 </Link>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
@@ -128,7 +128,7 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
                 </div>
               </div>
               <div className="flex flex-col justify-between md:items-end md:pl-8">
-                <Link className="inline-flex min-h-11 items-center font-label text-xs uppercase tracking-widest border-b-2 border-primary pb-1 group-hover:pr-4 transition-all duration-300" href={`/haber/${featured.slug}`}>{language === "fr" ? "LIRE L’ARTICLE" : "READ STORY"}</Link>
+                <Link className="inline-flex min-h-11 items-center font-label text-xs uppercase tracking-widest border-b-2 border-primary pb-1 group-hover:pr-4 transition-all duration-300" href={`/news/${featured.slug}`}>{language === "fr" ? "LIRE L’ARTICLE" : "READ STORY"}</Link>
               </div>
             </div>
           </article>
@@ -137,7 +137,7 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
         {side && (
           <article className="md:col-span-4 group bg-surface-container-low p-5 sm:p-8 flex flex-col justify-between rounded-[14px] overflow-hidden border border-outline-variant/20">
             <div>
-              <Link href={`/haber/${side.slug}`}>
+              <Link href={`/news/${side.slug}`}>
                 <div className="relative aspect-video bg-surface-container-high mb-6 overflow-hidden border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
                   {side.image ? (
                     <Image
@@ -153,10 +153,10 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
                 </div>
               </Link>
               <span className="font-label text-[10px] uppercase tracking-widest text-primary mb-2 block">{getCategoryLabel(side.category, language)}</span>
-              <Link href={`/haber/${side.slug}`}>
+              <Link href={`/news/${side.slug}`}>
                 <h3 className="font-headline text-2xl mb-3 leading-tight">{side.title}</h3>
               </Link>
-              <Link href={`/haber/${side.slug}`}>
+              <Link href={`/news/${side.slug}`}>
                 <p className="font-body text-sm leading-7 text-on-surface-variant">{side.description}</p>
               </Link>
             </div>
@@ -165,7 +165,7 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
 
         {gridPosts.map((post) => (
           <article className="md:col-span-4 group bg-surface-container-low p-5 sm:p-6 rounded-[14px] border border-outline-variant/20" key={post.slug}>
-            <Link href={`/haber/${post.slug}`}>
+            <Link href={`/news/${post.slug}`}>
               <div className="relative aspect-video bg-surface-container-high mb-6 overflow-hidden border border-outline-variant/20 flex items-center justify-center rounded-[14px]">
                 {post.image ? (
                     <Image
@@ -182,10 +182,10 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
             </Link>
             <div className="space-y-4">
               <span className="font-label text-[10px] uppercase tracking-widest text-primary">{getCategoryLabel(post.category, language)}</span>
-              <Link href={`/haber/${post.slug}`}>
+              <Link href={`/news/${post.slug}`}>
                 <h3 className="font-headline text-[1.75rem] leading-tight sm:text-3xl">{post.title}</h3>
               </Link>
-              <Link href={`/haber/${post.slug}`}>
+              <Link href={`/news/${post.slug}`}>
                 <p className="font-body text-sm leading-7 text-on-surface-variant">{post.description}</p>
               </Link>
             </div>

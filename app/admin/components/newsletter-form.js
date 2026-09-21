@@ -37,7 +37,7 @@ export function NewsletterForm({ newsletter }) {
         setMessage(result?.message || "Save failed.");
         return;
       }
-      router.push("/admin/e-bulten");
+      router.push("/admin/newsletter");
       router.refresh();
     } catch {
       setMessage("The server returned an unexpected response.");
@@ -72,7 +72,7 @@ export function NewsletterForm({ newsletter }) {
         </div>
         {message ? <p className="text-sm text-[#b42318]">{message}</p> : null}
         <div className="flex justify-end gap-2">
-          <Link href="/admin/e-bulten" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
+          <Link href="/admin/newsletter" className={buttonVariants({ variant: "secondary" })}>Cancel</Link>
           <Button type="submit" disabled={pending}>{pending ? "Saving…" : "Save"}</Button>
         </div>
       </div>
