@@ -73,6 +73,9 @@ const TURKISH_COPY = {
   "Günlük ortalama": ["Daily average", "Moyenne quotidienne"], "Henüz kayıt yok": ["No records yet", "Aucun enregistrement"],
   "Henüz sayfa yok": ["No pages yet", "Aucune page"], "Kalın": ["Bold", "Gras"], "İtalik": ["Italic", "Italique"],
   "Kayıt başarısız.": ["Save failed.", "Échec de l’enregistrement."],
+  "Alanlardan biri çok uzun.": ["One of the fields is too long.", "L’un des champs est trop long."],
+  "Bu slug ile bir yazı zaten var. Farklı bir slug seçin.": ["A post with this slug already exists. Choose a different slug.", "Un article avec ce slug existe déjà. Choisissez-en un autre."],
+  "Yazı kaydedilemedi. Lütfen tekrar deneyin.": ["The post could not be saved. Please try again.", "Impossible d’enregistrer l’article. Veuillez réessayer."],
   "Kayıt MySQL veritabanına yazılır.": ["The record is saved to the MySQL database.", "L’enregistrement est sauvegardé dans la base MySQL."],
   "Keşfet": ["Discover", "Découvrir"], "Menüyü aç": ["Open menu", "Ouvrir le menu"], "Menüyü kapat": ["Close menu", "Fermer le menu"],
   "Ana menü": ["Main menu", "Menu principal"], "Metin biçimlendirme": ["Text formatting", "Mise en forme du texte"],
@@ -201,6 +204,7 @@ function translate(value, language) {
     .replace(/(\d+) sends/g, language === "fr" ? "$1 envois" : "$1 sends")
     .replace(/(\d+) hours ago/g, language === "fr" ? "il y a $1 h" : "$1 hours ago")
     .replace(/(\d+) days ago/g, language === "fr" ? "il y a $1 jours" : "$1 days ago")
+    .replace(/^(.+) is too long \(max (\d+) characters\)\.$/, language === "fr" ? "Le champ « $1 » est trop long (max $2 caractères)." : "$1 is too long (max $2 characters).")
     .replace(/(\d+) characters/g, language === "fr" ? "$1 caractères" : "$1 characters")
     .replace(/(\d+) images/g, language === "fr" ? "$1 images" : "$1 images")
     .replace(/(\d+) readers/g, language === "fr" ? "$1 lecteurs" : "$1 readers")

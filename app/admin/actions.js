@@ -27,6 +27,7 @@ import { PAGES_TAG } from "../../lib/pages";
 import { createMessage, deleteMessage, updateMessageStatus } from "../../lib/messages";
 import { SESSION_COOKIE } from "../../lib/auth-session";
 import { listNewsImages, saveNewsImage } from "../../lib/news-images";
+import { LIMITS, checkLengths } from "../../lib/field-limits";
 
 function revalidateSite() {
   // Ziyaretçi okumaları unstable_cache üzerinden geldiği için yol
@@ -74,6 +75,8 @@ export async function listNewsImagesAction() {
 export async function savePostAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.post);
+  if (tooLong) return tooLong;
 
   const id = String(formData.get("id") || "");
   const payload = {
@@ -101,15 +104,32 @@ export async function savePostAction(formData) {
     return { success: false, message: "English and French titles and article content are required." };
   }
 
-  if (id) {
-    const updated = await updatePost(id, payload);
-    if (!updated) return { success: false, message: "Post not found." };
-  } else {
-    await createPost(payload);
+  try {
+    if (id) {
+      const updated = await updatePost(id, payload);
+      if (!updated) return { success: false, message: "Post not found." };
+    } else {
+      await createPost(payload);
+    }
+  } catch (err) {
+    return postSaveError(err);
   }
 
   revalidateSite();
   return { success: true };
+}
+
+// Veritabanı hataları istemciye fırlatılırsa kullanıcı yalnızca "beklenmeyen
+// yanıt" görüyor; en sık karşılaşılanları anlaşılır mesaja çeviriyoruz.
+function postSaveError(err) {
+  console.error(err);
+  if (err?.code === "P2000") {
+    return { success: false, message: "One of the fields is too long." };
+  }
+  if (err?.code === "P2002") {
+    return { success: false, message: "A post with this slug already exists. Choose a different slug." };
+  }
+  return { success: false, message: "The post could not be saved. Please try again." };
 }
 
 export async function deletePostAction(id) {
@@ -125,6 +145,8 @@ export async function deletePostAction(id) {
 export async function savePageAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.page);
+  if (tooLong) return tooLong;
 
   const id = String(formData.get("id") || "");
   const payload = {
@@ -160,6 +182,8 @@ export async function deletePageAction(id) {
 export async function createAdAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.ad);
+  if (tooLong) return tooLong;
 
   const title = String(formData.get("title") || "").trim();
   const description = String(formData.get("description") || "").trim();
@@ -201,6 +225,8 @@ export async function deleteAdAction(id) {
 export async function saveNewsletterAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.newsletter);
+  if (tooLong) return tooLong;
 
   const subject = String(formData.get("subject") || "").trim();
   if (!subject) return { success: false, message: "Subject is required." };
@@ -218,6 +244,8 @@ export async function saveNewsletterAction(formData) {
 export async function saveSettingsAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.settings);
+  if (tooLong) return tooLong;
 
   const patch = {};
   const strings = ["siteName", "domain", "description", "descriptionEn", "language", "feedLayout", "contactEmail", "newsletterTitle", "newsletterDescription", "adminName", "adminEmail"];
@@ -237,6 +265,8 @@ export async function saveSettingsAction(formData) {
 }
 
 export async function subscribeAction(formData) {
+  const tooLong = checkLengths(formData, { email: LIMITS.subscriber.email });
+  if (tooLong) return tooLong;
   const email = String(formData.get("email") || "").trim();
   if (!email.includes("@")) return { success: false, message: "Enter a valid email address." };
   const result = await addSubscriber(email, "Web sitesi");
@@ -247,6 +277,8 @@ export async function subscribeAction(formData) {
 export async function saveUserAction(formData) {
   const { user: current, error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.user);
+  if (tooLong) return tooLong;
 
   const id = String(formData.get("id") || "");
   const payload = {
@@ -295,6 +327,8 @@ export async function deleteUserAction(id) {
 export async function updateNewsletterAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.newsletter);
+  if (tooLong) return tooLong;
 
   const id = String(formData.get("id") || "");
   if (!id) return { success: false, message: "Newsletter not found." };
@@ -329,6 +363,8 @@ export async function deleteNewsletterAction(id) {
 export async function saveSubscriberAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.subscriber);
+  if (tooLong) return tooLong;
 
   const id = String(formData.get("id") || "");
   const payload = {
@@ -360,6 +396,8 @@ export async function deleteSubscriberAction(id) {
 
 // Ziyaretçiye açık: /contact formu buraya gönderiyor.
 export async function sendContactMessageAction(formData) {
+  const tooLong = checkLengths(formData, { email: LIMITS.contact.email, name: LIMITS.contact.name });
+  if (tooLong) return tooLong;
   const { headers } = await import("next/headers");
   const list = await headers();
   const ip = (list.get("x-forwarded-for") || "").split(",")[0].trim() || list.get("x-real-ip") || "";
@@ -403,6 +441,8 @@ export async function deleteMessageAction(id) {
 export async function updateAdAction(formData) {
   const { error } = await requireAdmin();
   if (error) return error;
+  const tooLong = checkLengths(formData, LIMITS.ad);
+  if (tooLong) return tooLong;
 
   const id = String(formData.get("id") || "");
   if (!id) return { success: false, message: "Ad not found." };

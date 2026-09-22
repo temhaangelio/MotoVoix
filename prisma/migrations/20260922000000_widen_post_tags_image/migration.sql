@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `posts` MODIFY `tags` VARCHAR(1000) NOT NULL DEFAULT '',
+    MODIFY `image` VARCHAR(500) NOT NULL DEFAULT '';

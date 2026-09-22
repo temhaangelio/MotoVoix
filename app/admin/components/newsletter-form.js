@@ -10,6 +10,9 @@ import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { useLanguage } from "../../components/language-provider";
+import { LIMITS } from "../../../lib/field-limits";
+
+const L = LIMITS.newsletter;
 
 // datetime-local alani "YYYY-MM-DDTHH:mm" bekliyor.
 function toLocalInput(value) {
@@ -51,8 +54,8 @@ export function NewsletterForm({ newsletter }) {
       <div className="card space-y-5">
         {isEdit ? <input type="hidden" name="id" value={newsletter.id} /> : null}
         <h2 className="section-title">{isEdit ? `Issue #${newsletter.issue_number}` : "New newsletter"}</h2>
-        <FormField label="Subject" htmlFor="subject"><Input id="subject" name="subject" required defaultValue={newsletter?.subject || ""} /></FormField>
-        <FormField label="Preview text" htmlFor="previewText"><Input id="previewText" name="previewText" defaultValue={newsletter?.preview_text || ""} /></FormField>
+        <FormField label="Subject" htmlFor="subject"><Input id="subject" name="subject" maxLength={L.subject} required defaultValue={newsletter?.subject || ""} /></FormField>
+        <FormField label="Preview text" htmlFor="previewText"><Input id="previewText" name="previewText" maxLength={L.previewText} defaultValue={newsletter?.preview_text || ""} /></FormField>
         <FormField label="Content" htmlFor="content"><Textarea id="content" name="content" className="min-h-[220px]" defaultValue={newsletter?.content || ""} /></FormField>
         <div className="grid gap-5 sm:grid-cols-2">
           <FormField label="Status" htmlFor="status">

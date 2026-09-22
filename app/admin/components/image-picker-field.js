@@ -16,7 +16,7 @@ function formatSize(bytes) {
   return bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
 }
 
-export function ImagePickerField({ id, name, defaultValue = "", placeholder = "/images/news/…" }) {
+export function ImagePickerField({ id, name, defaultValue = "", placeholder = "/images/news/…", maxLength }) {
   const [value, setValue] = useState(defaultValue);
   const [previewFailed, setPreviewFailed] = useState(false);
   const [status, setStatus] = useState(null);
@@ -61,7 +61,7 @@ export function ImagePickerField({ id, name, defaultValue = "", placeholder = "/
 
   return (
     <div>
-      <Input id={id} name={name} value={value} placeholder={placeholder} onChange={(event) => choose(event.target.value)} />
+      <Input id={id} name={name} value={value} maxLength={maxLength} placeholder={placeholder} onChange={(event) => choose(event.target.value)} />
       {value && !previewFailed ? (
         <img src={value} alt="" onError={() => setPreviewFailed(true)} className="mt-3 aspect-[16/9] w-full rounded-2xl bg-[#f5f5f5] object-cover" />
       ) : null}

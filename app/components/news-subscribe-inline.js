@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { subscribeAction } from "../admin/actions";
 import { LocalizedText } from "./language-provider";
+import { LIMITS } from "../../lib/field-limits";
+
+const L = LIMITS.subscriber;
 
 // /news alt bandındaki abone formu. Görsel olarak eskisiyle aynı; tek fark
 // artık gerçekten kayıt yapıyor (önceden input ve button boştaydı).
@@ -40,6 +43,7 @@ export default function NewsSubscribeInline() {
           aria-label="Email address"
           className="min-h-12 w-full bg-transparent border border-outline px-4 py-3 font-label text-base uppercase tracking-[0.18em] text-on-surface transition-all focus:border-primary focus:outline-none md:w-80"
           name="email"
+          maxLength={L.email}
           placeholder="Email"
           required
           type="email"

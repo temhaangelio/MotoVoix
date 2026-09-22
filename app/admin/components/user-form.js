@@ -8,6 +8,9 @@ import { Button, buttonVariants } from "./ui/button";
 import { FormField } from "./ui/form-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
+import { LIMITS } from "../../../lib/field-limits";
+
+const L = LIMITS.user;
 
 export function UserForm({ user, redirectTo = "/admin/users" }) {
   const router = useRouter();
@@ -43,11 +46,11 @@ export function UserForm({ user, redirectTo = "/admin/users" }) {
         <h2 className="section-title">Account</h2>
 
         <FormField label="Name" htmlFor="name">
-          <Input id="name" name="name" defaultValue={user?.name || ""} autoComplete="name" />
+          <Input id="name" name="name" maxLength={L.name} defaultValue={user?.name || ""} autoComplete="name" />
         </FormField>
 
         <FormField label="Email" htmlFor="email" hint="Used to sign in to the panel.">
-          <Input id="email" name="email" type="email" required defaultValue={user?.email || ""} autoComplete="username" />
+          <Input id="email" name="email" maxLength={L.email} type="email" required defaultValue={user?.email || ""} autoComplete="username" />
         </FormField>
 
         <FormField

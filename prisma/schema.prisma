@@ -42,8 +42,8 @@ model Post {
   bodyFr    String @map("body_fr") @db.MediumText
 
   category String @default("motorcycle") @db.VarChar(64)
-  tags     String @default("") @db.VarChar(255)
-  image    String @default("") @db.VarChar(255)
+  tags     String @default("") @db.VarChar(1000)
+  image    String @default("") @db.VarChar(500)
 
   status PostStatus @default(draft)
   reads  Int        @default(0)

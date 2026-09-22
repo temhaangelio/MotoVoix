@@ -8,6 +8,9 @@ import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
+import { LIMITS } from "../../../lib/field-limits";
+
+const L = LIMITS.settings;
 
 export function SettingsForm({ initialValues, section }) {
   const [pending, setPending] = useState(false);
@@ -36,12 +39,12 @@ export function SettingsForm({ initialValues, section }) {
         <div className="card space-y-5">
           <h2 className="section-title">Visitor site</h2>
           <div className="grid gap-5 sm:grid-cols-2">
-            <FormField label="Site name" htmlFor="siteName"><Input id="siteName" name="siteName" defaultValue={values.siteName} /></FormField>
-            <FormField label="Domain" htmlFor="domain"><Input id="domain" name="domain" defaultValue={values.domain} /></FormField>
+            <FormField label="Site name" htmlFor="siteName"><Input id="siteName" name="siteName" maxLength={L.siteName} defaultValue={values.siteName} /></FormField>
+            <FormField label="Domain" htmlFor="domain"><Input id="domain" name="domain" maxLength={L.domain} defaultValue={values.domain} /></FormField>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
-            <FormField label="French description" htmlFor="description"><Textarea id="description" name="description" defaultValue={values.description} /></FormField>
-            <FormField label="English description" htmlFor="descriptionEn"><Textarea id="descriptionEn" name="descriptionEn" defaultValue={values.descriptionEn} /></FormField>
+            <FormField label="French description" htmlFor="description"><Textarea id="description" name="description" maxLength={L.description} defaultValue={values.description} /></FormField>
+            <FormField label="English description" htmlFor="descriptionEn"><Textarea id="descriptionEn" name="descriptionEn" maxLength={L.descriptionEn} defaultValue={values.descriptionEn} /></FormField>
           </div>
           <FormField label="Posts to display" htmlFor="postsPerPage"><Input id="postsPerPage" name="postsPerPage" type="number" min={3} max={20} defaultValue={values.postsPerPage} /></FormField>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -59,7 +62,7 @@ export function SettingsForm({ initialValues, section }) {
               </Select>
             </FormField>
           </div>
-          <FormField label="Contact email" htmlFor="contactEmail"><Input id="contactEmail" name="contactEmail" type="email" defaultValue={values.contactEmail} /></FormField>
+          <FormField label="Contact email" htmlFor="contactEmail"><Input id="contactEmail" name="contactEmail" maxLength={L.contactEmail} type="email" defaultValue={values.contactEmail} /></FormField>
         </div>
       ) : null}
 
@@ -74,8 +77,8 @@ export function SettingsForm({ initialValues, section }) {
             <Switch label="Show newsletter" checked={values.newsletterEnabled} onCheckedChange={(value) => setField("newsletterEnabled", value)} />
           </div>
           <div className="mt-5 space-y-5">
-            <FormField label="Newsletter title" htmlFor="newsletterTitle"><Input id="newsletterTitle" name="newsletterTitle" disabled={!values.newsletterEnabled} defaultValue={values.newsletterTitle} /></FormField>
-            <FormField label="Newsletter description" htmlFor="newsletterDescription"><Textarea id="newsletterDescription" name="newsletterDescription" disabled={!values.newsletterEnabled} defaultValue={values.newsletterDescription} /></FormField>
+            <FormField label="Newsletter title" htmlFor="newsletterTitle"><Input id="newsletterTitle" name="newsletterTitle" maxLength={L.newsletterTitle} disabled={!values.newsletterEnabled} defaultValue={values.newsletterTitle} /></FormField>
+            <FormField label="Newsletter description" htmlFor="newsletterDescription"><Textarea id="newsletterDescription" name="newsletterDescription" maxLength={L.newsletterDescription} disabled={!values.newsletterEnabled} defaultValue={values.newsletterDescription} /></FormField>
           </div>
         </div>
       ) : null}
@@ -128,8 +131,8 @@ export function SettingsForm({ initialValues, section }) {
       {section === "profile" ? (
         <div className="card space-y-5">
           <h2 className="section-title">Profile</h2>
-          <FormField label="Name" htmlFor="adminName"><Input id="adminName" name="adminName" defaultValue={values.adminName} /></FormField>
-          <FormField label="Email" htmlFor="adminEmail"><Input id="adminEmail" name="adminEmail" type="email" defaultValue={values.adminEmail} /></FormField>
+          <FormField label="Name" htmlFor="adminName"><Input id="adminName" name="adminName" maxLength={L.adminName} defaultValue={values.adminName} /></FormField>
+          <FormField label="Email" htmlFor="adminEmail"><Input id="adminEmail" name="adminEmail" maxLength={L.adminEmail} type="email" defaultValue={values.adminEmail} /></FormField>
         </div>
       ) : null}
 

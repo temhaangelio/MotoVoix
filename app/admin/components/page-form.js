@@ -9,6 +9,9 @@ import { FormField } from "./ui/form-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Textarea } from "./ui/textarea";
+import { LIMITS } from "../../../lib/field-limits";
+
+const L = LIMITS.page;
 
 export function PageForm({ page }) {
   const router = useRouter();
@@ -38,12 +41,12 @@ export function PageForm({ page }) {
       {page ? <input type="hidden" name="id" value={page.id} /> : null}
       <div className="card space-y-5">
         <h2 className="section-title">Page</h2>
-        <FormField label="Title" htmlFor="title"><Input id="title" name="title" required defaultValue={page?.title || ""} /></FormField>
+        <FormField label="Title" htmlFor="title"><Input id="title" name="title" maxLength={L.title} required defaultValue={page?.title || ""} /></FormField>
         <FormField label="Heading (H1)" htmlFor="heading" hint="Shown as the big headline on the page. Falls back to the title when empty.">
-          <Input id="heading" name="heading" defaultValue={page?.heading || ""} />
+          <Input id="heading" name="heading" maxLength={L.heading} defaultValue={page?.heading || ""} />
         </FormField>
-        <FormField label="Slug" htmlFor="slug"><Input id="slug" name="slug" defaultValue={page?.slug || ""} /></FormField>
-        <FormField label="Summary" htmlFor="excerpt"><Textarea id="excerpt" name="excerpt" defaultValue={page?.excerpt || ""} /></FormField>
+        <FormField label="Slug" htmlFor="slug"><Input id="slug" name="slug" maxLength={L.slug} defaultValue={page?.slug || ""} /></FormField>
+        <FormField label="Summary" htmlFor="excerpt"><Textarea id="excerpt" name="excerpt" maxLength={L.excerpt} defaultValue={page?.excerpt || ""} /></FormField>
         <FormField label="Content" htmlFor="body" hint="Markdown is supported (## for headings)."><Textarea id="body" name="body" className="min-h-[220px]" defaultValue={page?.body || ""} /></FormField>
         <div className="grid gap-5 sm:grid-cols-2">
           <FormField label="Menu order" htmlFor="menuOrder"><Input id="menuOrder" name="menuOrder" type="number" defaultValue={page?.menu_order || 1} /></FormField>

@@ -14,6 +14,9 @@ import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
+import { LIMITS } from "../../../lib/field-limits";
+
+const L = LIMITS.ad;
 
 function hostname(value) {
   try {
@@ -87,13 +90,13 @@ export function AdsManager({ ads }) {
         <h2 className="section-title">New ad</h2>
         <p className="mt-2 text-sm leading-relaxed text-[#a1a1a1]">The ad is saved to the MySQL database.</p>
         <form onSubmit={submit} className="mt-6 space-y-5">
-          <FormField label="Title" htmlFor="ad-title"><Input id="ad-title" name="title" required /></FormField>
-          <FormField label="Description" htmlFor="ad-description"><Textarea id="ad-description" name="description" required /></FormField>
+          <FormField label="Title" htmlFor="ad-title"><Input id="ad-title" name="title" maxLength={L.title} required /></FormField>
+          <FormField label="Description" htmlFor="ad-description"><Textarea id="ad-description" name="description" maxLength={L.description} required /></FormField>
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField label="Button label" htmlFor="ad-cta"><Input id="ad-cta" name="ctaLabel" defaultValue="Discover" required /></FormField>
-            <FormField label="Hedef adres" htmlFor="ad-url"><Input id="ad-url" name="targetUrl" type="url" placeholder="https://" required /></FormField>
+            <FormField label="Button label" htmlFor="ad-cta"><Input id="ad-cta" name="ctaLabel" maxLength={L.ctaLabel} defaultValue="Discover" required /></FormField>
+            <FormField label="Hedef adres" htmlFor="ad-url"><Input id="ad-url" name="targetUrl" maxLength={L.targetUrl} type="url" placeholder="https://" required /></FormField>
           </div>
-          <FormField label="Image URL" htmlFor="ad-image"><ImagePickerField key={imageFieldKey} id="ad-image" name="imageUrl" /></FormField>
+          <FormField label="Image URL" htmlFor="ad-image"><ImagePickerField key={imageFieldKey} id="ad-image" name="imageUrl" maxLength={L.imageUrl} /></FormField>
           <FormField label="Language" htmlFor="ad-language">
             <Select id="ad-language" name="language" defaultValue="en">
               <option value="en">English</option>
@@ -150,13 +153,13 @@ export function AdsManager({ ads }) {
         {adToEdit ? (
           <form ref={editFormRef} className="space-y-4" onSubmit={(event) => event.preventDefault()}>
             <input type="hidden" name="id" value={adToEdit.id} />
-            <FormField label="Title" htmlFor="edit-ad-title"><Input id="edit-ad-title" name="title" required defaultValue={adToEdit.title} /></FormField>
-            <FormField label="Description" htmlFor="edit-ad-description"><Textarea id="edit-ad-description" name="description" required defaultValue={adToEdit.description} /></FormField>
+            <FormField label="Title" htmlFor="edit-ad-title"><Input id="edit-ad-title" name="title" maxLength={L.title} required defaultValue={adToEdit.title} /></FormField>
+            <FormField label="Description" htmlFor="edit-ad-description"><Textarea id="edit-ad-description" name="description" maxLength={L.description} required defaultValue={adToEdit.description} /></FormField>
             <div className="grid gap-4 sm:grid-cols-2">
-              <FormField label="Button label" htmlFor="edit-ad-cta"><Input id="edit-ad-cta" name="ctaLabel" required defaultValue={adToEdit.ctaLabel} /></FormField>
-              <FormField label="Destination URL" htmlFor="edit-ad-url"><Input id="edit-ad-url" name="targetUrl" type="url" required defaultValue={adToEdit.targetUrl} /></FormField>
+              <FormField label="Button label" htmlFor="edit-ad-cta"><Input id="edit-ad-cta" name="ctaLabel" maxLength={L.ctaLabel} required defaultValue={adToEdit.ctaLabel} /></FormField>
+              <FormField label="Destination URL" htmlFor="edit-ad-url"><Input id="edit-ad-url" name="targetUrl" maxLength={L.targetUrl} type="url" required defaultValue={adToEdit.targetUrl} /></FormField>
             </div>
-            <FormField label="Image URL" htmlFor="edit-ad-image"><ImagePickerField id="edit-ad-image" name="imageUrl" defaultValue={adToEdit.imageUrl || ""} /></FormField>
+            <FormField label="Image URL" htmlFor="edit-ad-image"><ImagePickerField id="edit-ad-image" name="imageUrl" maxLength={L.imageUrl} defaultValue={adToEdit.imageUrl || ""} /></FormField>
             <div className="grid gap-4 sm:grid-cols-2">
               <FormField label="Language" htmlFor="edit-ad-language">
                 <Select id="edit-ad-language" name="language" defaultValue={adToEdit.language}>

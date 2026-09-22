@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { sendContactMessageAction } from "../admin/actions";
 import { LocalizedText } from "./language-provider";
+import { LIMITS } from "../../lib/field-limits";
+
+const L = LIMITS.contact;
 
 // Görsel olarak eskisiyle aynı; tek fark artık gerçekten gönderiyor
 // (önceden butonun tipi "button" idi ve hiçbir yere bağlı değildi).
@@ -38,6 +41,7 @@ export default function ContactForm() {
           className="w-full bg-transparent border border-outline-variant/30 px-4 py-3 text-base text-on-surface focus:outline-none focus:border-primary transition-colors"
           id="name"
           name="name"
+          maxLength={L.name}
           required
           type="text"
         />
@@ -48,6 +52,7 @@ export default function ContactForm() {
           className="w-full bg-transparent border border-outline-variant/30 px-4 py-3 text-base text-on-surface focus:outline-none focus:border-primary transition-colors"
           id="email"
           name="email"
+          maxLength={L.email}
           required
           type="email"
         />
@@ -59,6 +64,7 @@ export default function ContactForm() {
           id="message"
           minLength={10}
           name="message"
+          maxLength={L.message}
           required
         />
       </div>

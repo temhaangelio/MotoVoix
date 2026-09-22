@@ -13,6 +13,9 @@ import { FormField } from "./ui/form-field";
 import { Input } from "./ui/input";
 import { Select } from "./ui/select";
 import { Table, TableWrap, Td, Th } from "./ui/table";
+import { LIMITS } from "../../../lib/field-limits";
+
+const L = LIMITS.subscriber;
 
 const statusLabels = { active: "Active", pending: "Pending", unsubscribed: "Unsubscribed" };
 
@@ -123,10 +126,10 @@ export function SubscribersTable({ subscribers }) {
         <form ref={formRef} className="space-y-4" onSubmit={(event) => event.preventDefault()}>
           {current ? <input type="hidden" name="id" value={current.id} /> : null}
           <FormField label="Email" htmlFor="subscriber-email">
-            <Input id="subscriber-email" name="email" type="email" required defaultValue={current?.email || ""} />
+            <Input id="subscriber-email" name="email" maxLength={L.email} type="email" required defaultValue={current?.email || ""} />
           </FormField>
           <FormField label="Name" htmlFor="subscriber-name">
-            <Input id="subscriber-name" name="name" defaultValue={current?.name || ""} />
+            <Input id="subscriber-name" name="name" maxLength={L.name} defaultValue={current?.name || ""} />
           </FormField>
           <div className="grid gap-4 sm:grid-cols-2">
             <FormField label="Status" htmlFor="subscriber-status">
@@ -137,7 +140,7 @@ export function SubscribersTable({ subscribers }) {
               </Select>
             </FormField>
             <FormField label="Source" htmlFor="subscriber-source">
-              <Input id="subscriber-source" name="source" defaultValue={current?.source || "Panel"} />
+              <Input id="subscriber-source" name="source" maxLength={L.source} defaultValue={current?.source || "Panel"} />
             </FormField>
           </div>
         </form>

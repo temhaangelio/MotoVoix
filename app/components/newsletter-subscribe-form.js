@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { subscribeAction } from "../admin/actions";
+import { LIMITS } from "../../lib/field-limits";
+
+const L = LIMITS.subscriber;
 
 export default function NewsletterSubscribeForm() {
   const [message, setMessage] = useState("");
@@ -27,6 +30,7 @@ export default function NewsletterSubscribeForm() {
           className="min-h-12 w-full rounded-[16px] border border-outline-variant/30 bg-transparent px-4 py-3 text-base text-on-surface transition-colors focus:border-primary focus:outline-none"
           id="newsletter-email"
           name="email"
+          maxLength={L.email}
           placeholder="name@email.com"
           required
           type="email"
