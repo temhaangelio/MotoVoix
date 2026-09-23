@@ -53,6 +53,12 @@ const nextConfig = {
       bodySizeLimit: "10mb",
     },
   },
+  images: {
+    // Next 16 varsayılanı yalnızca 75'e izin veriyor ve listede olmayan bir
+    // değer en yakınına çekiliyor; haber fotoğrafları için 90 gerekiyor.
+    // Bileşenlerdeki quality={IMAGE_QUALITY} ile aynı olmalı (lib/images.js).
+    qualities: [75, 90],
+  },
   turbopack: {
     root: __dirname,
   },

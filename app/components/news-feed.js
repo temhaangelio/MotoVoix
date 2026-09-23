@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Search, X } from "lucide-react";
 import { useLanguage } from "./language-provider";
 import { getCategoryLabel } from "../../lib/categories";
+import { IMAGE_QUALITY } from "../../lib/images";
 
 export default function NewsFeed({ posts, pageSize = 8 }) {
   const [visibleCount, setVisibleCount] = useState(pageSize);
@@ -100,6 +101,8 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
                     alt={featured.title}
                     className="object-cover rounded-[14px]"
                     fill
+                  quality={IMAGE_QUALITY}
+                    quality={IMAGE_QUALITY}
                     priority
                     sizes="(max-width: 768px) 100vw, 66vw"
                     src={featured.image}
@@ -144,6 +147,8 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
                       alt={side.title}
                       className="object-cover rounded-[14px]"
                       fill
+                  quality={IMAGE_QUALITY}
+                    quality={IMAGE_QUALITY}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       src={side.image}
                     />
@@ -172,6 +177,8 @@ export default function NewsFeed({ posts, pageSize = 8 }) {
                       alt={post.title}
                       className="object-cover rounded-[14px]"
                       fill
+                  quality={IMAGE_QUALITY}
+                    quality={IMAGE_QUALITY}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       src={post.image}
                     />

@@ -204,6 +204,7 @@ function translate(value, language) {
     .replace(/(\d+) sends/g, language === "fr" ? "$1 envois" : "$1 sends")
     .replace(/(\d+) hours ago/g, language === "fr" ? "il y a $1 h" : "$1 hours ago")
     .replace(/(\d+) days ago/g, language === "fr" ? "il y a $1 jours" : "$1 days ago")
+    .replace(/^Low resolution: (\d+) px wide\. Cover images should be at least (\d+) px\.$/, language === "fr" ? "Basse résolution : $1 px de large. Les images de couverture doivent faire au moins $2 px." : "Low resolution: $1 px wide. Cover images should be at least $2 px.")
     .replace(/^(.+) is too long \(max (\d+) characters\)\.$/, language === "fr" ? "Le champ « $1 » est trop long (max $2 caractères)." : "$1 is too long (max $2 characters).")
     .replace(/(\d+) characters/g, language === "fr" ? "$1 caractères" : "$1 characters")
     .replace(/(\d+) images/g, language === "fr" ? "$1 images" : "$1 images")

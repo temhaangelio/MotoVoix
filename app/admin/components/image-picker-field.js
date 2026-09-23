@@ -7,10 +7,14 @@ import { Check, ImageOff, Images, Upload, X } from "lucide-react";
 import { listNewsImagesAction, uploadNewsImageAction } from "../actions";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { IMAGE_QUALITY } from "../../../lib/images";
 
 // lib/news-images.js ile aynı sınır; büyük dosya sunucuya gitmeden reddedilir.
 const MAX_BYTES = 8 * 1024 * 1024;
 const ACCEPT = "image/jpeg,image/png,image/webp,image/gif,image/avif";
+// Kapak görseli detay sayfasında 1920 pikseli bulabiliyor; next/image
+// görseli büyütmediği için bunun altındaki dosyalar esnetilip bulanıklaşıyor.
+const MIN_COVER_WIDTH = 1200;
 
 function formatSize(bytes) {
   return bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
@@ -22,12 +26,14 @@ export function ImagePickerField({ id, name, defaultValue = "", placeholder = "/
   const [status, setStatus] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [libraryOpen, setLibraryOpen] = useState(false);
+  const [width, setWidth] = useState(0);
   const fileRef = useRef(null);
   const closeLibrary = useCallback(() => setLibraryOpen(false), []);
 
   function choose(url) {
     setValue(url);
     setPreviewFailed(false);
+    setWidth(0);
   }
 
   async function upload(event) {
@@ -63,7 +69,25 @@ export function ImagePickerField({ id, name, defaultValue = "", placeholder = "/
     <div>
       <Input id={id} name={name} value={value} maxLength={maxLength} placeholder={placeholder} onChange={(event) => choose(event.target.value)} />
       {value && !previewFailed ? (
-        <img src={value} alt="" onError={() => setPreviewFailed(true)} className="mt-3 aspect-[16/9] w-full rounded-2xl bg-[#f5f5f5] object-cover" />
+        <img
+          // Görsel React bağlanmadan önce yüklenmiş olabilir; o durumda onLoad
+          // hiç çalışmıyor, genişliği ref üzerinden okuyoruz.
+          ref={(node) => {
+            if (node?.complete && node.naturalWidth) setWidth(node.naturalWidth);
+          }}
+          src={value}
+          alt=""
+          onError={() => setPreviewFailed(true)}
+          onLoad={(event) => setWidth(event.currentTarget.naturalWidth)}
+          className="mt-3 aspect-[16/9] w-full rounded-2xl bg-[#f5f5f5] object-cover"
+        />
+      ) : null}
+      {/* Önizlemenin gerçek genişliği: yüklenen, kütüphaneden seçilen ve elle
+          yazılan adreslerin hepsi buradan geçiyor. */}
+      {width > 0 && width < MIN_COVER_WIDTH ? (
+        <p key={width} role="status" className="mt-2 text-[13px] text-[#b54708]">
+          {`Low resolution: ${width} px wide. Cover images should be at least ${MIN_COVER_WIDTH} px.`}
+        </p>
       ) : null}
       <div className="mt-2 flex flex-wrap gap-2">
         <Button size="sm" variant="outline" className="gap-1.5" disabled={uploading} onClick={() => fileRef.current?.click()}>
@@ -185,7 +209,7 @@ function ImageLibrary({ selected, onSelect, onClose }) {
                       className={`relative block w-full overflow-hidden rounded-2xl border-2 text-left transition-colors ${active ? "border-black" : "border-transparent hover:border-[#dedede]"}`}
                     >
                       <span className="relative block aspect-[4/3] bg-[#f5f5f5]">
-                        <Image src={image.url} alt="" fill sizes="(max-width: 640px) 45vw, 180px" className="object-cover" />
+                        <Image src={image.url} alt="" fill quality={IMAGE_QUALITY} sizes="(max-width: 640px) 45vw, 180px" className="object-cover" />
                       </span>
                       <span className="block truncate px-2 pt-1.5 text-xs font-medium">{image.name}</span>
                       <span className="block px-2 pb-1.5 text-[11px] text-[#999]">{formatSize(image.size)}</span>

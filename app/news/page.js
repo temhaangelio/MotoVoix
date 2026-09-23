@@ -9,6 +9,7 @@ import { MaintenanceNotice } from "../components/maintenance-notice";
 import { LocalizedText } from "../components/language-provider";
 import { Wordmark } from "../components/wordmark";
 import { absoluteUrl, siteName } from "../../lib/site";
+import { IMAGE_QUALITY } from "../../lib/images";
 
 // Akış statik üretilip 5 dakikada bir tazeleniyor; admin panelinden yayın
 // yapıldığında revalidatePath("/news") zaten anında güncelliyor.
@@ -71,6 +72,7 @@ export default async function NewsPage() {
           aria-hidden="true"
           className="header-hero-image header-hero-light w-full max-w-7xl h-auto mx-auto opacity-40 -translate-y-8 sm:-translate-y-14 md:-translate-y-20"
           height={1024}
+          quality={IMAGE_QUALITY}
           priority
           sizes="100vw"
           src="/images/header-bg.png"
@@ -82,6 +84,7 @@ export default async function NewsPage() {
           aria-hidden="true"
           className="header-hero-image header-hero-dark w-full max-w-7xl h-auto mx-auto opacity-40 -translate-y-8 sm:-translate-y-14 md:-translate-y-20"
           height={1024}
+          quality={IMAGE_QUALITY}
           priority
           sizes="100vw"
           src="/images/header-bg-dark.png"
